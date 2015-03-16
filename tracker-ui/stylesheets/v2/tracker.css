@@ -1,0 +1,1209 @@
+body {
+    background: #666666;
+}
+
+.clearer {
+    clear: both;
+}
+
+.exit-off-canvas {
+    display: none;
+}
+
+.inner-wrap {
+    position: fixed;
+}
+.inner-wrap .exit-off-canvas,
+.inner-wrap .exit-off-canvas:hover {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: none;
+}
+
+.tab-bar {
+    background-color: #F7F7F7;
+    border-bottom: 1px solid #D9D9D9;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+.tab-bar h1 {
+    color: #4B4B4B;
+    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-weight: normal;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+.tab-bar .left-small {
+    border-right: 1px solid #CCCCCC;
+    display: none;
+    text-align: center;
+
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.tab-bar .right-small {
+    border-left: 1px solid #CCCCCC;
+    display: none;
+    text-align: center;
+
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.tab-bar .left-small.chosen,
+.tab-bar .left-small:hover,
+.tab-bar .left-small.tapped,
+.tab-bar .right-small.chosen,
+.tab-bar .right-small:hover,
+.tab-bar .right-small.tapped {
+    background-color: #E7E7E7;
+    border-bottom: 1px solid #C9C9C9;
+}
+.tab-bar .left-small .back-button {
+    color: #969696;
+    display: block;
+    font-family: Georgia, Times, serif;
+    font-size: 45px;
+    font-weight: normal;
+    height: 40px;
+    line-height: 38px;
+    margin: 0;
+    padding: 0;
+}
+.tab-bar .menu-icon span::after {
+    box-shadow: 0 0 0 1px #969696, 0 7px 0 1px #969696, 0 14px 0 1px #969696;
+}
+
+.view-section {
+    background: #FFFFFF;
+    left: 0%;
+    opacity: 1;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 0;
+    position: absolute;
+    top: 45px;
+    width: 100%;
+
+    -webkit-overflow-scrolling: touch;
+
+    -webkit-transform: translateX(100%);
+       -moz-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+         -o-transform: translateX(100%);
+            transform: translateX(100%);
+
+    -webkit-transition: -webkit-transform .65s cubic-bezier(0.23,1,0.32,1), opacity .65s cubic-bezier(0.23,1,0.32,1);
+       -moz-transition: -moz-transform .65s cubic-bezier(0.23,1,0.32,1), opacity .65s cubic-bezier(0.23,1,0.32,1);
+         -o-transition: -o-transform .65s cubic-bezier(0.23,1,0.32,1), opacity .65s cubic-bezier(0.23,1,0.32,1);
+            transition: transform .65s cubic-bezier(0.23,1,0.32,1), opacity .65s cubic-bezier(0.23,1,0.32,1);
+}
+
+.view-section > * {
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.homepage-shown .homepage {
+    -webkit-transform: translateX(0%);
+       -moz-transform: translateX(0%);
+        -ms-transform: translateX(0%);
+         -o-transform: translateX(0%);
+            transform: translateX(0%);
+}
+.homepage-shown .list-view {
+    -webkit-transform: translateX(100%);
+       -moz-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+         -o-transform: translateX(100%);
+            transform: translateX(100%);
+}
+.homepage-shown .detail-view {
+    opacity: 0;
+
+    -webkit-transform: translateX(200%);
+       -moz-transform: translateX(200%);
+        -ms-transform: translateX(200%);
+         -o-transform: translateX(200%);
+            transform: translateX(200%);
+}
+
+.list-view-shown .homepage {
+    opacity: 0.01;
+
+    -webkit-transform: translateX(-50%);
+       -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+         -o-transform: translateX(-50%);
+            transform: translateX(-50%);
+}
+.list-view-shown .list-view {
+    -webkit-transform: translateX(0%);
+       -moz-transform: translateX(0%);
+        -ms-transform: translateX(0%);
+         -o-transform: translateX(0%);
+            transform: translateX(0%);
+}
+.list-view-shown .detail-view {
+    -webkit-transform: translateX(100%);
+       -moz-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+         -o-transform: translateX(100%);
+            transform: translateX(100%);
+}
+
+.detail-view-shown .homepage {
+    opacity: 0;
+
+    -webkit-transform: translateX(-150%);
+       -moz-transform: translateX(-150%);
+        -ms-transform: translateX(-150%);
+         -o-transform: translateX(-150%);
+            transform: translateX(-150%);
+}
+.detail-view-shown .list-view {
+    opacity: 0.01;
+
+    -webkit-transform: translateX(-50%);
+       -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+         -o-transform: translateX(-50%);
+            transform: translateX(-50%);
+}
+.detail-view-shown .detail-view {
+    -webkit-transform: translateX(0%);
+       -moz-transform: translateX(0%);
+        -ms-transform: translateX(0%);
+         -o-transform: translateX(0%);
+            transform: translateX(0%);
+}
+
+.homepage {
+    background-color: #ECECEC;
+}
+
+.homepage-contents {
+    padding: 0;
+    text-align: center;
+}
+
+.homepage-contents .homepage-box {
+    background: #FFFFFF;
+    border: 1px solid #D0D0D0;
+    margin: 9px;
+    padding: 9px;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+.homepage-contents .top-article {
+    padding: 9px 9px 10px;
+
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.homepage-contents .top-article a {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.homepage-contents .top-article img {
+    border: 1px solid #222222;
+    margin-bottom: 9px;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+.homepage-contents .top-article .headline {
+    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 26px;
+    margin: 0;
+    padding: 0 10px;
+    text-align: left;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+.homepage-contents .top-article .tease-text {
+    color: #909090;
+    font-size: 14px;
+    line-height: 22px;
+    margin: 0;
+    padding: 5px 10px 0px 10px;
+    text-align: left;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+.homepage-contents .top-article .tease-text .timestamp {
+    color: #444444;
+}
+.homepage-contents .top-article .tease-text .timestamp .ts-inner {
+    color: #AC4136;
+}
+
+.homepage-contents .homepage-inner {
+    margin: 0 auto;
+    max-width: 1350px;
+}
+.homepage-contents .belt {
+    padding: 0;
+    text-align: left;
+}
+.homepage-contents .belt .divider h4 {
+    background-color: #444444;
+    color: #FFFFFF;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    line-height: 11px;
+    margin: 0 0 9px;
+    padding: 7px 9px;
+    text-transform: uppercase;
+}
+.homepage-contents .belt .featured_content {
+    padding: 0 9px;
+}
+.homepage-contents .belt .featured_content .features_story {
+    margin-bottom: 15px;
+    padding: 0 10px;
+}
+.homepage-contents .belt .featured_content .features_story h3.headline {
+    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 24px;
+    margin: 0 0 3px 0;
+    padding: 0;
+}
+.homepage-contents .belt .featured_content .features_story p,
+.homepage-contents .belt .featured_content .features_story .story_assets {
+    display: none;
+}
+
+.homepage-contents .section-triggers {
+    list-style: none inside none;
+    margin: 0 9px 15px;
+    padding: 0;
+}
+.homepage-contents .section-triggers .trigger {
+    cursor: pointer;
+    float: left;
+    padding: 20px 9px;
+    text-align: center;
+    width: 100%;
+
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-transition: background-color 0.3s linear, color 0.4s linear;
+       -moz-transition: background-color 0.3s linear, color 0.4s linear;
+         -o-transition: background-color 0.3s linear, color 0.4s linear;
+            transition: background-color 0.3s linear, color 0.4s linear;
+}
+.homepage-contents .section-triggers .trigger:hover {
+    background-color: #F3F3F3;
+}
+.homepage-contents .section-triggers .trigger:active,
+.homepage-contents .section-triggers .trigger.chosen,
+.homepage-contents .section-triggers .trigger.tapped {
+    background-color: #009930;
+
+    -webkit-transition: background-color 0s linear, color 0s linear;
+       -moz-transition: background-color 0s linear, color 0s linear;
+         -o-transition: background-color 0s linear, color 0s linear;
+            transition: background-color 0s linear, color 0s linear;
+}
+.homepage-contents .section-triggers .trigger-one {
+    border-bottom: 1px solid #D0D0D0;
+    border-right: 0 none;
+}
+.homepage-contents .section-triggers .trigger-two {
+    border-bottom: 1px solid #D0D0D0;
+}
+.homepage-contents .section-triggers .trigger-three {
+    border-right: 0 none;
+}
+.homepage-contents .section-triggers .trigger-disabled {
+    background: #E4E4E4;
+    cursor: auto;
+}
+.homepage-contents .section-triggers .trigger-disabled:hover,
+.homepage-contents .section-triggers .trigger-disabled:active,
+.homepage-contents .section-triggers .trigger-disabled.chosen,
+.homepage-contents .section-triggers .trigger-disabled.tapped {
+    background-color: #E4E4E4;
+}
+.homepage-contents .section-triggers .trigger h5 {
+    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-size: 14px;
+    line-height: 16px;
+    margin: 0;
+    padding: 9px 0 0;
+}
+.homepage-contents .section-triggers .trigger:active h5,
+.homepage-contents .section-triggers .trigger.chosen h5,
+.homepage-contents .section-triggers .trigger.tapped h5 {
+    color: #FFFFFF;
+}
+.homepage-contents .section-triggers .trigger-disabled:active h5,
+.homepage-contents .section-triggers .trigger-disabled.chosen h5,
+.homepage-contents .section-triggers .trigger-disabled.tapped h5 {
+    color: #222222;
+}
+.homepage-contents .section-triggers .trigger .trigger-icon {
+    color: #606060;
+    font-size: 30px;
+    line-height: 24px;
+    padding-top: 12px;
+}
+.homepage-contents .section-triggers .trigger:active .trigger-icon,
+.homepage-contents .section-triggers .trigger.chosen .trigger-icon,
+.homepage-contents .section-triggers .trigger.tapped .trigger-icon {
+    color: #FFFFFF;
+}
+.homepage-contents .section-triggers .trigger-disabled:active .trigger-icon,
+.homepage-contents .section-triggers .trigger-disabled.chosen .trigger-icon,
+.homepage-contents .section-triggers .trigger-disabled.tapped .trigger-icon {
+    color: #606060;
+}
+
+.pagination {
+    background: #666666;
+    border-bottom: 1px solid #222222;
+    border-top: 1px solid #222222;
+    color: #FFFFFF;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 10px;
+    height: 47px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+.pagination .pagination-left {
+    border-right: 1px solid #222222;
+    display: block;
+    float: left;
+    height: 45px;
+    line-height: 48px;
+    text-align: center;
+    width: 26%;
+}
+.pagination .pagination-center {
+    display: block;
+    height: 45px;
+    line-height: 48px;
+    padding: 0 26%;
+    text-align: center;
+}
+.pagination .pagination-right {
+    border-left: 1px solid #222222;
+    display: block;
+    float: right;
+    height: 45px;
+    line-height: 48px;
+    text-align: center;
+    width: 26%;
+}
+.pagination .pagination-link {
+    background-color: #393939;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.pagination .pagination-link:hover {
+    background-color: #222222;
+    color: #EEEEEE;
+}
+
+#events {
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+#events h3 {
+    background: #444444;
+    color: #FFFFFF;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    line-height: 19px;
+    margin: 0;
+    padding: 0 10px;
+    position: fixed;
+    text-transform: uppercase;
+    top: 0;
+    width: 100%;
+    z-index: 9;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+#events h3 .selected-area {
+    color: #C0C0C0;
+}
+#events h3 .top-pagination {
+    float: right;
+}
+#events ul {
+    list-style: none inside none;
+    margin: 0;
+    padding: 19px 0 0;
+}
+#events ul li {
+    border-top: 1px solid #AAAAAA;
+    position: relative;
+
+    -webkit-transition: background-color 0.3s linear, color 0.4s linear;
+       -moz-transition: background-color 0.3s linear, color 0.4s linear;
+         -o-transition: background-color 0.3s linear, color 0.4s linear;
+            transition: background-color 0.3s linear, color 0.4s linear;
+}
+#events ul .ad {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+#events ul .bonus-item,
+#events ul .tag,
+#events ul .visit {
+    cursor: pointer;
+    padding: 10px;
+
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+#events ul .tag {
+    padding: 0;
+}
+#events ul .bonus-item:active,
+#events ul .bonus-item.chosen,
+#events ul .bonus-item.tapped,
+#events ul .tag:active,
+#events ul .tag.chosen,
+#events ul .tag.tapped,
+#events ul .visit:active,
+#events ul .visit.chosen,
+#events ul .visit.tapped {
+    border-top: 1px solid #111111;
+
+    -webkit-transition: background-color 0s linear, color 0s linear;
+       -moz-transition: background-color 0s linear, color 0s linear;
+         -o-transition: background-color 0s linear, color 0s linear;
+            transition: background-color 0s linear, color 0s linear;
+}
+
+#events ul .bonus-item:active + li,
+#events ul .bonus-item.chosen + li,
+#events ul .bonus-item.tapped + li,
+#events ul .tag:active + li,
+#events ul .tag.chosen + li,
+#events ul .tag.tapped + li,
+#events ul .visit:active + li,
+#events ul .visit.chosen + li,
+#events ul .visit.tapped + li {
+    border-top: 1px solid #111111;
+}
+
+#events ul .tag:active,
+#events ul .tag.chosen,
+#events ul .tag.tapped,
+#events ul .visit:active,
+#events ul .visit.chosen,
+#events ul .visit.tapped {
+    background-color: #009930;
+}
+#events ul .tag a {
+    display: block;
+    padding: 10px;
+}
+#events ul .stateface {
+    color: #888888;
+    display: none;
+    float: left;
+    font-size: 50px;
+    line-height: 50px;
+    text-align: center;
+    width: 80px;
+}
+#events ul .visit:active .stateface,
+#events ul .visit.chosen .stateface,
+#events ul .visit.tapped .stateface {
+    color: #ECECEC;
+}
+#events ul .visit .visit-details {
+    margin-right: 70px;
+}
+#events ul .tag h4,
+#events ul .visit h4 {
+    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 21px;
+    margin: 10px 0 5px;
+}
+#events ul .tag:active h4,
+#events ul .tag.chosen h4,
+#events ul .tag.tapped h4,
+#events ul .visit:active h4,
+#events ul .visit.chosen h4,
+#events ul .visit.tapped h4 {
+    color: #FFFFFF;
+}
+#events ul .tag h5,
+#events ul .visit h5 {
+    color: #777777;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    line-height: 9px;
+    margin: 0 0 11px;
+    text-indent: 3px;
+    text-transform: uppercase;
+}
+#events ul .tag:active h5,
+#events ul .tag.chosen h5,
+#events ul .tag.tapped h5,
+#events ul .visit:active h5,
+#events ul .visit.chosen h5,
+#events ul .visit.tapped h5 {
+    color: #E4E4E4;
+}
+#events ul .tag h6,
+#events ul .visit h6 {
+    background: #E9E9E9;
+    border: 1px solid #959595;
+    border-radius: 5px;
+    color: #555555;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 60px;
+}
+#events ul .tag h6 span,
+#events ul .visit h6 span {
+    display: block;
+}
+#events ul .tag h6 .hidden,
+#events ul .visit h6 .hidden {
+    display: none;
+}
+#events ul .visit h6 .month {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    line-height: 16px;
+    margin-top: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+#events ul .visit h6 .day {
+    background: #F7F7F7;
+    color: #222222;
+    font-family: Georgia, Times, serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    line-height: 20px;
+    padding-bottom: 5px;
+    padding-top: 2px;
+    text-align: center;
+    text-transform: uppercase;
+}
+#events ul .visit h6 .year {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    line-height: 16px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#events ul .bonus-item {
+    box-shadow: inset 1px 1px 200px rgba(0,0,0,0.5);
+
+    -webkit-transition: box-shadow .25s ease-in-out;
+       -moz-transition: box-shadow .25s ease-in-out;
+         -o-transition: box-shadow .25s ease-in-out;
+            transition: box-shadow .25s ease-in-out;
+}
+#events ul .map {
+    background: #FFFFFF url("../../img/choropleth-bar-placeholder.png") no-repeat scroll 50% 50%;
+}
+#events ul .state-list {
+    background: #FFFFFF url("../../img/citylist-bar-placeholder.png") no-repeat scroll 50% 50%;
+}
+#events ul .tag-list {
+    background: #FFFFFF url("../../img/taglist-bar-placeholder.png") no-repeat scroll 50% 50%;
+}
+#events ul .bonus-item:active,
+#events ul .bonus-item.chosen,
+#events ul .bonus-item.tapped {
+    box-shadow: inset 1px 1px 200px rgba(0,0,0,1);
+}
+#events ul .bonus-item .bonus-link-text {
+    color: #FFFFFF;
+    font-family: "Crete Round", Rockwell, 'Courier Bold',
+                Courier, Georgia, Times, 'Times New Roman', serif;
+    font-size: 21px;
+    font-style: italic;
+    font-weight: normal;
+    line-height: 30px;
+    padding: 15px 0;
+    text-align: center;
+    text-shadow: 1px 1px 5px #000000;
+}
+
+#events ul .ad {
+    background: #FFFFFF;
+    padding-bottom: 7px;
+    padding-top: 7px;
+    text-align: center;
+}
+#events ul .ad .ad-holder {
+    height: 66px;
+    overflow: hidden;
+}
+#events ul .ad .ad-warning {
+    color: #959595;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 8px;
+    letter-spacing: 2px;
+    line-height: 12px;
+    padding-bottom: 2px;
+    text-align: center;
+    text-transform: uppercase;
+}
+#events ul .ad iframe {
+    height: 50px;
+    overflow: hidden;
+    width: 320px;
+}
+#events ul .ad img {
+    border: 1px solid #555555;
+}
+
+#events ul .placeholder {
+    padding-bottom: 7px;
+    padding-top: 7px;
+}
+#events ul .placeholder .placeholder-inner {
+    font-family: "Crete Round", Rockwell, 'Courier Bold',
+                Courier, Georgia, Times, 'Times New Roman', serif;
+    font-size: 24px;
+    line-height: 66px;
+    text-align: center;
+}
+
+ul.off-canvas-list li label,
+ul.off-canvas-list li a {
+    box-shadow: inset 8px 0px 8px -4px rgba(0, 0, 0, 0.5);
+
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+ul.off-canvas-list li label {
+    color: #CCCCCC;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    letter-spacing: 3px;
+}
+ul.off-canvas-list li a {
+    color: #EEEEEE;
+    cursor: pointer;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    line-height: 30px;
+    padding: 9px 1em;
+    text-transform: uppercase;
+}
+ul.off-canvas-list li a.active {
+    background-color: #009930;
+    color: #FFFFFF;
+}
+ul.off-canvas-list li a .ss-icon {
+    font-family: Verdana;
+    font-weight: normal;
+
+    -webkit-font-smoothing: auto;
+}
+ul.off-canvas-list li a .ss-icon:before {
+    color: #AAAAAA;
+    display: block;
+    float: left;
+    font-size: 20px;
+    height: 22px;
+    margin-right: 10px;
+    margin-top: 2px;
+    text-align: center;
+    text-transform: none;
+    width: 35px;
+}
+ul.off-canvas-list li a .stateface:before {
+    color: #AAAAAA;
+    display: block;
+    float: left;
+    font-size: 26px;
+    margin-right: 10px;
+    text-align: center;
+    text-transform: none;
+    width: 35px;
+}
+ul.off-canvas-list li a.active .stateface:before {
+    color: #FFFFFF;
+}
+
+.detail-card {
+    background-color: #FBFBFB;
+    padding: 0 6px;
+}
+.detail-card h1 {
+    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-size: 17px;
+    font-weight: normal;
+    line-height: 27px;
+    margin-bottom: 6px;
+    margin-top: 15px;
+    text-align: center;
+}
+.detail-card h2 {
+    color: #777777;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 9px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    line-height: 9px;
+    margin-bottom: 12px;
+    margin-top: 6px;
+    text-align: center;
+    text-transform: uppercase;
+}
+.detail-card h2 .date-info {
+    border-bottom: 1px solid #D0D0D0;
+    border-top: 1px solid #D0D0D0;
+    display: inline-block;
+    padding: 6px 9px;
+}
+.detail-card h2 .date-info-outer .date-info-inner {
+}
+.detail-card h2 .date-info-outer .date-info-inner {
+}
+.detail-card .attribute-section {
+    border-top: 1px solid #BBBBBB;
+    margin: 0;
+    padding: 8px 6px 6px;
+}
+.detail-card .attribute-section.no-top-line {
+    border-top: 0 none;
+}
+.detail-card .attribute-section.no-header {
+    padding-bottom: 8px;
+}
+.detail-card .attribute-section .attribute-name {
+    color: #777777;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    line-height: 15px;
+    text-indent: 1px;
+    text-transform: uppercase;
+}
+.detail-card .attribute-section.multi-attribute .attribute-name {
+    padding-bottom: 1px;
+}
+.detail-card .attribute-section .attribute-value {
+    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-size: 14px;
+    line-height: 24px;
+}
+.detail-card .attribute-section.multi-line ul {
+    list-style: disc inside none;
+    margin: 0;
+}
+.detail-card .attribute-section.multi-line .attribute-value {
+    padding-top: 3px;
+}
+.detail-card .attribute-section .attribute-value.inline-value {
+    float: left;
+    width: 100%;
+}
+.detail-card .attribute-section .tag-list {
+    list-style: none inside none;
+    margin: 0;
+}
+.detail-card .attribute-section .tag-list .tag {
+    background: #DEFCE8;
+    border: 2px solid #009930;
+    border-radius: 4px;
+    float: left;
+    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-size: 14px;
+    line-height: 22px;
+    margin: 4px;
+    padding: 0 8px;
+
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+.detail-card .attribute-section .tag-list .tag a {
+    color: #009930;
+}
+.detail-card .about-this-app {
+    background: #CCCCCC;
+    border: 1px solid #333333;
+    margin: 10px 0 12px;
+}
+.detail-card .about-this-app .about-app-trigger {
+    background-color: #2171B5;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-size: 17px;
+    letter-spacing: 1px;
+    padding: 10px 15px;
+    position: relative;
+
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+.detail-card .about-this-app .about-app-trigger .trigger-down,
+.detail-card .about-this-app .about-app-trigger .trigger-up {
+    font-size: 26px;
+    position: absolute;
+    right: 8px;
+    top: 7px;
+}
+.detail-card .about-this-app .about-app-trigger .trigger-down {
+    opacity: 1;
+}
+.detail-card .about-this-app .about-app-trigger .trigger-up {
+    opacity: 0;
+}
+.detail-card .about-this-app.active .about-app-trigger .trigger-down {
+    opacity: 0;
+}
+.detail-card .about-this-app.active .about-app-trigger .trigger-up {
+    opacity: 1;
+}
+.detail-card .about-this-app .about-app-trigger.chosen,
+.detail-card .about-this-app .about-app-trigger:hover,
+.detail-card .about-this-app .about-app-trigger.tapped {
+    background-color: #6BAED6;
+}
+.detail-card .about-this-app .about-app-flexible {
+    background-color: #F7FBFF;
+    border-top: 1px solid #333333;
+    display: none;
+    padding: 10px 20px;
+}
+.detail-card .about-this-app .about-app-flexible p {
+    color: #555555;
+    line-height: 24px;
+    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 12px 0;
+    text-align: left;
+}
+
+.detail-card .map-holder {
+    margin-top: 10px;
+    text-align: center;
+}
+.detail-card .map-holder .stately {
+    background: none;
+    font: normal normal 0 "stately-webfont";
+    position: relative;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+.detail-card .map-holder .stately li {
+    color: #F2F0F7;
+    font: normal normal 320px "stately-webfont";
+    -webkit-text-stroke: 0.2px black;
+    -webkit-transition: 0s none;
+}
+.detail-card .map-holder .stately li.tier-zero {
+    color: #FFFFFF;
+}
+.detail-card .map-holder .stately li.tier-two {
+    color: #BCBDDC;
+}
+.detail-card .map-holder .stately li.tier-three {
+    color: #807DBA;
+}
+.detail-card .map-holder .stately li.tier-four {
+    color: #4A1486;
+}
+.detail-card .map-holder .stately #popouts-holder {
+    bottom: 4%;
+    font-family: Georgia, "Times", serif;
+    font-variant: small-caps;
+    font-weight: bold;
+    position: absolute;
+    right: 6px;
+    text-align: center;
+    top: auto;
+    width: 40px;
+}
+.detail-card .map-holder .stately #popouts-holder .popout-box {
+    background-color: #F2F0F7;
+    border: 1px solid #666666;
+    border-radius: 3px;
+    color: #333333;
+    font-size: 12px;
+    line-height: 20px;
+    margin-bottom: 6px;
+
+    -webkit-text-rendering: auto;
+       -moz-text-rendering: auto;
+        -ms-text-rendering: auto;
+         -o-text-rendering: auto;
+            text-rendering: auto;
+}
+.detail-card .map-holder .stately #popouts-holder .popout-box.tier-two {
+    background-color: #BCBDDC;
+}
+.detail-card .map-holder .stately #popouts-holder .popout-box.tier-three {
+    background-color: #807DBA;
+    color: #FFFFFF;
+}
+.detail-card .map-holder .stately #popouts-holder .popout-box.tier-four {
+    background-color: #4A1486;
+    color: #FFFFFF;
+}
+.detail-card .map-holder h1 {
+    background: #494949;
+    border: 2px solid #333333;
+    border-bottom: 0 none;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+    line-height: 42px;
+    margin: 15px auto 0;
+    padding: 0 0 1px;
+    width: 100%;
+}
+.detail-card .map-holder .state-frequencies {
+    width: 100%;
+}
+.detail-card .map-holder .state-frequencies {
+    border: 2px solid #333333;
+    border-collapse: collapse;
+}
+.detail-card .map-holder .state-frequencies thead tr {
+    background: #6B6B6B;
+    height: 20px;
+    line-height: 20px;
+}
+.detail-card .map-holder .state-frequencies thead tr th {
+    border-bottom: 1px solid #333333;
+    border-right: 1px solid #333333;
+    color: #FFFFFF;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 9px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    padding: 6px 0.625rem;
+    text-transform: uppercase;
+}
+.detail-card .map-holder .state-frequencies tr.even,
+.detail-card .map-holder .state-frequencies tr.alt,
+.detail-card .map-holder .state-frequencies tr:nth-of-type(even) {
+    background: #F7F7F7;
+}
+.detail-card .map-holder .state-frequencies td {
+    border-bottom: 1px solid #DDDDDD;
+    display: table-cell;
+    font-family: Georgia, Times, serif;
+    font-size: 12px;
+    line-height: 16px;
+}
+.detail-card .map-holder .state-frequencies td + td {
+    border-left: 1px solid #DDDDDD;
+}
+
+@media(min-width: 450px) {
+    .detail-card .map-holder .stately #popouts-holder {
+        bottom: 16%;
+        top: auto;
+    }
+    .detail-card .map-holder .stately #popouts-holder .popout-box {
+        font-size: 14px;
+        margin-bottom: 9px;
+    }
+}
+@media(min-width: 600px) {
+    .homepage-contents .top-article .headline {
+        font-size: 27px;
+        line-height: 35px;
+    }
+    .homepage-contents .belt {}
+    .homepage-contents .belt .featured_content .features_story h3.headline {
+        font-size: 19px;
+        line-height: 28px;
+    }
+    .homepage-contents .belt .featured_content .features_story p,
+    .homepage-contents .belt .featured_content .features_story .story_assets {
+        display: block;
+    }
+    .homepage-contents .belt .featured_content .features_story p {
+        color: #777777;
+        font-family: Verdana, Arial, sans-serif;
+        font-size: 12px;
+        font-weight: normal;
+        line-height: 21px;
+        margin-bottom: 0;
+        margin-top: 6px;
+    }
+    .homepage-contents .belt .featured_content .features_story p br {
+        line-height: 20px;
+    }
+    .homepage-contents .belt .featured_content .features_story p img{
+        display: none;
+    }
+    .homepage-contents .belt .featured_content .features_story .story_assets ul {
+        list-style: disc inside none;
+        margin: 7px 0 10px;
+        padding: 0;
+    }
+    .homepage-contents .belt .featured_content .features_story .story_assets li {
+        background-image: none;
+        font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+        font-size: 15px;
+        margin-bottom: 8px;
+        margin-top: 0;
+        padding-left: 8px;
+    }
+    .homepage-contents .belt .featured_content .features_story .story_assets li span {
+        text-transform: uppercase;
+    }
+
+    .homepage-contents .section-triggers .trigger {
+        padding: 9px;
+        width: 33.3%;
+    }
+    .homepage-contents .section-triggers .trigger-one {
+        border: 0 none;
+    }
+    .homepage-contents .section-triggers .trigger-two {
+        border: 0 none;
+        border-left: 1px solid #D0D0D0;
+        width: 33.4%;
+    }
+    .homepage-contents .section-triggers .trigger-three {
+        border: 0 none;
+        border-left: 1px solid #D0D0D0;
+    }
+
+    .pagination .pagination-left {
+        width: 20%;
+    }
+    .pagination .pagination-center {
+        padding: 0 20%;
+    }
+    .pagination .pagination-right {
+        width: 20%;
+    }
+
+    #events ul .tag:hover,
+    #events ul .visit:hover {
+        background-color: #F3F3F3;
+    }
+    #events ul .tag:active:hover,
+    #events ul .visit:active:hover {
+        background-color: #009930;
+    }
+    #events ul .stateface {
+        display: block;
+    }
+    #events ul .tag h4,
+    #events ul .visit h4 {
+        font-size: 16px;
+        font-weight: normal;
+        line-height: 24px;
+    }
+    #events ul .tag h5,
+    #events ul .visit h5 {
+        font-size: 10px;
+        line-height: 10px;
+        margin-top: 3px;
+    }
+
+    #events ul .bonus-item:hover {
+        box-shadow: inset 1px 1px 200px rgba(0,0,0,0.8);
+    }
+    #events ul .bonus-item:active:hover {
+        box-shadow: inset 1px 1px 200px rgba(0,0,0,1);
+    }
+
+    .detail-card .map-holder .stately #popouts-holder {
+        bottom: auto;
+        top: 36%;
+    }
+}
+
+@media(min-width: 700px) {
+    .homepage-contents .homepage-box {
+        float: left;
+        margin: 1%;
+    }
+    .homepage-contents .top-article {
+        width: 31%;
+    }
+    .homepage-contents .belt {
+        width: 65%;
+    }
+    .homepage-contents .section-triggers {
+        width: 98%;
+    }
+
+    .detail-card .map-holder .stately li {
+        -webkit-text-stroke: 0.39px black;
+    }
+    .detail-card .map-holder .state-frequencies td {
+        font-size: 13px;
+        line-height: 18px;
+    }
+}
+
+@media(min-width: 1200px) {
+    .homepage-contents .homepage-box {
+        margin: 0.5%;
+    }
+    .homepage-contents .top-article {
+        width: 41%;
+    }
+    .homepage-contents .belt {
+        width: 57%;
+    }
+    .homepage-contents .section-triggers {
+        width: 99%;
+    }
+}
