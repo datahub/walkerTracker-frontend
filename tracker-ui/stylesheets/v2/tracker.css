@@ -29,7 +29,8 @@ body {
 }
 .tab-bar h1 {
     color: #4B4B4B;
-    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-family: "Crete Round", Rockwell, 'Courier Bold',
+                    Courier, Georgia, Times, 'Times New Roman', serif;
     font-weight: normal;
 
     -webkit-user-select: none;
@@ -62,7 +63,7 @@ body {
 .tab-bar .left-small .back-button {
     color: #969696;
     display: block;
-    font-family: Georgia, Times, serif;
+    font-family: Georgia, "Times", serif;
     font-size: 45px;
     font-weight: normal;
     height: 40px;
@@ -216,7 +217,8 @@ body {
         -ms-user-select: none;
 }
 .homepage-contents .top-article .headline {
-    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-family: "Crete Round", Rockwell, 'Courier Bold',
+                    Courier, Georgia, Times, 'Times New Roman', serif;
     font-size: 18px;
     font-weight: normal;
     line-height: 26px;
@@ -275,7 +277,8 @@ body {
     padding: 0 10px;
 }
 .homepage-contents .belt .featured_content .features_story h3.headline {
-    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-family: "Crete Round", Rockwell, 'Courier Bold',
+                    Courier, Georgia, Times, 'Times New Roman', serif;
     font-size: 16px;
     font-weight: normal;
     line-height: 24px;
@@ -339,7 +342,8 @@ body {
     background-color: #E4E4E4;
 }
 .homepage-contents .section-triggers .trigger h5 {
-    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-family: "Crete Round", Rockwell, 'Courier Bold',
+                    Courier, Georgia, Times, 'Times New Roman', serif;
     font-size: 14px;
     line-height: 16px;
     margin: 0;
@@ -424,6 +428,7 @@ body {
     background-color: #222222;
     color: #EEEEEE;
 }
+
 
 #events {
     left: 0;
@@ -550,7 +555,8 @@ body {
 }
 #events ul .tag h4,
 #events ul .visit h4 {
-    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-family: "Crete Round", Rockwell, 'Courier Bold',
+                    Courier, Georgia, Times, 'Times New Roman', serif;
     font-size: 13px;
     font-weight: normal;
     line-height: 21px;
@@ -617,12 +623,13 @@ body {
 #events ul .visit h6 .day {
     background: #F7F7F7;
     color: #222222;
-    font-family: Georgia, Times, serif;
+    font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD',
+                    'Book Antiqua', Georgia, serif;
     font-size: 20px;
     letter-spacing: 1px;
     line-height: 20px;
-    padding-bottom: 5px;
-    padding-top: 2px;
+    padding-bottom: 1px;
+    padding-top: 5px;
     text-align: center;
     text-transform: uppercase;
 }
@@ -660,7 +667,7 @@ body {
 #events ul .bonus-item .bonus-link-text {
     color: #FFFFFF;
     font-family: "Crete Round", Rockwell, 'Courier Bold',
-                Courier, Georgia, Times, 'Times New Roman', serif;
+                    Courier, Georgia, Times, 'Times New Roman', serif;
     font-size: 21px;
     font-style: italic;
     font-weight: normal;
@@ -705,11 +712,264 @@ body {
 }
 #events ul .placeholder .placeholder-inner {
     font-family: "Crete Round", Rockwell, 'Courier Bold',
-                Courier, Georgia, Times, 'Times New Roman', serif;
+                    Courier, Georgia, Times, 'Times New Roman', serif;
     font-size: 24px;
     line-height: 66px;
     text-align: center;
 }
+
+
+#finances {
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+#finances h3 {
+    background: #444444;
+    color: #FFFFFF;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    line-height: 19px;
+    margin: 0;
+    padding: 0 10px;
+    position: fixed;
+    text-transform: uppercase;
+    top: 0;
+    width: 100%;
+    z-index: 9;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+#finances h3 .selected-area {
+    color: #C0C0C0;
+}
+#finances h3 .top-pagination {
+    float: right;
+}
+#finances ul {
+    list-style: none inside none;
+    margin: 0;
+    padding: 19px 0 0;
+}
+#finances ul li {
+    border-top: 1px solid #AAAAAA;
+    position: relative;
+
+    -webkit-transition: background-color 0.3s linear, color 0.4s linear;
+       -moz-transition: background-color 0.3s linear, color 0.4s linear;
+         -o-transition: background-color 0.3s linear, color 0.4s linear;
+            transition: background-color 0.3s linear, color 0.4s linear;
+}
+#finances ul .ad {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+#finances ul .bonus-item,
+#finances ul .donation {
+    cursor: pointer;
+    padding: 10px;
+
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+#finances ul .bonus-item:active,
+#finances ul .bonus-item.chosen,
+#finances ul .bonus-item.tapped,
+#finances ul .donation:active,
+#finances ul .donation.chosen,
+#finances ul .donation.tapped {
+    border-top: 1px solid #111111;
+
+    -webkit-transition: background-color 0s linear, color 0s linear;
+       -moz-transition: background-color 0s linear, color 0s linear;
+         -o-transition: background-color 0s linear, color 0s linear;
+            transition: background-color 0s linear, color 0s linear;
+}
+
+#finances ul .bonus-item:active + li,
+#finances ul .bonus-item.chosen + li,
+#finances ul .bonus-item.tapped + li,
+#finances ul .donation:active + li,
+#finances ul .donation.chosen + li,
+#finances ul .donation.tapped + li {
+    border-top: 1px solid #111111;
+}
+
+#finances ul .donation:active,
+#finances ul .donation.chosen,
+#finances ul .donation.tapped {
+    background-color: #009930;
+}
+#finances ul .tag a {
+    display: block;
+    padding: 10px;
+}
+#finances ul .stateface {
+    color: #888888;
+    display: none;
+    float: left;
+    font-size: 50px;
+    line-height: 50px;
+    text-align: center;
+    width: 80px;
+}
+#finances ul .donation:active .stateface,
+#finances ul .donation.chosen .stateface,
+#finances ul .donation.tapped .stateface {
+    color: #ECECEC;
+}
+#finances ul .donation .donation-details {
+    margin-right: 70px;
+}
+#finances ul .donation h4 {
+    font-family: "Crete Round", Rockwell, 'Courier Bold',
+                    Courier, Georgia, Times, 'Times New Roman', serif;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 21px;
+    margin: 10px 0 5px;
+}
+#finances ul .donation:active h4,
+#finances ul .donation.chosen h4,
+#finances ul .donation.tapped h4 {
+    color: #FFFFFF;
+}
+#finances ul .donation h5 {
+    color: #777777;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    line-height: 9px;
+    margin: 0 0 11px;
+    text-indent: 3px;
+    text-transform: uppercase;
+}
+#finances ul .donation:active h5,
+#finances ul .donation.chosen h5,
+#finances ul .donation.tapped h5 {
+    color: #E4E4E4;
+}
+#finances ul .donation h6 {
+    background: #F7F7F7;
+    border: 1px solid #333333;
+    border-radius: 5px;
+    color: #555555;
+    height: 60px;
+    margin: 0;
+    padding: 10px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    /*width: 60px;*/
+}
+#finances ul .donation h6 span {
+    display: block;
+}
+#finances ul .donation h6 .hidden {
+    display: none;
+}
+#finances ul .donation h6 .total {
+    color: #222222;
+    font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD',
+                    'Book Antiqua', Georgia, serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 20px;
+    padding-bottom: 1px;
+    padding-top: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+#finances ul .donation h6 .to-date {
+    color: #777777;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    line-height: 11px;
+    margin: 5px 0 4px;
+    text-align: right;
+    text-indent: 3px;
+    text-transform: uppercase;
+}
+
+#finances ul .bonus-item {
+    box-shadow: inset 1px 1px 200px rgba(0,0,0,0.5);
+
+    -webkit-transition: box-shadow .25s ease-in-out;
+       -moz-transition: box-shadow .25s ease-in-out;
+         -o-transition: box-shadow .25s ease-in-out;
+            transition: box-shadow .25s ease-in-out;
+}
+#finances ul .map {
+    background: #FFFFFF url("../../img/choropleth-bar-placeholder.png") no-repeat scroll 50% 50%;
+}
+#finances ul .bonus-item:active,
+#finances ul .bonus-item.chosen,
+#finances ul .bonus-item.tapped {
+    box-shadow: inset 1px 1px 200px rgba(0,0,0,1);
+}
+#finances ul .bonus-item .bonus-link-text {
+    color: #FFFFFF;
+    font-family: "Crete Round", Rockwell, 'Courier Bold',
+                    Courier, Georgia, Times, 'Times New Roman', serif;
+    font-size: 21px;
+    font-style: italic;
+    font-weight: normal;
+    line-height: 30px;
+    padding: 15px 0;
+    text-align: center;
+    text-shadow: 1px 1px 5px #000000;
+}
+
+#finances ul .ad {
+    background: #FFFFFF;
+    padding-bottom: 7px;
+    padding-top: 7px;
+    text-align: center;
+}
+#finances ul .ad .ad-holder {
+    height: 66px;
+    overflow: hidden;
+}
+#finances ul .ad .ad-warning {
+    color: #959595;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 8px;
+    letter-spacing: 2px;
+    line-height: 12px;
+    padding-bottom: 2px;
+    text-align: center;
+    text-transform: uppercase;
+}
+#finances ul .ad iframe {
+    height: 50px;
+    overflow: hidden;
+    width: 320px;
+}
+#finances ul .ad img {
+    border: 1px solid #555555;
+}
+
+#finances ul .placeholder {
+    padding-bottom: 7px;
+    padding-top: 7px;
+}
+#finances ul .placeholder .placeholder-inner {
+    font-family: "Crete Round", Rockwell, 'Courier Bold',
+                    Courier, Georgia, Times, 'Times New Roman', serif;
+    font-size: 24px;
+    line-height: 66px;
+    text-align: center;
+}
+
 
 ul.off-canvas-list li label,
 ul.off-canvas-list li a {
@@ -779,7 +1039,8 @@ ul.off-canvas-list li a.active .stateface:before {
     padding: 0 6px;
 }
 .detail-card h1 {
-    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-family: "Crete Round", Rockwell, 'Courier Bold',
+                    Courier, Georgia, Times, 'Times New Roman', serif;
     font-size: 17px;
     font-weight: normal;
     line-height: 27px;
@@ -833,7 +1094,8 @@ ul.off-canvas-list li a.active .stateface:before {
     padding-bottom: 1px;
 }
 .detail-card .attribute-section .attribute-value {
-    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-family: "Crete Round", Rockwell, 'Courier Bold',
+                    Courier, Georgia, Times, 'Times New Roman', serif;
     font-size: 14px;
     line-height: 24px;
 }
@@ -857,7 +1119,8 @@ ul.off-canvas-list li a.active .stateface:before {
     border: 2px solid #009930;
     border-radius: 4px;
     float: left;
-    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-family: "Crete Round", Rockwell, 'Courier Bold',
+                    Courier, Georgia, Times, 'Times New Roman', serif;
     font-size: 14px;
     line-height: 22px;
     margin: 4px;
@@ -880,7 +1143,8 @@ ul.off-canvas-list li a.active .stateface:before {
     background-color: #2171B5;
     color: #FFFFFF;
     cursor: pointer;
-    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-family: "Crete Round", Rockwell, 'Courier Bold',
+                    Courier, Georgia, Times, 'Times New Roman', serif;
     font-size: 17px;
     letter-spacing: 1px;
     padding: 10px 15px;
@@ -924,7 +1188,8 @@ ul.off-canvas-list li a.active .stateface:before {
 .detail-card .about-this-app .about-app-flexible p {
     color: #555555;
     line-height: 24px;
-    font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    font-family: "Crete Round", Rockwell, 'Courier Bold',
+                    Courier, Georgia, Times, 'Times New Roman', serif;
     font-size: 14px;
     margin: 0;
     padding: 12px 0;
@@ -1041,7 +1306,7 @@ ul.off-canvas-list li a.active .stateface:before {
 .detail-card .map-holder .state-frequencies td {
     border-bottom: 1px solid #DDDDDD;
     display: table-cell;
-    font-family: Georgia, Times, serif;
+    font-family: Georgia, "Times", serif;
     font-size: 12px;
     line-height: 16px;
 }
@@ -1095,7 +1360,8 @@ ul.off-canvas-list li a.active .stateface:before {
     }
     .homepage-contents .belt .featured_content .features_story .story_assets li {
         background-image: none;
-        font-family: "Crete Round", Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+        font-family: "Crete Round", Rockwell, 'Courier Bold',
+                        Courier, Georgia, Times, 'Times New Roman', serif;
         font-size: 15px;
         margin-bottom: 8px;
         margin-top: 0;
@@ -1155,11 +1421,36 @@ ul.off-canvas-list li a.active .stateface:before {
         line-height: 10px;
         margin-top: 3px;
     }
-
     #events ul .bonus-item:hover {
         box-shadow: inset 1px 1px 200px rgba(0,0,0,0.8);
     }
     #events ul .bonus-item:active:hover {
+        box-shadow: inset 1px 1px 200px rgba(0,0,0,1);
+    }
+
+    #finances ul .donation:hover {
+        background-color: #F3F3F3;
+    }
+    #finances ul .donation:active:hover {
+        background-color: #009930;
+    }
+    #finances ul .stateface {
+        display: block;
+    }
+    #finances ul .donation h4 {
+        font-size: 16px;
+        font-weight: normal;
+        line-height: 24px;
+    }
+    #finances ul .donation h5 {
+        font-size: 10px;
+        line-height: 10px;
+        margin-top: 3px;
+    }
+    #finances ul .bonus-item:hover {
+        box-shadow: inset 1px 1px 200px rgba(0,0,0,0.8);
+    }
+    #finances ul .bonus-item:active:hover {
         box-shadow: inset 1px 1px 200px rgba(0,0,0,1);
     }
 

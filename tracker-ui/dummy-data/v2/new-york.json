@@ -1,0 +1,33 @@
+loadStateSummary({
+    "status": "200",
+    "event": {
+        "state": "New York",
+        "stateSlug": "new-york",
+        "statePostalLower": "ny",
+        "donationCount": "13,125 donations",
+        "donationTotals": "$345,678.90",
+        "nationalRank": 1,
+        "topDonors": [
+            {
+                "name": "Lucy Adams",
+                "amount": 20000
+            },
+            {
+                "name": "Sarah Jones",
+                "amount": 20000
+            },
+            {
+                "name": "John Smith",
+                "amount": 20000
+            },
+            {
+                "name": "Paul Westin",
+                "amount": 20000
+            },
+            {
+                "name": "Rick Ruiz",
+                "amount": 19500
+            }
+        ]
+    }
+});

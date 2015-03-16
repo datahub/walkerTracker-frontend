@@ -1,5 +1,51 @@
 var generateURLs = {
-    travel: {
+    'campaign-finance': {
+        list: function(listView) {
+            var specificURL, queryPage,
+                query = listView.queryDict;
+
+            if (_.isEmpty(query)) {
+                queryPage = 1;
+            } else {
+                queryPage = 1;
+                if (_.has(query, 'page')) {
+                    var queryPageCandidate = query.page;
+                    if ($.isNumeric(queryPageCandidate) &&
+                            parseInt(queryPageCandidate, 10) > 0) {
+                        queryPage = parseInt(
+                            queryPageCandidate,
+                            10
+                        ).toString();
+                    }
+                }
+            }
+
+            specificURL = "http://media.dhb.io/news-apps/walker-tracker/" +
+                                "dummy-data/v2/state-totals." +
+                                queryPage + ".json";
+
+            if (debug) {
+                return listView.facetConfig.baseURL + specificURL;
+            } else {
+                return listView.facetConfig.baseURL + specificURL +
+                        "?spaceless=true";
+            }
+        },
+        detail: function(view) {
+            var specificURL;
+
+            specificURL = "http://media.dhb.io/news-apps/walker-tracker/" +
+                                "dummy-data/v2/" + view.dataID + ".json";
+
+            if (debug) {
+                return view.facetConfig.baseURL + specificURL;
+            } else {
+                return view.facetConfig.baseURL + specificURL +
+                        "?spaceless=true";
+            }
+        }
+    },
+    'travel': {
         list: function(listView) {
             var specificURL, queryArea, queryIssueSlug, queryPage,
                 query = listView.queryDict;
@@ -110,7 +156,85 @@ var generateURLs = {
 
 
 facetConfigs = {
-    travel: {
+    'campaign-finance': {
+        baseURL: "",
+        templateIDs: {
+            "listHeader": "finance-list-header",
+            "listItem": "finance-list-item",
+            "adLI": "finance-ad-item",
+            "bonusLI": "finance-bonus-item",
+            "detail": "finance-detail",
+            // "visualization": "event-visualization",
+            "placeholderLI": "finance-placeholder-item"
+            // "tagArchiveHeader": "event-tag-archive-header",
+            // "tagArchiveItem": "event-tag-archive-item"
+        },
+        parseListViewFacets: function(view, facetsCandidate) {
+            var facetsFinalized = {};
+
+            if (_.has(facetsCandidate, 'page')) {
+                var pageCandidate = parseInt(
+                    facetsCandidate.page,
+                    10
+                );
+
+                if (isInteger(pageCandidate)) {
+                    facetsFinalized['page'] = pageCandidate;
+                }
+            }
+
+            return facetsFinalized;
+        },
+        // parseTagArchiveFacets: function(view, facetsCandidate) {},
+        // reassembleFacets: function(queryDict) {},
+        buildCollectionData: function(dataObject) {
+            return dataObject.stateTotals;
+        },
+        renderRightNav: function(listView) {},
+        // generateListRightNav: function(view) {},
+        enhanceHeader: function(view) {
+            return "";
+        },
+        // enhanceTagArchiveHeader: function(view) {},
+        callbacks: {
+            list: "loadStateDonationTotals",
+            detail: "loadStateSummary"
+        },
+        listHolderID: "finances",
+        listHeaderBase: "Donations",
+        listClass: "donation-list",
+        // tagArchiveHeaderPlaceholder: "",
+        // tagArchiveClass: "",
+        itemClasses: {
+            detail: "donation",
+            advertisement: "ad",
+            // tagArchiveItem: "tag",
+            // tagAdvertisement: "ad",
+            placeholder: "placeholder"
+        },
+        generateBonusItemClass: function(view) {
+            var itemClass = "map";
+
+            return itemClass;
+        },
+        generateBonusItemURL: function(view) {
+            var listURL = "#!/" + view.chaperone.facetSlug + "/in-depth/";
+
+            return listURL;
+        },
+        generateBonusItemContext: function(view) {
+            var contextObj = {};
+
+            contextObj.itemToOpen = "state-by-state map";
+
+            return contextObj;
+        },
+        // renderVisualization: function(view, callbackFunction) {},
+        // generateVisualizationContext: function(view) {},
+        // visualizationPostRenderHooks: function(view) {},
+        a: "b" // TODO: DELETE.
+    },
+    'travel': {
         baseURL: "http://aukofer.dhb.io/api/v1/",
         queryAreas: [{a:"US",fn:"Entire U.S."},{a:"AL",fn:"Alabama"},{a:"AK",fn:"Alaska"},{a:"AZ",fn:"Arizona"},{a:"AR",fn:"Arkansas"},{a:"CA",fn:"California"},{a:"CO",fn:"Colorado"},{a:"CT",fn:"Connecticut"},{a:"DE",fn:"Delaware"},{a:"DC",fn:"D.C."},{a:"FL",fn:"Florida"},{a:"GA",fn:"Georgia"},{a:"HI",fn:"Hawaii"},{a:"ID",fn:"Idaho"},{a:"IL",fn:"Illinois"},{a:"IN",fn:"Indiana"},{a:"IA",fn:"Iowa"},{a:"KS",fn:"Kansas"},{a:"KY",fn:"Kentucky"},{a:"LA",fn:"Louisiana"},{a:"ME",fn:"Maine"},{a:"MD",fn:"Maryland"},{a:"MA",fn:"Massachusetts"},{a:"MI",fn:"Michigan"},{a:"MN",fn:"Minnesota"},{a:"MS",fn:"Mississippi"},{a:"MO",fn:"Missouri"},{a:"MT",fn:"Montana"},{a:"NE",fn:"Nebraska"},{a:"NV",fn:"Nevada"},{a:"NH",fn:"New Hampshire"},{a:"NJ",fn:"New Jersey"},{a:"NM",fn:"New Mexico"},{a:"NY",fn:"New York"},{a:"NC",fn:"North Carolina"},{a:"ND",fn:"North Dakota"},{a:"OH",fn:"Ohio"},{a:"OK",fn:"Oklahoma"},{a:"OR",fn:"Oregon"},{a:"PA",fn:"Pennsylvania"},{a:"RI",fn:"Rhode Island"},{a:"SC",fn:"South Carolina"},{a:"SD",fn:"South Dakota"},{a:"TN",fn:"Tennessee"},{a:"TX",fn:"Texas"},{a:"UT",fn:"Utah"},{a:"VT",fn:"Vermont"},{a:"VA",fn:"Virginia"},{a:"WA",fn:"Washington"},{a:"WV",fn:"West Virginia"},{a:"WY",fn:"Wyoming"}],
         templateIDs: {
@@ -195,6 +319,14 @@ facetConfigs = {
             facetFormatted = facetList.join(",");
 
             return facetFormatted;
+        },
+        buildCollectionData: function(dataObject) {
+            return dataObject.events;
+        },
+        renderRightNav: function(listView) {
+            listView.chaperone.view.rightMenu.setListElements(
+                listView.facetConfig.generateListRightNav(listView)
+            );
         },
         generateListRightNav: function(view) {
             var activeArea,
@@ -891,7 +1023,6 @@ var HomepageView = Backbone.View.extend({
         });
 
         $(".trigger[facet-slug='media-appearances']").unbind();
-        $(".trigger[facet-slug='campaign-finance']").unbind();
 
         return self;
     },
@@ -1000,9 +1131,7 @@ var ListView = Backbone.View.extend({
             }
         }
 
-        self.chaperone.view.rightMenu.setListElements(
-            self.facetConfig.generateListRightNav(self)
-        );
+        self.facetConfig.renderRightNav(self);
 
         self.listHeaderView = new ListHeaderView({
             chaperone: self
@@ -1039,26 +1168,32 @@ var ListView = Backbone.View.extend({
     },
 
     fetchItems: function(callbackFunction) {
-        var self = this;
-
-        $.ajax({
-            url: self.queryURL,
-            dataType: "jsonp",
-            // jsonpCallback: self.facetConfig.callbacks.list,
-            type: "GET",
-            jsonp: "callback",
-            contentType: "application/json",
-            success: function(data) {
-                if (typeof callbackFunction != "undefined") {
-                    if (callbackFunction !== null) {
-                        callbackFunction(data);
+        var self = this,
+            ajaxConfig = {
+                url: self.queryURL,
+                dataType: "jsonp",
+                type: "GET",
+                jsonp: "callback",
+                contentType: "application/json",
+                success: function(data) {
+                    if (typeof callbackFunction != "undefined") {
+                        if (callbackFunction !== null) {
+                            callbackFunction(data);
+                        }
                     }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // TODO: Capture error and send to Sentry.
                 }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                // TODO: Capture error and send to Sentry.
+            };
+
+        if (_.has(self.facetConfig, "callbacks")) {
+            if (_.has(self.facetConfig.callbacks, "list")) {
+                ajaxConfig.jsonpCallback = self.facetConfig.callbacks.list;
             }
-        });
+        }
+
+        $.ajax(ajaxConfig);
     },
 
     populateListItems: function() {
@@ -1140,7 +1275,7 @@ var ListView = Backbone.View.extend({
             if (data.status == "200") {
                 listDiv.empty();
 
-                self.collectionData = data.events;
+                self.collectionData = fc.buildCollectionData(data);
 
                 self.verboseTagName = data.tagName;
 
@@ -1683,26 +1818,34 @@ var DetailView = Backbone.View.extend({
     },
 
     fetchItem: function(callbackFunction) {
-        var self = this;
-
-        $.ajax({
-            url: self.queryURL,
-            dataType: "jsonp",
-            // jsonpCallback: self.facetConfig.callbacks.detail,
-            type: "GET",
-            jsonp: "callback",
-            contentType: "application/json",
-            success: function(data) {
-                if (typeof callbackFunction != "undefined") {
-                    if (callbackFunction !== null) {
-                        callbackFunction(data);
+        var self = this,
+            ajaxConfig = {
+                url: self.queryURL,
+                dataType: "jsonp",
+                // jsonpCallback: self.facetConfig.callbacks.detail,
+                type: "GET",
+                jsonp: "callback",
+                contentType: "application/json",
+                success: function(data) {
+                    console.log(data);
+                    if (typeof callbackFunction != "undefined") {
+                        if (callbackFunction !== null) {
+                            callbackFunction(data);
+                        }
                     }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // TODO: Capture error and send to Sentry.
                 }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                // TODO: Capture error and send to Sentry.
+            };
+
+        if (_.has(self.facetConfig, "callbacks")) {
+            if (_.has(self.facetConfig.callbacks, "detail")) {
+                ajaxConfig.jsonpCallback = self.facetConfig.callbacks.detail;
             }
-        });
+        }
+
+        $.ajax(ajaxConfig);
     },
 
     render: function() {

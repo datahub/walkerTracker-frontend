@@ -12,3 +12,8 @@ function getCookie(key) {
 function isInteger(x) {
     return (typeof x === 'number') && (x % 1 === 0);
 }
+
+function numberWithCommas(n) {
+    var parts=n.toString().split(".");
+    return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+}

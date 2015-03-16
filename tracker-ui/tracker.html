@@ -116,7 +116,7 @@
                             <div class="trigger-icon ss-icon ss-tv"></div>
                             <h5>Media appearances</h5>
                         </li>
-                        <li class="trigger trigger-three trigger-disabled" facet-slug="campaign-finance" title="Coming soon">
+                        <li class="trigger trigger-three" facet-slug="campaign-finance">
                             <div class="trigger-icon ss-icon ss-moneybag"></div>
                             <h5>Campaign finance</h5>
                         </li>
@@ -149,6 +149,81 @@
                 <div class="pagination"></div>
             </div>
             <a class="exit-off-canvas" style="height: 991px;"></a>
+        </script>
+
+        <script type="text/template" id="finance-list-header">
+            <span><%= baseDisplay %> <span class="selected-area"><%= enhancedDisplay %></span></span>
+            <span class="top-pagination">Page <%= currentPage %>/<%= totalPages %></span>
+        </script>
+
+        <script type="text/template" id="finance-list-item">
+            <a href="#!/<%= facetSlug %>/items/<%= rowData.stateSlug %>/">
+                <div class="stateface stateface-<%= rowData.statePostalLower %>"></div>
+                <div class="donation-details">
+                    <h4 class="description"><%= rowData.state %></h4>
+                    <h5 class="location"><%= rowData.donationCounts %></h5>
+                </div>
+                <h6 class="donation-totals">
+                    <span class="total"><%= rowData.donationTotal %></span>
+                    <span class="to-date">To date</span>
+                </h6>
+                <div class="clearer"></div>
+            </a>
+        </script>
+
+        <script type="text/template" id="finance-ad-item">
+            <div class="ad-holder">
+                <div class="ad-warning">Advertisement</div>
+
+                <iframe id="51a4f9b058955" name="51a4f9b058955" src="http://ox-d.jrn.com/w/1.0/afr?auid=421130&cb=<%= cbValue %>" frameborder="0" scrolling="no"><a href="http://ox-d.jrn.com/w/1.0/rc?cs=51a4f9b058955&cb=<%= cbValue %>" ><img src="http://ox-d.jrn.com/w/1.0/ai?auid=421130&cs=51a4f9b058955&cb=<%= cbValue %>" border="0" alt=""></a></iframe>
+            </div>
+        </script>
+
+        <script type="text/template" id="finance-bonus-item">
+            <a href="<%= itemURL %>">
+                <div class="bonus-link-text">Open <span class="bonus-type"><%= itemToOpen %></span> »</div>
+            </a>
+        </script>
+
+        <script type="text/template" id="finance-placeholder-item">
+            <div class="placeholder-inner">
+                <div>No visits found.</div>
+            </div>
+        </script>
+
+        <script type="text/template" id="finance-detail">
+            <div class="detail-card">
+                <h1><%= rowData.state %></h1>
+                <h2>
+                    <span class="date-info">
+                        <span class="date-clause"><%= rowData.donationCount %></span>
+                        <span class="divider"> ♦ </span>
+                        <span class="place-clause"><%= rowData.donationTotals %> to date</span>
+                    </span>
+                </h2>
+
+                <div class="attribute-section multi-attribute no-header">
+                    <span>#<%= rowData.nationalRank %> nationally in money raised</span>
+                </div>
+
+                <div class="attribute-section multi-attribute no-header">
+                    <table class="">
+                        <thead>
+                            <tr>
+                                <th>Donor</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% _.each(rowData.topDonors, function(donor) { %>
+                            <tr>
+                                <td><%= donor.name %></td>
+                                <td><%= donor.amount %></td>
+                            </tr>
+                            <% }); %>
+                        </tbody>
+                </div>
+            </div>
         </script>
 
         <script type="text/template" id="event-list-header">

@@ -1,0 +1,83 @@
+loadStateDonationTotals({
+    "status": "200",
+    "pagination": {
+        "totalEvents": 50,
+        "prevPage": null,
+        "eventsPerPage": 10,
+        "totalPages": 5,
+        "currentPage": 1,
+        "nextPage": 2
+    },
+    "stateTotals": [
+        {
+            "state": "New York",
+            "stateSlug": "new-york",
+            "statePostalLower": "ny",
+            "donationCounts": "13,125 donations",
+            "donationTotal": "$345,678.90"
+        },
+        {
+            "state": "California",
+            "stateSlug": "california",
+            "statePostalLower": "ca",
+            "donationCounts": "11,322 donations",
+            "donationTotal": "$211,321.09"
+        },
+        {
+            "state": "Texas",
+            "stateSlug": "texas",
+            "statePostalLower": "tx",
+            "donationCounts": "10,494 donations",
+            "donationTotal": "$206,780.80"
+        },
+        {
+            "state": "Florida",
+            "stateSlug": "florida",
+            "statePostalLower": "fl",
+            "donationCounts": "9,832 donations",
+            "donationTotal": "$201,684.29"
+        },
+        {
+            "state": "Washington, D.C.",
+            "stateSlug": "washington-dc",
+            "statePostalLower": "dc",
+            "donationCounts": "9,418 donations",
+            "donationTotal": "$191,458.31"
+        },
+        {
+            "state": "Michigan",
+            "stateSlug": "michigan",
+            "statePostalLower": "mi",
+            "donationCounts": "9,532 donations",
+            "donationTotal": "$187,482.34"
+        },
+        {
+            "state": "Virginia",
+            "stateSlug": "virginia",
+            "statePostalLower": "va",
+            "donationCounts": "9,108 donations",
+            "donationTotal": "$162,333.65"
+        },
+        {
+            "state": "Illinois",
+            "stateSlug": "illinois",
+            "statePostalLower": "il",
+            "donationCounts": "8,731 donations",
+            "donationTotal": "$151,938.22"
+        },
+        {
+            "state": "Iowa",
+            "stateSlug": "iowa",
+            "statePostalLower": "ia",
+            "donationCounts": "8,382 donations",
+            "donationTotal": "$142,270.07"
+        },
+        {
+            "state": "Nevada",
+            "stateSlug": "nevada",
+            "statePostalLower": "nv",
+            "donationCounts": "8,223 donations",
+            "donationTotal": "$130,629.82"
+        }
+    ]
+});

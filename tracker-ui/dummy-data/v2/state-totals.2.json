@@ -1,0 +1,83 @@
+loadStateDonationTotals({
+    "status": "200",
+    "pagination": {
+        "totalEvents": 50,
+        "prevPage": 1,
+        "eventsPerPage": 10,
+        "totalPages": 5,
+        "currentPage": 2,
+        "nextPage": 3
+    },
+    "stateTotals": [
+        {
+            "state": "New Jersey",
+            "stateSlug": "new-jersey",
+            "statePostalLower": "nj",
+            "donationCounts": "7,106 donations",
+            "donationTotal": "$128,128.28"
+        },
+        {
+            "state": "Arizona",
+            "stateSlug": "arizona",
+            "statePostalLower": "az",
+            "donationCounts": "6,849 donations",
+            "donationTotal": "$127,463.68"
+        },
+        {
+            "state": "Utah",
+            "stateSlug": "utah",
+            "statePostalLower": "ut",
+            "donationCounts": "6,817 donations",
+            "donationTotal": "$126,008.96"
+        },
+        {
+            "state": "Wyoming",
+            "stateSlug": "wyoming",
+            "statePostalLower": "wy",
+            "donationCounts": "6,355 donations",
+            "donationTotal": "$125,362.51"
+        },
+        {
+            "state": "Montana",
+            "stateSlug": "montana",
+            "statePostalLower": "mt",
+            "donationCounts": "5,799 donations",
+            "donationTotal": "$123,456.78"
+        },
+        {
+            "state": "Idaho",
+            "stateSlug": "idaho",
+            "statePostalLower": "id",
+            "donationCounts": "5,432 donations",
+            "donationTotal": "$120,976.43"
+        },
+        {
+            "state": "Mississippi",
+            "stateSlug": "mississippi",
+            "statePostalLower": "ms",
+            "donationCounts": "5,086 donations",
+            "donationTotal": "$118,350.23"
+        },
+        {
+            "state": "Louisiana",
+            "stateSlug": "louisiana",
+            "statePostalLower": "la",
+            "donationCounts": "4,627 donations",
+            "donationTotal": "$115,219.04"
+        },
+        {
+            "state": "Alabama",
+            "stateSlug": "alabama",
+            "statePostalLower": "al",
+            "donationCounts": "4,040 donations",
+            "donationTotal": "$113,608.59"
+        },
+        {
+            "state": "Tennessee",
+            "stateSlug": "tennessee",
+            "statePostalLower": "tn",
+            "donationCounts": "3,862 donations",
+            "donationTotal": "$111,111.11"
+        }
+    ]
+});
