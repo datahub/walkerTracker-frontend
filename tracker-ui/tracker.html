@@ -1,0 +1,435 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <title>WalkerTracker</title>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <link rel="stylesheet" href="http://media.dhb.io/javascripts/foundation/v5.5.1/css/normalize.css" />
+        <link rel="stylesheet" href="http://media.dhb.io/javascripts/foundation/v5.5.1/css/foundation.css" />
+
+        <!-- KEEP OUT <link href='http://fonts.googleapis.com/css?family=Arbutus+Slab' rel='stylesheet' type='text/css'> -->
+        <link href='http://fonts.googleapis.com/css?family=Crete+Round:400,400italic' rel='stylesheet' type='text/css'>
+        <link href="http://media.dhb.io/webfonts/stateface/stateface.css" rel="stylesheet" type="text/css" />
+        <link href="http://graphics.jsonline.com/jsi_news/webfonts/symbolset-symbolicons-block/ss-symbolicons-block.css" rel="stylesheet" type="text/css" />
+
+        <link href="http://media.dhb.io/webfonts/stately/git-8f406598d5/stately/css/stately.css" rel="stylesheet" type="text/css" />
+
+        <link href="stylesheets/v1/tracker.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="app"></div>
+
+        <script src="http://media.dhb.io/javascripts/foundation/v5.5.1/js/vendor/jquery.js" type="text/javascript"></script>
+
+        <script src="http://media.dhb.io/javascripts/foundation/v5.5.1/js/vendor/modernizr.js" type="text/javascript"></script>
+        <script src="http://media.dhb.io/javascripts/foundation/v5.5.1/js/foundation.min.js" type="text/javascript"></script>
+        <script src="http://media.dhb.io/javascripts/swiftclick/v1.1.5/swiftclick.min.js" type="text/javascript"></script>
+
+        <script src="http://media1.dhb.io/projects/2013/newborns/underscore-min.1.5.1.js" type="text/javascript"> </script>
+        <script src="http://media1.dhb.io/projects/2013/newborns/backbone-min.1.0.js" type="text/javascript"> </script>
+
+        <script src="http://media1.dhb.io/webfonts/symbolset/ss-standard.js" type="text/javascript"> </script>
+
+        <script type="text/template" id="wrapper-template">
+            <div class="off-canvas-wrap" data-offcanvas>
+                <div class="inner-wrap <%= activeSection %>-shown">
+                    <nav class="tab-bar"></nav>
+
+                    <aside class="right-off-canvas-menu"></aside>
+
+                    <% _.each(sections, function(section) { %>
+                    <section class="<%= section %> view-section"></section>
+                    <% }); %>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/template" id="nav-template">
+                <section class="left-small"></section>
+                <section class="middle tab-bar-section">
+                    <h1 class="title"><%= appTitle %></h1>
+                </section>
+                <section class="right-small"></section>
+                <a class="exit-off-canvas"></a>
+        </script>
+
+        <script type="text/template" id="back-button-contents">
+            <a class="back-button" href="#"><span>&lsaquo;</span></a>
+        </script>
+
+        <script type="text/template" id="menu-button-contents">
+            <a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
+        </script>
+
+        <script type="text/template" id="off-canvas-menu-base">
+            <ul class="off-canvas-list">
+            </ul>
+        </script>
+
+        <script type="text/template" id="off-canvas-label-item-template">
+            <label><%= value %></label>
+        </script>
+
+        <script type="text/template" id="off-canvas-menu-item-template">
+            <a class="menu-trigger <%= anchorClass %>" href="<%= anchorLink %>">
+                <span class="<%= spanClass %>"><%= value %></span>
+            </a>
+        </script>
+
+        <script type="text/template" id="homepage-template">
+            <div class="homepage-contents">
+                <div class="homepage-inner">
+                    <div class="top-article homepage-box">
+                        <a href="http://www.jsonline.com/blogs/news/291160271.html">
+                            <img src="http://media.jrn.com/images/660*413/b99439710z.1_20150205190139_000_grq9r80i.1-1.jpg">
+                            <h1 class="headline">Walker poised for another campaign</h1>
+                            <p class="tease-text"><span class="timestamp"><span class="ts-inner">Feb. 7, 2015</span> | </span> The 47-year-old Republican governor began running at an earlier age and has run more often and won more elections than any of his potential presidential rivals.</p>
+                        </a>
+                    </div>
+                    <div class="belt homepage-box">
+                        <div class="divider"><h4>Scott Walker presidential news</h4></div>
+                        <div class="featured_content">
+
+                        <% _.each(articles, function(article) { %>
+                            <div class="features_story">
+                                <h3 class="headline"><a href="<%= article.link %>"><%= article.headline %></a></h3>
+                                <p><%= article.description %></p>
+                            </div>
+                        <% }); %>
+
+                        </div>
+                    </div>
+
+                    <div class="clearer"></div>
+
+                    <ul class="section-triggers homepage-box">
+                        <li class="trigger trigger-one" facet-slug="travel">
+                            <div class="trigger-icon ss-icon ss-briefcase"></div>
+                            <h5>Travel</h5>
+                        </li>
+                        <li class="trigger trigger-two trigger-disabled" facet-slug="media-appearances" title="Coming soon">
+                            <div class="trigger-icon ss-icon ss-tv"></div>
+                            <h5>Media appearances</h5>
+                        </li>
+                        <li class="trigger trigger-three trigger-disabled" facet-slug="campaign-finance" title="Coming soon">
+                            <div class="trigger-icon ss-icon ss-moneybag"></div>
+                            <h5>Campaign finance</h5>
+                        </li>
+                        <div class="clearer"></div>
+                    </ul>
+
+                    <div class="clearer"></div>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/template" id="pagination-template">
+            <div>
+                <% if (paginationData.prevPage != null) { %>
+                <a class="pagination-left pagination-link" href="#!/<%= facetSlug %>/refine/<%= pagelessQueryDict %>page=<%= paginationData.prevPage %>/">&lsaquo; Newer</a>
+                <% } %>
+                <% if (paginationData.nextPage != null) { %>
+                <a class="pagination-right pagination-link" href="#!/<%= facetSlug %>/refine/<%= pagelessQueryDict %>page=<%= paginationData.nextPage %>/">Older &rsaquo;</a>
+                <% } %>
+                <div class="pagination-center">Page <span class="current-page"><%= paginationData.currentPage %></span> of <span class="total-pages"><%= paginationData.totalPages %></span></div>
+                <div class="clearer"></div>
+            </div>
+        </script>
+
+        <script type="text/template" id="list-template">
+            <div id="<%= listHolderID %>">
+                <h3><%= listHeaderBase %></h3>
+                <ul class="<%= listClass %>">
+                </ul>
+                <div class="pagination"></div>
+            </div>
+            <a class="exit-off-canvas" style="height: 991px;"></a>
+        </script>
+
+        <script type="text/template" id="event-list-header">
+            <span><%= baseDisplay %> <span class="selected-area"><%= enhancedDisplay %></span></span>
+            <span class="top-pagination">Page <%= currentPage %>/<%= totalPages %></span>
+        </script>
+
+        <script type="text/template" id="event-list-item">
+            <a href="#!/<%= facetSlug %>/items/<%= rowData.id %>/">
+                <div class="stateface stateface-<%= rowData.statePostalLower %>"></div>
+                <div class="visit-details">
+                    <h4 class="description"><%= rowData.description %></h4>
+                    <h5 class="location"><span class="city"><%= rowData.city %></span>, <span class="state"><%= rowData.state %></span></h5>
+                </div>
+                <h6 class="date">
+                    <span class="month"><%= rowData.dateComponents.month %></span>
+                    <span class="hidden"> </span>
+                    <span class="day"><%= rowData.dateComponents.day%></span>
+                    <span class="hidden">, </span>
+                    <span class="year"><%= rowData.dateComponents.year %></span>
+                </h6>
+                <div class="clearer"></div>
+            </a>
+        </script>
+
+        <script type="text/template" id="event-ad-item">
+            <div class="ad-holder">
+                <div class="ad-warning">Advertisement</div>
+
+                <iframe id="51a4f9b058955" name="51a4f9b058955" src="http://ox-d.jrn.com/w/1.0/afr?auid=421130&cb=<%= cbValue %>" frameborder="0" scrolling="no"><a href="http://ox-d.jrn.com/w/1.0/rc?cs=51a4f9b058955&cb=<%= cbValue %>" ><img src="http://ox-d.jrn.com/w/1.0/ai?auid=421130&cs=51a4f9b058955&cb=<%= cbValue %>" border="0" alt=""></a></iframe>
+            </div>
+        </script>
+
+        <script type="text/template" id="event-bonus-item">
+            <a href="<%= itemURL %>">
+                <div class="bonus-link-text">Open <span class="bonus-type"><%= itemToOpen %></span> »</div>
+            </a>
+        </script>
+
+        <script type="text/template" id="event-placeholder-item">
+            <div class="placeholder-inner">
+                <div>No visits found.</div>
+            </div>
+        </script>
+
+        <script type="text/template" id="tag-pagination-template">
+            <div>
+                <% if (paginationData.prevPage != null) { %>
+                <a class="pagination-left pagination-link" href="#!/<%= facetSlug %>/tags/<%= pagelessQueryDict %>page=<%= paginationData.prevPage %>/">&lsaquo; Back</a>
+                <% } %>
+                <% if (paginationData.nextPage != null) { %>
+                <a class="pagination-right pagination-link" href="#!/<%= facetSlug %>/tags/<%= pagelessQueryDict %>page=<%= paginationData.nextPage %>/">Next &rsaquo;</a>
+                <% } %>
+                <div class="pagination-center">Page <span class="current-page"><%= paginationData.currentPage %></span> of <span class="total-pages"><%= paginationData.totalPages %></span></div>
+                <div class="clearer"></div>
+            </div>
+        </script>
+
+        <script type="text/template" id="tag-archive-template">
+            <div id="<%= listHolderID %>">
+                <h3><%= tagArchiveHeaderPlaceholder %></h3>
+                <ul class="<%= tagArchiveClass %>">
+                </ul>
+                <div class="pagination"></div>
+            </div>
+            <a class="exit-off-canvas" style="height: 991px;"></a>
+        </script>
+
+        <script type="text/template" id="event-tag-archive-header">
+            <span><%= enhancedDisplay %> <span class="selected-area">in <%= baseDisplay %></span></span>
+        </script>
+
+        <script type="text/template" id="event-tag-archive-item">
+            <a href="#!/<%= facetSlug %>/refine/issue=<%= rowData.slug %>/">
+                <div class="visit-details">
+                    <h4 class="description"><%= rowData.name %></h4>
+                    <h5 class="location"><%= rowData.eventCount %></h5>
+                </div>
+            </a>
+        </script>
+
+        <script type="text/template" id="event-detail">
+            <div class="detail-card">
+                <h1><%= rowData.description %></h1>
+                <h2>
+                    <span class="date-info">
+                        <span class="date-clause"><%= rowData.startDate %></span>
+                        <span class="divider"> ♦ </span>
+                        <span class="place-clause"><%= rowData.city %>, <%= rowData.state %></span>
+                    </span>
+                </h2>
+
+                <% if (typeof rowData.sponsors != "undefined" && rowData.sponsors != null) { %>
+                <div class="attribute-section no-top-line">
+                    <div class="attribute-name">Sponsors</div>
+                    <div class="attribute-value"><%= rowData.sponsors %></div>
+                </div>
+                <% } %>
+
+                <% if (typeof rowData.activity != "undefined" && rowData.activity != null) { %>
+                <div class="attribute-section">
+                    <div class="attribute-name">Activity</div>
+                    <div class="attribute-value"><%= rowData.activity %></div>
+                </div>
+                <% } %>
+
+                <% if ((typeof rowData.announcement != "undefined" && rowData.announcement != null) || (typeof rowData.transcript != "undefined" && rowData.transcript != null)) { %>
+                <div class="attribute-section multi-attribute no-header">
+                    <% if (typeof rowData.announcement != "undefined" && rowData.announcement != null) { %>
+                    <div class="attribute-value inline-value"><a href="<%= rowData.announcement %>">Announcement</a></div>
+                    <% } %>
+                    <% if (typeof rowData.transcript != "undefined" && rowData.transcript != null) { %>
+                    <div class="attribute-value inline-value"><a href="<%= rowData.transcript %>">Transcript</a></div>
+                    <% } %>
+                    <div class="clearer"></div>
+                </div>
+                <% } %>
+
+                <% if (typeof rowData.recordings != "undefined" && rowData.recordings.length > 0) { %>
+                <div class="attribute-section multi-attribute">
+                    <div class="attribute-name">Recordings</div>
+                        <% _.each(rowData.recordings, function(recording){ %>
+                        <div class="attribute-value inline-value">
+                            <a href="<%= recording.link %>"><%= recording.type %> recording</a>
+                        </div>
+                        <% }); %>
+                    <div class="clearer"></div>
+                </div>
+                <% } %>
+
+                <% if (typeof rowData.coverage != "undefined" && rowData.coverage.length > 0) { %>
+                <div class="attribute-section multi-line">
+                    <div class="attribute-name">Media coverage</div>
+                    <ul>
+                        <% _.each(rowData.coverage, function(cItem) { %>
+                        <li class="attribute-value">
+                            <a href="<%= cItem.link %>"><%= cItem.organization %></a>
+                        </li>
+                        <% }); %>
+                    </ul>
+                </div>
+                <% } %>
+
+                <% if (typeof rowData.tags != "undefined" && rowData.tags.length > 0) { %>
+                <div class="attribute-section tag-display">
+                    <div class="attribute-name">Issues discussed</div>
+                    <ul class="tag-list">
+                        <% _.each(rowData.tags, function(tag) { %>
+                            <li class="tag"><a href="#!/<%= facetSlug %>/refine/issue=<%= tag.slug %>/"><%= tag.name %></a></li>
+                        <% }); %>
+                    </ul>
+                    <div class="clearer"></div>
+                </div>
+                <% } %>
+
+                <div class="about-this-app">
+                    <div class="about-app-trigger">About this application<span class="trigger-up ss-icon ss-navigateup"></span><span class="trigger-down ss-icon ss-navigatedown"></span></div>
+                    <div class="about-app-flexible">
+                        <p>Information on Scott Walker's travel is compiled by Dave Umhoefer and others from the Milwaukee Journal Sentinel staff. Only out-of-state trips are&nbsp;listed.</p>
+                        <p>Information comes from publicly reported information. <a href="mailto:dumhoefer@journalsentinel.com">Contact the Journal Sentinel</a> if you know of a trip we have not&nbsp;listed.</p>
+                        <p>This application was developed by <a href="mailto:ajvestal@journalsentinel.com">Allan James Vestal</a>, <a href="mailto:mandre@journalsentinel.com">Michael Andre</a> and <a href="mailto:kcrowe@journalsentinel.com">Kevin Crowe</a> of the Journal Sentinel&nbsp;staff.</p>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/template" id="event-visualization">
+            <div class="detail-card">
+                <div class="map-holder">
+                    <% if (viewMode == "US") { %>
+                    <ul class="stately">
+                        <li data-state="al" class="al">A</li>
+                        <li data-state="ak" class="ak">B</li>
+                        <li data-state="ar" class="ar">C</li>
+                        <li data-state="az" class="az">D</li>
+                        <li data-state="ca" class="ca">E</li>
+                        <li data-state="co" class="co">F</li>
+                        <li data-state="ct" class="ct">G</li>
+                        <li data-state="de" class="de">H</li>
+                        <li data-state="dc" class="dc">I</li>
+                        <li data-state="fl" class="fl">J</li>
+                        <li data-state="ga" class="ga">K</li>
+                        <li data-state="hi" class="hi">L</li>
+                        <li data-state="id" class="id">M</li>
+                        <li data-state="il" class="il">N</li>
+                        <li data-state="in" class="in">O</li>
+                        <li data-state="ia" class="ia">P</li>
+                        <li data-state="ks" class="ks">Q</li>
+                        <li data-state="ky" class="ky">R</li>
+                        <li data-state="la" class="la">S</li>
+                        <li data-state="me" class="me">T</li>
+                        <li data-state="md" class="md">U</li>
+                        <li data-state="ma" class="ma">V</li>
+                        <li data-state="mi" class="mi">W</li>
+                        <li data-state="mn" class="mn">X</li>
+                        <li data-state="ms" class="ms">Y</li>
+                        <li data-state="mo" class="mo">Z</li>
+                        <li data-state="mt" class="mt">a</li>
+                        <li data-state="ne" class="ne">b</li>
+                        <li data-state="nv" class="nv">c</li>
+                        <li data-state="nh" class="nh">d</li>
+                        <li data-state="nj" class="nj">e</li>
+                        <li data-state="nm" class="nm">f</li>
+                        <li data-state="ny" class="ny">g</li>
+                        <li data-state="nc" class="nc">h</li>
+                        <li data-state="nd" class="nd">i</li>
+                        <li data-state="oh" class="oh">j</li>
+                        <li data-state="ok" class="ok">k</li>
+                        <li data-state="or" class="or">l</li>
+                        <li data-state="pa" class="pa">m</li>
+                        <li data-state="ri" class="ri">n</li>
+                        <li data-state="sc" class="sc">o</li>
+                        <li data-state="sd" class="sd">p</li>
+                        <li data-state="tn" class="tn">q</li>
+                        <li data-state="tx" class="tx">r</li>
+                        <li data-state="ut" class="ut">s</li>
+                        <li data-state="va" class="va">t</li>
+                        <li data-state="vt" class="vt">u</li>
+                        <li data-state="wa" class="wa">v</li>
+                        <li data-state="wv" class="wv">w</li>
+                        <li data-state="wi" class="wi tier-zero">x</li>
+                        <li data-state="wy" class="wy">y</li>
+
+                        <div id="popouts-holder">
+                            <div id="popout-ri" class="ri popout-box" hover-title="rhode-island">R.I.</div>
+                            <div id="popout-de" class="de popout-box" hover-title="delaware">Del.</div>
+                            <div id="popout-dc" class="dc popout-box" hover-title="district-of-columbia">D.C.</div>
+                        </div>
+                    </ul>
+                    <!-- <img src="http://media.dhb.io/news-apps/walker-tracker/img/choropleth-full-placeholder.png" alt="Full choropleth"> -->
+                    <% } else { %><% } %>
+                    <h1>Most-visited <% if (viewMode == "US") { %>states<% } else { %>cities<% } %></h1>
+                    <table class="state-frequencies">
+                        <thead>
+                            <tr>
+                                <th><% if (viewMode == "US") { %>State<% } else { %>City<% } %></th>
+                                <th>Visits</th>
+                                <th>Latest visit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% _.each(frequencies, function(r) { %>
+                            <tr>
+                                <td><% if (viewMode == "US") { %><%= r.state %><% } else { %><%= r.city %><% } %></td>
+                                <td><%= r.frequency %></td>
+                                <td><%= r.latest %></td>
+                            </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+
+                    <div class="about-this-app">
+                        <div class="about-app-trigger">About this application<span class="trigger-up ss-icon ss-navigateup"></span><span class="trigger-down ss-icon ss-navigatedown"></span></div>
+                        <div class="about-app-flexible">
+                            <p>Information on Scott Walker's travel is compiled by Dave Umhoefer and others from the Milwaukee Journal Sentinel staff. Only out-of-state trips are&nbsp;listed.</p>
+                            <p>Information comes from publicly reported information. <a href="mailto:dumhoefer@journalsentinel.com">Contact the Journal Sentinel</a> if you know of a trip we have not&nbsp;listed.</p>
+                            <p>This application was developed by <a href="mailto:ajvestal@journalsentinel.com">Allan James Vestal</a>, <a href="mailto:mandre@journalsentinel.com">Michael Andre</a> and <a href="mailto:kcrowe@journalsentinel.com">Kevin Crowe</a> of the Journal Sentinel&nbsp;staff.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <script src="http://m.jsonline.com/templates/jrn.tracking.js" type="text/javascript"></script>
+
+        <script src="javascripts/v1/helpers.js" type="text/javascript"></script>
+        <script src="javascripts/v1/tracker.js?1232" type="text/javascript"></script>
+
+        <script type="text/javascript">
+            var debug = true;
+
+            $(document).ready(function() {
+                SwiftClick.attach(document.body);
+
+                app = new AppRouter();
+            });
+
+
+            $(window).resize(function() {
+                reframeWindow();
+            });
+        </script>
+    </body>
+</html>
