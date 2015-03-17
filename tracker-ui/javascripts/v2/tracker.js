@@ -157,6 +157,12 @@ var generateURLs = {
 
 facetConfigs = {
     'campaign-finance': {
+        // parseTagArchiveFacets: function(view, facetsCandidate) {},
+        // enhanceTagArchiveHeader: function(view) {},
+        // tagArchiveHeaderPlaceholder: "",
+        // tagArchiveClass: "",
+        // renderRightNav: function(listView) {},
+        // generateListRightNav: function(view) {},
         baseURL: "",
         templateIDs: {
             "listHeader": "finance-list-header",
@@ -185,17 +191,30 @@ facetConfigs = {
 
             return facetsFinalized;
         },
-        // parseTagArchiveFacets: function(view, facetsCandidate) {},
-        // reassembleFacets: function(queryDict) {},
+        reassembleFacets: function(queryDict) {
+            var facetList = [],
+                facetFormatted;
+
+            _.each(queryDict, function(value, key) {
+                if (key == "page") {
+                    facetList.push(key + '=' + value);
+                } else {
+                    facetList.push(key + '=' +
+                                value.toLowerCase());
+                }
+            });
+
+            facetFormatted = facetList.join(",");
+
+            return facetFormatted;
+        },
         buildCollectionData: function(dataObject) {
             return dataObject.stateTotals;
         },
-        renderRightNav: function(listView) {},
-        // generateListRightNav: function(view) {},
+        listHasRightNav: false,
         enhanceHeader: function(view) {
             return "";
         },
-        // enhanceTagArchiveHeader: function(view) {},
         callbacks: {
             list: "loadStateDonationTotals",
             detail: "loadStateSummary"
@@ -203,8 +222,6 @@ facetConfigs = {
         listHolderID: "finances",
         listHeaderBase: "Donations",
         listClass: "donation-list",
-        // tagArchiveHeaderPlaceholder: "",
-        // tagArchiveClass: "",
         itemClasses: {
             detail: "donation",
             advertisement: "ad",
@@ -231,8 +248,7 @@ facetConfigs = {
         },
         // renderVisualization: function(view, callbackFunction) {},
         // generateVisualizationContext: function(view) {},
-        // visualizationPostRenderHooks: function(view) {},
-        a: "b" // TODO: DELETE.
+        visualizationPostRenderHooks: function(view) {}
     },
     'travel': {
         baseURL: "http://aukofer.dhb.io/api/v1/",
@@ -323,6 +339,7 @@ facetConfigs = {
         buildCollectionData: function(dataObject) {
             return dataObject.events;
         },
+        listHasRightNav: true,
         renderRightNav: function(listView) {
             listView.chaperone.view.rightMenu.setListElements(
                 listView.facetConfig.generateListRightNav(listView)
@@ -1131,7 +1148,10 @@ var ListView = Backbone.View.extend({
             }
         }
 
-        self.facetConfig.renderRightNav(self);
+        if (_.has(self.facetConfig, 'listHasRightNav') &&
+            (self.facetConfig.listHasRightNav === true)) {
+                self.facetConfig.renderRightNav(self);
+        }
 
         self.listHeaderView = new ListHeaderView({
             chaperone: self
@@ -1438,24 +1458,27 @@ var ListView = Backbone.View.extend({
             return false;
         });
 
-        menuNav.on('touchstart', function(event) {
-            $(this).addClass('tapped');
-        });
-        menuNav.on('touchend', function(event) {
-            $(this).removeClass('tapped');
-        });
-        menuNav.on('click', function(event) {
-            event.stopPropagation();
+        if (_.has(self.facetConfig, 'listHasRightNav') &&
+                    (self.facetConfig.listHasRightNav === true)) {
+            menuNav.on('touchstart', function(event) {
+                $(this).addClass('tapped');
+            });
+            menuNav.on('touchend', function(event) {
+                $(this).removeClass('tapped');
+            });
+            menuNav.on('click', function(event) {
+                event.stopPropagation();
 
-            reframeWindow();
+                reframeWindow();
 
-            $(this).addClass('chosen');
-            $(this).removeClass('tapped');
+                $(this).addClass('chosen');
+                $(this).removeClass('tapped');
 
-            $(".off-canvas-wrap").addClass("move-left");
+                $(".off-canvas-wrap").addClass("move-left");
 
-            return false;
-        });
+                return false;
+            });
+        }
 
         return self;
     },
@@ -1483,16 +1506,27 @@ var ListView = Backbone.View.extend({
             }
         }
 
-        if (!rightNav.is(":visible")) {
-            if (previousView !== null) {
-                rightNav.delay(200).fadeIn(450);
+        if (_.has(self.facetConfig, 'listHasRightNav') &&
+                    (self.facetConfig.listHasRightNav === true)) {
+            if (!rightNav.is(":visible")) {
+                if (previousView !== null) {
+                    rightNav.delay(200).fadeIn(450);
+                } else {
+                    rightNav.show();
+                }
             } else {
-                rightNav.show();
+                if (previousView !== null) {
+                    rightNav.fadeOut(325);
+                    rightNav.fadeIn(325);
+                }
             }
         } else {
-            if (previousView !== null) {
-                rightNav.fadeOut(325);
-                rightNav.fadeIn(325);
+            if (rightNav.is(":visible")) {
+                if (previousView !== null) {
+                    rightNav.fadeOut(450);
+                } else {
+                    rightNav.hide();
+                }
             }
         }
 

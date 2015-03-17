@@ -1,12 +1,15 @@
 ========[ MVP for Wednesday morning ]========
 
-• Event binding on CampFin.ListView
-• Hide sidebar menu on CampFin.ListView
-• Add second side-by-side metric to CampFin.DetailView
-• Add OBBES link (top donors by state) to CampFin.DetailView
-• Style CampFin.DetailView
-    - Initial sizes
-    - Responsiveness
+√   • Event binding on CampFin.ListView
+√   • Hide sidebar menu on CampFin.ListView
+√   • Add second side-by-side metric to CampFin.DetailView
+√   • Add third side-by-side metric to CampFin.DetailView
+√   • Add OBBES link (top donors by state) to CampFin.DetailView
+√   • Style CampFin.DetailView
+√       - Initial sizes
+√       - Responsiveness
+√   • Data conversion
+
 • OBBES table
 
 
@@ -34,7 +37,9 @@
 
 ========[ Pre-publication additions ]========
 
+• More fields from OBBES?
 • True IE-testing
 • Minified templates
 • Minified CSS, JS
 • Review all Travel options not set for CampFin
+• Connect OBBES table to "Explore all donations from <state> >>" links

@@ -192,8 +192,8 @@
         </script>
 
         <script type="text/template" id="finance-detail">
-            <div class="detail-card">
-                <h1><%= rowData.state %></h1>
+            <div class="detail-card donation-detail">
+                <h1>Financial contributions from <%= rowData.state %></h1>
                 <h2>
                     <span class="date-info">
                         <span class="date-clause"><%= rowData.donationCount %></span>
@@ -202,11 +202,28 @@
                     </span>
                 </h2>
 
-                <div class="attribute-section multi-attribute no-header">
-                    <span>#<%= rowData.nationalRank %> nationally in money raised</span>
+                <div class="attribute-stat-line row">
+                    <div class="attribute-stat-line-mid">
+                        <div class="attribute-stat-line-inner">
+                            <div class="attribute-stat small-4 columns">
+                                <div class="big-number"><span class="number-ancillary">#</span><span><%= rowData.nationalRank %></span></div>
+                                <div class="number-reference">nationally in money raised</div>
+                            </div>
+                            <div class="attribute-stat small-4 columns">
+                                <div class="big-number"><span><%= rowData.maximumDonorsCount %></span></div>
+                                <div class="number-reference">maximum-donation contributions</div>
+                            </div>
+                            <div class="attribute-stat small-4 columns">
+                                <div class="big-number"><span class="number-ancillary dollar-sign">$</span><span><%= rowData.averageDonation %></span></div>
+                                <div class="number-reference">average donation</div>
+                            </div>
+                            <div class="clearer"></div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="attribute-section multi-attribute no-header">
+                <div class="multi-attribute no-header donor-table">
+                    <div class="donor-header">Biggest donations</div>
                     <table class="">
                         <thead>
                             <tr>
@@ -222,6 +239,8 @@
                             </tr>
                             <% }); %>
                         </tbody>
+                    </table>
+                    <p class="obbes-link"><a href="">Explore all donations from <%= rowData.state %>&nbsp;&raquo;</a></p>
                 </div>
             </div>
         </script>
