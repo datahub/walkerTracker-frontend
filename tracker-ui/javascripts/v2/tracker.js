@@ -20,22 +20,20 @@ var generateURLs = {
                 }
             }
 
-            specificURL = "http://media.dhb.io/news-apps/walker-tracker/" +
-                                "dummy-data/v2/state-totals." +
-                                queryPage + ".json";
+            specificURL = "campaign-finance/all/?page=" +
+                                    queryPage;
 
             if (debug) {
                 return listView.facetConfig.baseURL + specificURL;
             } else {
                 return listView.facetConfig.baseURL + specificURL +
-                        "?spaceless=true";
+                        "&spaceless=true";
             }
         },
         detail: function(view) {
             var specificURL;
 
-            specificURL = "http://media.dhb.io/news-apps/walker-tracker/" +
-                                "dummy-data/v2/" + view.dataID + ".json";
+            specificURL = "campaign-finance/by-state/" + view.dataID + "/";
 
             if (debug) {
                 return view.facetConfig.baseURL + specificURL;
@@ -163,7 +161,7 @@ facetConfigs = {
         // tagArchiveClass: "",
         // renderRightNav: function(listView) {},
         // generateListRightNav: function(view) {},
-        baseURL: "",
+        baseURL: "http://aukofer.dhb.io/api/v2/",
         templateIDs: {
             "listHeader": "finance-list-header",
             "listItem": "finance-list-item",
@@ -209,11 +207,14 @@ facetConfigs = {
             return facetFormatted;
         },
         buildCollectionData: function(dataObject) {
-            return dataObject.stateTotals;
+            return dataObject.aggregates;
         },
         listHasRightNav: false,
         enhanceHeader: function(view) {
             return "";
+        },
+        getRowData: function(data) {
+            return data.stateData;
         },
         callbacks: {
             list: "loadStateDonationTotals",
@@ -248,10 +249,43 @@ facetConfigs = {
         },
         // renderVisualization: function(view, callbackFunction) {},
         // generateVisualizationContext: function(view) {},
-        visualizationPostRenderHooks: function(view) {}
+        visualizationPostRenderHooks: function(view) {},
+        detailPostRenderHooks: function(view) {
+            if (typeof view.rowData != "undefined") {
+                $.ajax({
+                    url: view.rowData.queryURL,
+                    dataType: "jsonp",
+                    // jsonpCallback: "loadStats",
+                    type: "GET",
+                    jsonp: "callback",
+                    contentType: "application/json",
+                    success: function(data) {
+                        var tableBody = view.$el.find(
+                            "#largest-donations tbody"
+                        );
+
+                        _.each(data.results.slice(0,10), function(row) {
+                            tableBody.append(
+                                '<tr>' +
+                                '    <td>' + row.webName + '</td>' +
+                                '    <td>$' +
+                                    numberWithCommas(
+                                        row.ContributionAmount.toFixed(2)
+                                    ) +
+                                '</td>' +
+                                '</tr>'
+                            );
+                        });
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        // TODO: Capture error and send to Sentry.
+                    }
+                });
+            }
+        }
     },
     'travel': {
-        baseURL: "http://aukofer.dhb.io/api/v1/",
+        baseURL: "http://aukofer.dhb.io/api/v2/",
         queryAreas: [{a:"US",fn:"Entire U.S."},{a:"AL",fn:"Alabama"},{a:"AK",fn:"Alaska"},{a:"AZ",fn:"Arizona"},{a:"AR",fn:"Arkansas"},{a:"CA",fn:"California"},{a:"CO",fn:"Colorado"},{a:"CT",fn:"Connecticut"},{a:"DE",fn:"Delaware"},{a:"DC",fn:"D.C."},{a:"FL",fn:"Florida"},{a:"GA",fn:"Georgia"},{a:"HI",fn:"Hawaii"},{a:"ID",fn:"Idaho"},{a:"IL",fn:"Illinois"},{a:"IN",fn:"Indiana"},{a:"IA",fn:"Iowa"},{a:"KS",fn:"Kansas"},{a:"KY",fn:"Kentucky"},{a:"LA",fn:"Louisiana"},{a:"ME",fn:"Maine"},{a:"MD",fn:"Maryland"},{a:"MA",fn:"Massachusetts"},{a:"MI",fn:"Michigan"},{a:"MN",fn:"Minnesota"},{a:"MS",fn:"Mississippi"},{a:"MO",fn:"Missouri"},{a:"MT",fn:"Montana"},{a:"NE",fn:"Nebraska"},{a:"NV",fn:"Nevada"},{a:"NH",fn:"New Hampshire"},{a:"NJ",fn:"New Jersey"},{a:"NM",fn:"New Mexico"},{a:"NY",fn:"New York"},{a:"NC",fn:"North Carolina"},{a:"ND",fn:"North Dakota"},{a:"OH",fn:"Ohio"},{a:"OK",fn:"Oklahoma"},{a:"OR",fn:"Oregon"},{a:"PA",fn:"Pennsylvania"},{a:"RI",fn:"Rhode Island"},{a:"SC",fn:"South Carolina"},{a:"SD",fn:"South Dakota"},{a:"TN",fn:"Tennessee"},{a:"TX",fn:"Texas"},{a:"UT",fn:"Utah"},{a:"VT",fn:"Vermont"},{a:"VA",fn:"Virginia"},{a:"WA",fn:"Washington"},{a:"WV",fn:"West Virginia"},{a:"WY",fn:"Wyoming"}],
         templateIDs: {
             "listHeader": "event-list-header",
@@ -440,6 +474,9 @@ facetConfigs = {
 
             return headerText;
         },
+        getRowData: function(data) {
+            return data.event;
+        },
         // callbacks: {},
         listHolderID: "events",
         listHeaderBase: "Visits",
@@ -603,6 +640,7 @@ facetConfigs = {
 
             resizeChoropleth();
         },
+        detailPostRenderHooks: function(view) {},
         classifyState: function(element, areaAbbrev, frequency) {
             var tierMaxes = [0, 5, 10];
 
@@ -974,7 +1012,7 @@ var HomepageView = Backbone.View.extend({
 
     render: function(previousView) {
         var self = this,
-            headlineListURL = "http://aukofer.dhb.io/api/v1/" +
+            headlineListURL = "http://aukofer.dhb.io/api/v2/" +
                                 "latest-articles-feed/";
 
         if (!debug) {
@@ -988,7 +1026,7 @@ var HomepageView = Backbone.View.extend({
             jsonp: "callback",
             contentType: "application/json",
             success: function(data) {
-                if (data.status == "200") {
+                if (data.status[0] == "2") {
                     dd = data.articles;
 
                     var htmlContents =  _.template(
@@ -1292,7 +1330,7 @@ var ListView = Backbone.View.extend({
                 paginationElement = self.$el.find(".pagination"),
                 adClass = fc.itemClasses.advertisement;
 
-            if (data.status == "200") {
+            if (data.status[0] == "2") {
                 listDiv.empty();
 
                 self.collectionData = fc.buildCollectionData(data);
@@ -1680,7 +1718,7 @@ var VisualizationView = Backbone.View.extend({
         navView.$el.find(".left-small .back-button").unbind();
 
         fc.renderVisualization(self, function(data) {
-            if (data.status == "200") {
+            if (data.status[0] == "2") {
 
                 self.currentArea = data.currentArea;
 
@@ -1861,7 +1899,6 @@ var DetailView = Backbone.View.extend({
                 jsonp: "callback",
                 contentType: "application/json",
                 success: function(data) {
-                    console.log(data);
                     if (typeof callbackFunction != "undefined") {
                         if (callbackFunction !== null) {
                             callbackFunction(data);
@@ -1903,8 +1940,8 @@ var DetailView = Backbone.View.extend({
         self.createURL().fetchItem(function(data) {
             var htmlContents = "";
 
-            if (data.status == "200") {
-                self.rowData = data.event;
+            if (data.status[0] == "2") {
+                self.rowData = fc.getRowData(data);
 
                 htmlContents = _.template(
                     $("#" + fc.templateIDs.detail).html(),
@@ -1919,8 +1956,17 @@ var DetailView = Backbone.View.extend({
 
             self.$el.html(htmlContents);
 
-            self.bindEvents();
+            self.postRender().bindEvents();
         });
+
+        return self;
+    },
+
+    postRender: function() {
+        var self = this,
+            fc = self.facetConfig;
+
+        fc.detailPostRenderHooks(self);
 
         return self;
     },
@@ -2460,7 +2506,7 @@ var TagArchiveView = Backbone.View.extend({
                 paginationElement = self.$el.find(".pagination"),
                 adClass = fc.itemClasses.tagAdvertisement;
 
-            if (data.status == "200") {
+            if (data.status[0] == "2") {
                 listDiv.empty();
 
                 self.collectionData = data.tags;

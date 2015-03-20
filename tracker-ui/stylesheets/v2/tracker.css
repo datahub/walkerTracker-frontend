@@ -842,6 +842,13 @@ body {
 #finances ul .donation.tapped h4 {
     color: #FFFFFF;
 }
+#finances ul .donation h4 .ranking {
+    color: #888888;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12px;
+    line-height: 20px;
+    padding-right: 2px;
+}
 #finances ul .donation h5 {
     color: #777777;
     font-family: Verdana, Arial, sans-serif;
@@ -1341,7 +1348,7 @@ ul.off-canvas-list li a.active .stateface:before {
 }
 
 .detail-card .attribute-stat-line {
-    background: #FEFEFE;
+    background: #FBFBFB;
     border-bottom: 1px solid #BBBBBB;
     border-top: 1px solid #BBBBBB;
     margin: 0 -12px 10px;

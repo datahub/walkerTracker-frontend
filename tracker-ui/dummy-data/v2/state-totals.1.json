@@ -8,76 +8,76 @@ loadStateDonationTotals({
         "currentPage": 1,
         "nextPage": 2
     },
-    "stateTotals": [
+    "aggregates": [
         {
-            "state": "New York",
-            "stateSlug": "new-york",
+            "stateNameFull": "New York",
             "statePostalLower": "ny",
-            "donationCounts": "13,125 donations",
-            "donationTotal": "$345,678.90"
+            "rank": 1,
+            "donationCount": 13125,
+            "donationTotal": 345678.90
         },
         {
-            "state": "California",
-            "stateSlug": "california",
+            "stateNameFull": "California",
             "statePostalLower": "ca",
-            "donationCounts": "11,322 donations",
-            "donationTotal": "$211,321.09"
+            "rank": 2,
+            "donationCount": 11322,
+            "donationTotal": 211321.09
         },
         {
-            "state": "Texas",
-            "stateSlug": "texas",
+            "stateNameFull": "Texas",
             "statePostalLower": "tx",
-            "donationCounts": "10,494 donations",
-            "donationTotal": "$206,780.80"
+            "rank": 3,
+            "donationCount": 10494,
+            "donationTotal": 206780.80
         },
         {
-            "state": "Florida",
-            "stateSlug": "florida",
+            "stateNameFull": "Florida",
             "statePostalLower": "fl",
-            "donationCounts": "9,832 donations",
-            "donationTotal": "$201,684.29"
+            "rank": 4,
+            "donationCount": 9832,
+            "donationTotal": 201684.29
         },
         {
-            "state": "Washington, D.C.",
-            "stateSlug": "washington-dc",
+            "stateNameFull": "Washington, D.C.",
             "statePostalLower": "dc",
-            "donationCounts": "9,418 donations",
-            "donationTotal": "$191,458.31"
+            "rank": 5,
+            "donationCount": 9418,
+            "donationTotal": 191458.31
         },
         {
-            "state": "Michigan",
-            "stateSlug": "michigan",
+            "stateNameFull": "Michigan",
             "statePostalLower": "mi",
-            "donationCounts": "9,532 donations",
-            "donationTotal": "$187,482.34"
+            "rank": 6,
+            "donationCount": 9532,
+            "donationTotal": 187482.34
         },
         {
-            "state": "Virginia",
-            "stateSlug": "virginia",
+            "stateNameFull": "Virginia",
             "statePostalLower": "va",
-            "donationCounts": "9,108 donations",
-            "donationTotal": "$162,333.65"
+            "rank": 7,
+            "donationCount": 9108,
+            "donationTotal": 162333.65
         },
         {
-            "state": "Illinois",
-            "stateSlug": "illinois",
+            "stateNameFull": "Illinois",
             "statePostalLower": "il",
-            "donationCounts": "8,731 donations",
-            "donationTotal": "$151,938.22"
+            "rank": 8,
+            "donationCount": 8731,
+            "donationTotal": 151938.22
         },
         {
-            "state": "Iowa",
-            "stateSlug": "iowa",
+            "stateNameFull": "Iowa",
             "statePostalLower": "ia",
-            "donationCounts": "8,382 donations",
-            "donationTotal": "$142,270.07"
+            "rank": 9,
+            "donationCount": 8382,
+            "donationTotal": 142270.07
         },
         {
-            "state": "Nevada",
-            "stateSlug": "nevada",
+            "stateNameFull": "Nevada",
             "statePostalLower": "nv",
-            "donationCounts": "8,223 donations",
-            "donationTotal": "$130,629.82"
+            "rank": 10,
+            "donationCount": 8223,
+            "donationTotal": 130629.82
         }
     ]
 });

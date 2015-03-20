@@ -1,0 +1,16 @@
+loadStateSummary({
+    "status": "200",
+    "stateData": {
+        "stateNameFull": "New York",
+        "statePostalLower": "ny",
+        "donationCount": 13125,
+        "donationTotal": 345678.90,
+        "maxDonations": 3,
+        "smallDonations": 12066,
+        "tableLinkURL": "http://obbes.dhb.io/preview/v1/campaign-contributions-gov-scott-walker.v2.preview#!/contributionamount.desc.1/contributortype=Individual&statecode=NY/",
+        "queryURL": "http://obbes.dhb.io/api/v1/campaign-contributions-gov-scott-walker.v2.query?sort=ContributionAmount&query=%7B\"contributortype\"%3A\"Individual\"%2C\"statecode\"%3A\"NY\"%7D&order=desc&page=1",
+
+        // To remove:
+        "nationalRank": 1
+    }
+});

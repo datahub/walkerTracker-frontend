@@ -157,14 +157,14 @@
         </script>
 
         <script type="text/template" id="finance-list-item">
-            <a href="#!/<%= facetSlug %>/items/<%= rowData.stateSlug %>/">
+            <a href="#!/<%= facetSlug %>/items/<%= rowData.statePostalLower %>/">
                 <div class="stateface stateface-<%= rowData.statePostalLower %>"></div>
                 <div class="donation-details">
-                    <h4 class="description"><%= rowData.state %></h4>
-                    <h5 class="location"><%= rowData.donationCounts %></h5>
+                    <h4 class="description"><span class="ranking">(<%= rowData.rank %>)</span> <%= rowData.stateNameFull %></h4>
+                    <h5 class="location"><% print(numberWithCommas(rowData.donationCount)); %> <% if (rowData.donationCount == 1) { %>donation<% } else { %>donations<% } %></h5>
                 </div>
                 <h6 class="donation-totals">
-                    <span class="total"><%= rowData.donationTotal %></span>
+                    <span class="total">$<% print(numberWithCommas(rowData.donationTotal.toFixed(2))); %></span>
                     <span class="to-date">To date</span>
                 </h6>
                 <div class="clearer"></div>
@@ -193,12 +193,12 @@
 
         <script type="text/template" id="finance-detail">
             <div class="detail-card donation-detail">
-                <h1>Financial contributions from <%= rowData.state %></h1>
+                <h1>Financial contributions from <%= rowData.stateNameFull %></h1>
                 <h2>
                     <span class="date-info">
-                        <span class="date-clause"><%= rowData.donationCount %></span>
+                        <span class="date-clause"><% print(numberWithCommas(rowData.donationCount)); %> <% if (rowData.donationCount == 1) { %>donation<% } else { %>donations<% } %></span>
                         <span class="divider"> ♦ </span>
-                        <span class="place-clause"><%= rowData.donationTotals %> to date</span>
+                        <span class="place-clause">$<% print(numberWithCommas(rowData.donationTotal.toFixed(2))); %> to date</span>
                     </span>
                 </h2>
 
@@ -210,12 +210,12 @@
                                 <div class="number-reference">nationally in money raised</div>
                             </div>
                             <div class="attribute-stat small-4 columns">
-                                <div class="big-number"><span><%= rowData.maximumDonorsCount %></span></div>
+                                <div class="big-number"><span><% print(numberWithCommas(rowData.maxDonations)); %></span></div>
                                 <div class="number-reference">maximum-donation contributions</div>
                             </div>
                             <div class="attribute-stat small-4 columns">
-                                <div class="big-number"><span class="number-ancillary dollar-sign">$</span><span><%= rowData.averageDonation %></span></div>
-                                <div class="number-reference">average donation</div>
+                                <div class="big-number"><span><% print(numberWithCommas(rowData.smallDonations)); %></span></div>
+                                <div class="number-reference">contributions of $50 or less</div>
                             </div>
                             <div class="clearer"></div>
                         </div>
@@ -224,7 +224,7 @@
 
                 <div class="multi-attribute no-header donor-table">
                     <div class="donor-header">Biggest donations</div>
-                    <table class="">
+                    <table id="largest-donations">
                         <thead>
                             <tr>
                                 <th>Donor</th>
@@ -232,15 +232,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% _.each(rowData.topDonors, function(donor) { %>
-                            <tr>
-                                <td><%= donor.name %></td>
-                                <td><%= donor.amount %></td>
-                            </tr>
-                            <% }); %>
                         </tbody>
                     </table>
-                    <p class="obbes-link"><a href="">Explore all donations from <%= rowData.state %>&nbsp;&raquo;</a></p>
+                    <p class="obbes-link"><a href="<%= rowData.tableLinkURL %>">Explore all donations from <%= rowData.stateNameFull %>&nbsp;&raquo;</a></p>
                 </div>
             </div>
         </script>
