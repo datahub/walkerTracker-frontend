@@ -168,7 +168,7 @@ facetConfigs = {
             "adLI": "finance-ad-item",
             "bonusLI": "finance-bonus-item",
             "detail": "finance-detail",
-            // "visualization": "event-visualization",
+            "visualization": "finance-visualization",
             "placeholderLI": "finance-placeholder-item"
             // "tagArchiveHeader": "event-tag-archive-header",
             // "tagArchiveItem": "event-tag-archive-item"
@@ -206,15 +206,23 @@ facetConfigs = {
 
             return facetFormatted;
         },
-        buildCollectionData: function(dataObject) {
-            return dataObject.aggregates;
+        storeListResponseData: function(view, dataObject) {
+            view.collectionData = dataObject.aggregates;
+
+            view.dataEndDate = dataObject.endDate;
+
+            view.verboseTagName = dataObject.tagName;
+
+            view.paginationData = dataObject.pagination;
+        },
+        generateListItemContext: function(view, row) {
+            row.dataEndDate = view.dataEndDate;
+
+            return row;
         },
         listHasRightNav: false,
         enhanceHeader: function(view) {
             return "";
-        },
-        getRowData: function(data) {
-            return data.stateData;
         },
         callbacks: {
             list: "loadStateDonationTotals",
@@ -229,6 +237,14 @@ facetConfigs = {
             // tagArchiveItem: "tag",
             // tagAdvertisement: "ad",
             placeholder: "placeholder"
+        },
+        generateDetailViewContext: function(data, initialContext) {
+            var context = _.clone(initialContext);
+
+            context.rowData = data.stateData;
+            context.dataEndDate = data.endDate;
+
+            return context;
         },
         generateBonusItemClass: function(view) {
             var itemClass = "map";
@@ -247,13 +263,98 @@ facetConfigs = {
 
             return contextObj;
         },
-        // renderVisualization: function(view, callbackFunction) {},
-        // generateVisualizationContext: function(view) {},
-        visualizationPostRenderHooks: function(view) {},
+        renderVisualization: function(view, callbackFunction) {
+            var statsURL = view.facetConfig.baseURL + "campaign-finance/" +
+                                "visualizations/us/";
+
+            if (!debug) {
+                statsURL = statsURL + "?spaceless=true";
+            }
+
+            $.ajax({
+                url: statsURL,
+                dataType: "jsonp",
+                // jsonpCallback: "loadStats",
+                type: "GET",
+                jsonp: "callback",
+                contentType: "application/json",
+                success: function(data) {
+                    if (typeof callbackFunction != "undefined") {
+                        if (callbackFunction !== null) {
+                            callbackFunction(data);
+                        }
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // TODO: Capture error and send to Sentry.
+                }
+            });
+        },
+        generateVisualizationContext: function(view) {
+            var jenksCount = 5,
+                legendFormatted,
+                maxes = jenks(
+                    _.pluck(view.locationCounts, 'total'),
+                    jenksCount
+                ).splice(1, (jenksCount - 1));
+
+            legendFormatted = {
+                one: formatCurrency(0, 0) +
+                    "&thinsp;&ndash;&thinsp;" + formatCurrency(maxes[0], 0),
+                two: formatCurrency(maxes[0], 0) +
+                    "&thinsp;&ndash;&thinsp;" + formatCurrency(maxes[1], 0),
+                three: formatCurrency(maxes[1], 0) +
+                    "&thinsp;&ndash;&thinsp;" + formatCurrency(maxes[2], 0),
+                four: formatCurrency(maxes[2], 0) +
+                    "&thinsp;&ndash;&thinsp;" + formatCurrency(maxes[3], 0),
+                five: "&gt;&nbsp;" + formatCurrency(maxes[2], 0)
+            };
+
+            view.tierMaxes = maxes;
+
+            return {
+                viewMode: view.currentArea,
+                legend: legendFormatted,
+                frequencies: view.locationCounts
+            };
+        },
+        visualizationPostRenderHooks: function(view) {
+            if (view.currentArea == "US") {
+                _.each(view.locationCounts, function(location) {
+                    view.facetConfig.classifyState(
+                        view.$el.find(".stately"),
+                        location.statePostal,
+                        view.tierMaxes,
+                        location.total
+                    );
+                });
+            }
+
+            resizeChoropleth();
+        },
+        classifyState: function(element, areaAbbrev, tierMaxes, sortAttr) {
+            if (sortAttr > tierMaxes[3]) {
+                element.find("." + areaAbbrev)
+                            .addClass("tier-five");
+                eee = element;
+            } else if (sortAttr > tierMaxes[2]) {
+                element.find("." + areaAbbrev)
+                            .addClass("tier-four");
+            } else if (sortAttr > tierMaxes[1]) {
+                element.find("." + areaAbbrev)
+                            .addClass("tier-three");
+            } else if (sortAttr > tierMaxes[0]) {
+                element.find("." + areaAbbrev)
+                            .addClass("tier-two");
+            } else {
+                element.find("." + areaAbbrev)
+                            .addClass("tier-one");
+            }
+        },
         detailPostRenderHooks: function(view) {
-            if (typeof view.rowData != "undefined") {
+            if (typeof view.rowContext != "undefined") {
                 $.ajax({
-                    url: view.rowData.queryURL,
+                    url: view.rowContext.rowData.queryURL,
                     dataType: "jsonp",
                     // jsonpCallback: "loadStats",
                     type: "GET",
@@ -370,8 +471,15 @@ facetConfigs = {
 
             return facetFormatted;
         },
-        buildCollectionData: function(dataObject) {
-            return dataObject.events;
+        storeListResponseData: function(view, dataObject) {
+            view.collectionData = dataObject.events;
+
+            view.verboseTagName = dataObject.tagName;
+
+            view.paginationData = dataObject.pagination;
+        },
+        generateListItemContext: function(view, row) {
+            return row;
         },
         listHasRightNav: true,
         renderRightNav: function(listView) {
@@ -474,9 +582,6 @@ facetConfigs = {
 
             return headerText;
         },
-        getRowData: function(data) {
-            return data.event;
-        },
         // callbacks: {},
         listHolderID: "events",
         listHeaderBase: "Visits",
@@ -489,6 +594,13 @@ facetConfigs = {
             tagArchiveItem: "tag",
             tagAdvertisement: "ad",
             placeholder: "placeholder"
+        },
+        generateDetailViewContext: function(data, initialContext) {
+            var context = _.clone(initialContext);
+
+            context.rowData = data.event;
+
+            return context;
         },
         generateBonusItemClass: function(view) {
             var itemClass, isStateView, isTagView,
@@ -628,11 +740,14 @@ facetConfigs = {
             };
         },
         visualizationPostRenderHooks: function(view) {
+            var tierMaxes = [0, 5, 10];
+
             if (view.currentArea == "US") {
                 _.each(view.locationCounts, function(location) {
                     view.facetConfig.classifyState(
                         view.$el.find(".stately"),
                         location.stateAbbrev,
+                        tierMaxes,
                         location.frequency
                     );
                 });
@@ -641,9 +756,7 @@ facetConfigs = {
             resizeChoropleth();
         },
         detailPostRenderHooks: function(view) {},
-        classifyState: function(element, areaAbbrev, frequency) {
-            var tierMaxes = [0, 5, 10];
-
+        classifyState: function(element, areaAbbrev, tierMaxes, frequency) {
             if (frequency > tierMaxes[2]) {
                 element.find("." + areaAbbrev)
                             .addClass("tier-four");
@@ -1263,9 +1376,13 @@ var ListView = Backbone.View.extend({
 
         if (dataLength > 0) {
             _.each(self.collectionData, function(row) {
-                var listItem = new ListItemView({
+                var context = self.facetConfig.generateListItemContext(
+                        self,
+                        row
+                    ),
+                    listItem = new ListItemView({
                     chaperone: self,
-                    data: row
+                    data: context
                 });
 
                 self.listItemViews.push(listItem);
@@ -1333,11 +1450,7 @@ var ListView = Backbone.View.extend({
             if (data.status[0] == "2") {
                 listDiv.empty();
 
-                self.collectionData = fc.buildCollectionData(data);
-
-                self.verboseTagName = data.tagName;
-
-                self.paginationData = data.pagination;
+                fc.storeListResponseData(self, data);
 
                 listHeaderView.emptyElement()
                                     .setElement(headerH3)
@@ -1941,14 +2054,16 @@ var DetailView = Backbone.View.extend({
             var htmlContents = "";
 
             if (data.status[0] == "2") {
-                self.rowData = fc.getRowData(data);
+                self.rowContext = fc.generateDetailViewContext(
+                    data,
+                    {
+                        facetSlug: self.facetSlug
+                    }
+                );
 
                 htmlContents = _.template(
                     $("#" + fc.templateIDs.detail).html(),
-                    {
-                        facetSlug: self.facetSlug,
-                        rowData: self.rowData
-                    }
+                    self.rowContext
                 );
             } else {
                 // Status handling TK.

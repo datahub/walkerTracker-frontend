@@ -651,7 +651,7 @@ body {
             transition: box-shadow .25s ease-in-out;
 }
 #events ul .map {
-    background: #FFFFFF url("../../img/choropleth-bar-placeholder.png") no-repeat scroll 50% 50%;
+    background: #FFFFFF url("../../img/events-choropleth-bar-placeholder.png") no-repeat scroll 50% 50%;
 }
 #events ul .state-list {
     background: #FFFFFF url("../../img/citylist-bar-placeholder.png") no-repeat scroll 50% 50%;
@@ -916,7 +916,7 @@ body {
             transition: box-shadow .25s ease-in-out;
 }
 #finances ul .map {
-    background: #FFFFFF url("../../img/choropleth-bar-placeholder.png") no-repeat scroll 50% 50%;
+    background: #FFFFFF url("../../img/campaign-finance-choropleth-bar-placeholder.png") no-repeat scroll 50% 50%;
 }
 #finances ul .bonus-item:active,
 #finances ul .bonus-item.chosen,
@@ -1203,11 +1203,11 @@ ul.off-canvas-list li a.active .stateface:before {
     text-align: left;
 }
 
-.detail-card .map-holder {
+.detail-card .events-map-holder {
     margin-top: 10px;
     text-align: center;
 }
-.detail-card .map-holder .stately {
+.detail-card .events-map-holder .stately {
     background: none;
     font: normal normal 0 "stately-webfont";
     position: relative;
@@ -1216,25 +1216,27 @@ ul.off-canvas-list li a.active .stateface:before {
        -moz-user-select: none;
         -ms-user-select: none;
 }
-.detail-card .map-holder .stately li {
-    color: #F2F0F7;
+.detail-card .events-map-holder .stately li {
     font: normal normal 320px "stately-webfont";
     -webkit-text-stroke: 0.2px black;
     -webkit-transition: 0s none;
 }
-.detail-card .map-holder .stately li.tier-zero {
+.detail-card .events-map-holder {
+    color: #F2F0F7;
+}
+.detail-card .events-map-holder .tier-zero {
     color: #FFFFFF;
 }
-.detail-card .map-holder .stately li.tier-two {
+.detail-card .events-map-holder .tier-two {
     color: #BCBDDC;
 }
-.detail-card .map-holder .stately li.tier-three {
+.detail-card .events-map-holder .tier-three {
     color: #807DBA;
 }
-.detail-card .map-holder .stately li.tier-four {
+.detail-card .events-map-holder .tier-four {
     color: #4A1486;
 }
-.detail-card .map-holder .stately #popouts-holder {
+.detail-card .events-map-holder .stately #popouts-holder {
     bottom: 4%;
     font-family: Georgia, "Times", serif;
     font-variant: small-caps;
@@ -1245,7 +1247,7 @@ ul.off-canvas-list li a.active .stateface:before {
     top: auto;
     width: 40px;
 }
-.detail-card .map-holder .stately #popouts-holder .popout-box {
+.detail-card .events-map-holder .stately #popouts-holder .popout-box {
     background-color: #F2F0F7;
     border: 1px solid #666666;
     border-radius: 3px;
@@ -1260,18 +1262,18 @@ ul.off-canvas-list li a.active .stateface:before {
          -o-text-rendering: auto;
             text-rendering: auto;
 }
-.detail-card .map-holder .stately #popouts-holder .popout-box.tier-two {
+.detail-card .events-map-holder .stately #popouts-holder .popout-box.tier-two {
     background-color: #BCBDDC;
 }
-.detail-card .map-holder .stately #popouts-holder .popout-box.tier-three {
+.detail-card .events-map-holder .stately #popouts-holder .popout-box.tier-three {
     background-color: #807DBA;
     color: #FFFFFF;
 }
-.detail-card .map-holder .stately #popouts-holder .popout-box.tier-four {
+.detail-card .events-map-holder .stately #popouts-holder .popout-box.tier-four {
     background-color: #4A1486;
     color: #FFFFFF;
 }
-.detail-card .map-holder h1 {
+.detail-card .events-map-holder h1.table-header {
     background: #494949;
     border: 2px solid #333333;
     border-bottom: 0 none;
@@ -1282,19 +1284,19 @@ ul.off-canvas-list li a.active .stateface:before {
     padding: 0 0 1px;
     width: 100%;
 }
-.detail-card .map-holder .state-frequencies {
+.detail-card .events-map-holder .state-frequencies {
     width: 100%;
 }
-.detail-card .map-holder .state-frequencies {
+.detail-card .events-map-holder .state-frequencies {
     border: 2px solid #333333;
     border-collapse: collapse;
 }
-.detail-card .map-holder .state-frequencies thead tr {
+.detail-card .events-map-holder .state-frequencies thead tr {
     background: #6B6B6B;
     height: 20px;
     line-height: 20px;
 }
-.detail-card .map-holder .state-frequencies thead tr th {
+.detail-card .events-map-holder .state-frequencies thead tr th {
     border-bottom: 1px solid #333333;
     border-right: 1px solid #333333;
     color: #FFFFFF;
@@ -1305,19 +1307,190 @@ ul.off-canvas-list li a.active .stateface:before {
     padding: 6px 0.625rem;
     text-transform: uppercase;
 }
-.detail-card .map-holder .state-frequencies tr.even,
-.detail-card .map-holder .state-frequencies tr.alt,
-.detail-card .map-holder .state-frequencies tr:nth-of-type(even) {
+.detail-card .events-map-holder .state-frequencies tr.even,
+.detail-card .events-map-holder .state-frequencies tr.alt,
+.detail-card .events-map-holder .state-frequencies tr:nth-of-type(even) {
     background: #F7F7F7;
 }
-.detail-card .map-holder .state-frequencies td {
+.detail-card .events-map-holder .state-frequencies td {
     border-bottom: 1px solid #DDDDDD;
     display: table-cell;
     font-family: Georgia, "Times", serif;
     font-size: 12px;
     line-height: 16px;
 }
-.detail-card .map-holder .state-frequencies td + td {
+.detail-card .events-map-holder .state-frequencies td + td {
+    border-left: 1px solid #DDDDDD;
+}
+
+.detail-card .finance-map-holder {
+    margin-top: 10px;
+    text-align: center;
+}
+.detail-card .map-holder .choropleth-legend {
+    background: #D4D4D4;
+    border: 1px solid #AAAAAA;
+    margin: 0 auto;
+    padding: 0;
+    width: 90%;
+}
+.detail-card .map-holder .choropleth-legend li {
+    float: left;
+    height: 33px;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    text-align: left;
+    width: 100%;
+}
+.detail-card .map-holder .choropleth-legend li .legend-swatch {
+    display: inline-block;
+    font-size: 27px;
+    line-height: 33px;
+    text-align: center;
+    width: 33px;
+}
+.detail-card .map-holder .choropleth-legend li .legend-label {
+    color: #222222;
+    display: inline-block;
+    font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD',
+                    'Book Antiqua', Georgia, serif;
+    font-size: 13px;
+    left: 33px;
+    line-height: 27px;
+    margin: 3px 0 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+}
+
+.detail-card .finance-map-holder .stately {
+    background: none;
+    font: normal normal 0 "stately-webfont";
+    position: relative;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+.detail-card .finance-map-holder .stately li {
+    font: normal normal 320px "stately-webfont";
+    -webkit-text-stroke: 0.2px black;
+    -webkit-transition: 0s none;
+}
+.detail-card .finance-map-holder .tier-one {
+    color: #EDF8E9;
+}
+.detail-card .finance-map-holder .tier-two {
+    color: #BAE4B3;
+}
+.detail-card .finance-map-holder .tier-three {
+    color: #74C476;
+}
+.detail-card .finance-map-holder .tier-four {
+    color: #31A354;
+}
+.detail-card .finance-map-holder .tier-five {
+    color: #006D2C;
+}
+.detail-card .finance-map-holder .stately #popouts-holder {
+    bottom: 4%;
+    font-family: Georgia, "Times", serif;
+    font-variant: small-caps;
+    font-weight: bold;
+    position: absolute;
+    right: 6px;
+    text-align: center;
+    top: auto;
+    width: 40px;
+}
+.detail-card .finance-map-holder .stately #popouts-holder .popout-box {
+    background-color: #EDF8E9;
+    border: 1px solid #666666;
+    border-radius: 3px;
+    color: #333333;
+    font-size: 12px;
+    line-height: 20px;
+    margin-bottom: 6px;
+
+    -webkit-text-rendering: auto;
+       -moz-text-rendering: auto;
+        -ms-text-rendering: auto;
+         -o-text-rendering: auto;
+            text-rendering: auto;
+}
+.detail-card .finance-map-holder .stately #popouts-holder .popout-box.tier-two {
+    background-color: #BAE4B3;
+}
+.detail-card .finance-map-holder .stately #popouts-holder .popout-box.tier-three {
+    background-color: #74C476;
+    color: #FFFFFF;
+}
+.detail-card .finance-map-holder .stately #popouts-holder .popout-box.tier-four {
+    background-color: #31A354;
+    color: #FFFFFF;
+}
+.detail-card .finance-map-holder .stately #popouts-holder .popout-box.tier-five {
+    background-color: #006D2C;
+    color: #FFFFFF;
+}
+.detail-card .finance-map-holder h1.map-title {
+    font-size: 21px;
+    margin-bottom: 12px;
+    margin-top: 24px;
+}
+.detail-card .finance-map-holder h1.map-title .title-underline {
+    border-bottom: 1px solid #CCCCCC;
+    padding: 0 9px 6px;
+}
+.detail-card .finance-map-holder h1.table-header {
+    background: #494949;
+    border: 2px solid #333333;
+    border-bottom: 0 none;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+    line-height: 42px;
+    margin: 15px auto 0;
+    padding: 0 0 1px;
+    width: 100%;
+}
+.detail-card .finance-map-holder .state-frequencies {
+    width: 100%;
+}
+.detail-card .finance-map-holder .state-frequencies {
+    border: 2px solid #333333;
+    border-collapse: collapse;
+}
+.detail-card .finance-map-holder .state-frequencies thead tr {
+    background: #6B6B6B;
+    height: 20px;
+    line-height: 20px;
+}
+.detail-card .finance-map-holder .state-frequencies thead tr th {
+    border-bottom: 1px solid #333333;
+    border-right: 1px solid #333333;
+    color: #FFFFFF;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 9px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    padding: 6px 0.625rem;
+    text-transform: uppercase;
+}
+.detail-card .finance-map-holder .state-frequencies tr.even,
+.detail-card .finance-map-holder .state-frequencies tr.alt,
+.detail-card .finance-map-holder .state-frequencies tr:nth-of-type(even) {
+    background: #F7F7F7;
+}
+.detail-card .finance-map-holder .state-frequencies td {
+    border-bottom: 1px solid #DDDDDD;
+    display: table-cell;
+    font-family: Georgia, "Times", serif;
+    font-size: 12px;
+    line-height: 16px;
+}
+.detail-card .finance-map-holder .state-frequencies td + td {
     border-left: 1px solid #DDDDDD;
 }
 
@@ -1451,8 +1624,8 @@ ul.off-canvas-list li a.active .stateface:before {
     display: table-cell;
     font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD',
                     'Book Antiqua', Georgia, serif;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 13px;
+    line-height: 18px;
 }
 .detail-card .donor-table table tbody tr + tr td {
     border-top: 1px solid #DDDDDD;
@@ -1471,11 +1644,20 @@ ul.off-canvas-list li a.active .stateface:before {
 }
 
 @media(min-width: 450px) {
-    .detail-card .map-holder .stately #popouts-holder {
+    .detail-card .events-map-holder .stately #popouts-holder {
         bottom: 16%;
         top: auto;
     }
-    .detail-card .map-holder .stately #popouts-holder .popout-box {
+    .detail-card .events-map-holder .stately #popouts-holder .popout-box {
+        font-size: 14px;
+        margin-bottom: 9px;
+    }
+
+    .detail-card .finance-map-holder .stately #popouts-holder {
+        bottom: 16%;
+        top: auto;
+    }
+    .detail-card .finance-map-holder .stately #popouts-holder .popout-box {
         font-size: 14px;
         margin-bottom: 9px;
     }
@@ -1484,6 +1666,10 @@ ul.off-canvas-list li a.active .stateface:before {
         font-size: 11px;
         letter-spacing: 1px;
         line-height: 13px;
+    }
+
+    .detail-card .map-holder .choropleth-legend li {
+        width: 50%;
     }
 }
 @media(min-width: 600px) {
@@ -1616,9 +1802,21 @@ ul.off-canvas-list li a.active .stateface:before {
         box-shadow: inset 1px 1px 200px rgba(0,0,0,1);
     }
 
-    .detail-card .map-holder .stately #popouts-holder {
+    .detail-card .events-map-holder .stately #popouts-holder {
         bottom: auto;
         top: 36%;
+    }
+
+    .detail-card .finance-map-holder .stately #popouts-holder {
+        bottom: auto;
+        top: 36%;
+    }
+
+    .detail-card .map-holder .choropleth-legend li {
+        width: 33.3333%;
+    }
+    .detail-card .events-map-holder .choropleth-legend li {
+        width: 25%;
     }
 }
 
@@ -1637,10 +1835,20 @@ ul.off-canvas-list li a.active .stateface:before {
         width: 98%;
     }
 
-    .detail-card .map-holder .stately li {
+    .detail-card .events-map-holder .stately li {
         -webkit-text-stroke: 0.39px black;
     }
-    .detail-card .map-holder .state-frequencies td {
+    .detail-card .events-map-holder .state-frequencies td {
+        font-size: 13px;
+        line-height: 18px;
+    }
+
+    .detail-card .finance-map-holder .stately li {
+        -webkit-text-stroke: 0.39px black;
+    }
+    .detail-card .finance-map-holder .state-frequencies td {
+        font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD',
+                        'Book Antiqua', Georgia, serif;
         font-size: 13px;
         line-height: 18px;
     }
@@ -1678,6 +1886,16 @@ ul.off-canvas-list li a.active .stateface:before {
         font-size: 10px;
         letter-spacing: 2px;
         line-height: 16px;
+    }
+
+    .detail-card .map-holder .choropleth-legend {
+        width: 870px;
+    }
+    .detail-card .map-holder .choropleth-legend li {
+        width: 20%;
+    }
+    .detail-card .events-map-holder .choropleth-legend li {
+        width: 25%;
     }
 }
 

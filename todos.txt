@@ -9,23 +9,24 @@
 √       - Initial sizes
 √       - Responsiveness
 √   • Data conversion
-
-• OBBES table
+√   • OBBES table
 
 
 ========[ Wednesday reach goals ]========
 
-• CampFin.BonusItemView
-    - Green choropleth
-    - Table with state values (or maybe region?)
-    - Choropleth scale
-• Data service views
-    - CampFin.ListView (direct to Mongo)
-    - CampFin.DetailView (via OBBES but wrapped)
-    - CampFin.BonusItemView (with CampFin.ListView data)
-• Current dates
-    - CampFin.ListView
-    - CampFin.DetailView
+√   • CampFin.BonusItemView
+√       - Green choropleth
+√       - Table with state values (or maybe region?)
+√       - Choropleth scale
+√   • Data service views
+√       - CampFin.ListView (direct to Mongo)
+√       - CampFin.DetailView (via OBBES but wrapped)
+√       - CampFin.BonusItemView (with CampFin.ListView data)
+√   • Change BonusItemListView background-image to green choropleth
+√   • Current dates
+√       - CampFin.ListView
+√       - CampFin.DetailView
+
 • "About this data"
     - Re-style for Travel.DetailView
     - Place for CampFin.DetailView
@@ -38,6 +39,8 @@
 ========[ Pre-publication additions ]========
 
 • More fields from OBBES?
+• Convert all possible instances to use formatCurrency()
+• Remove all possible calls to facetConfig within facetConfig
 • True IE-testing
 • Minified templates
 • Minified CSS, JS
