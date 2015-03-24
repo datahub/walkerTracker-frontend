@@ -45,4 +45,4 @@
 • Minified templates
 • Minified CSS, JS
 • Review all Travel options not set for CampFin
-• Connect OBBES table to "Explore all donations from <state> >>" links
+√   • Connect OBBES table to "Explore all donations from <state> >>" links
