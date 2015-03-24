@@ -87,10 +87,10 @@
             <div class="homepage-contents">
                 <div class="homepage-inner">
                     <div class="top-article homepage-box">
-                        <a href="http://www.jsonline.com/blogs/news/291160271.html">
-                            <img src="http://media.jrn.com/images/660*413/b99439710z.1_20150205190139_000_grq9r80i.1-1.jpg">
-                            <h1 class="headline">Walker poised for another campaign</h1>
-                            <p class="tease-text"><span class="timestamp"><span class="ts-inner">Feb. 7, 2015</span> | </span> The 47-year-old Republican governor began running at an earlier age and has run more often and won more elections than any of his potential presidential rivals.</p>
+                        <a href="http://www.jsonline.com/news/statepolitics/scott-walkers-teen-years-in-delavan-put-him-on-the-road-to-politics-b99464746z1-297155471.html">
+                            <img src="http://media.jrn.com/images/b99466421z.1_20150322000236_000_guradvrj.2-0.jpg" />
+                            <h1 class="headline">Scott Walker&rsquo;s teen years in Delavan put him on the road to&nbsp;politics</h1>
+                            <p class="tease-text"><span class="timestamp"><span class="ts-inner">March 21, 2015</span> | </span> As a high school junior at Delavan-Darien High School, Scott Walker (third from left) was chosen as an alternate for Badger Boys State and ended up taking the place of another teen chosen to go to the leadership camp.</p>
                         </a>
                     </div>
                     <div class="belt homepage-box">
@@ -114,32 +114,19 @@
                             <div class="trigger-icon ss-icon ss-briefcase"></div>
                             <h5>Travel</h5>
                         </li>
+                        <li class="trigger trigger-three" facet-slug="campaign-finance">
+                            <div class="trigger-icon ss-icon ss-moneybag"></div>
+                            <h5>Contributions</h5>
+                        </li>
                         <li class="trigger trigger-two trigger-disabled" facet-slug="media-appearances" title="Coming soon">
                             <div class="trigger-icon ss-icon ss-tv"></div>
                             <h5>Media appearances</h5>
-                        </li>
-                        <li class="trigger trigger-three" facet-slug="campaign-finance">
-                            <div class="trigger-icon ss-icon ss-moneybag"></div>
-                            <h5>Campaign finance</h5>
                         </li>
                         <div class="clearer"></div>
                     </ul>
 
                     <div class="clearer"></div>
                 </div>
-            </div>
-        </script>
-
-        <script type="text/template" id="pagination-template">
-            <div>
-                <% if (paginationData.prevPage != null) { %>
-                <a class="pagination-left pagination-link" href="#!/<%= facetSlug %>/refine/<%= pagelessQueryDict %>page=<%= paginationData.prevPage %>/">&lsaquo; Newer</a>
-                <% } %>
-                <% if (paginationData.nextPage != null) { %>
-                <a class="pagination-right pagination-link" href="#!/<%= facetSlug %>/refine/<%= pagelessQueryDict %>page=<%= paginationData.nextPage %>/">Older &rsaquo;</a>
-                <% } %>
-                <div class="pagination-center">Page <span class="current-page"><%= paginationData.currentPage %></span> of <span class="total-pages"><%= paginationData.totalPages %></span></div>
-                <div class="clearer"></div>
             </div>
         </script>
 
@@ -151,6 +138,19 @@
                 <div class="pagination"></div>
             </div>
             <a class="exit-off-canvas" style="height: 991px;"></a>
+        </script>
+
+        <script type="text/template" id="finance-pagination-template">
+            <div>
+                <% if (paginationData.prevPage != null) { %>
+                <a class="pagination-left pagination-link" href="#!/<%= facetSlug %>/refine/<%= pagelessQueryDict %>page=<%= paginationData.prevPage %>/">&lsaquo; Back</a>
+                <% } %>
+                <% if (paginationData.nextPage != null) { %>
+                <a class="pagination-right pagination-link" href="#!/<%= facetSlug %>/refine/<%= pagelessQueryDict %>page=<%= paginationData.nextPage %>/">Next &rsaquo;</a>
+                <% } %>
+                <div class="pagination-center">Page <span class="current-page"><%= paginationData.currentPage %></span> of <span class="total-pages"><%= paginationData.totalPages %></span></div>
+                <div class="clearer"></div>
+            </div>
         </script>
 
         <script type="text/template" id="finance-list-header">
@@ -166,7 +166,7 @@
                     <h5 class="location"><% print(numberWithCommas(rowData.donationCount)); %> <% if (rowData.donationCount == 1) { %>donation<% } else { %>donations<% } %></h5>
                 </div>
                 <h6 class="donation-totals">
-                    <span class="total">$<% print(numberWithCommas(rowData.donationTotal.toFixed(2))); %></span>
+                    <span class="total"><% print(formatCurrency(rowData.donationTotal, 2)); %></span>
                     <span class="to-date">As of <%= rowData.dataEndDate %></span>
                 </h6>
                 <div class="clearer"></div>
@@ -200,9 +200,11 @@
                     <span class="date-info">
                         <span class="date-clause"><% print(numberWithCommas(rowData.donationCount)); %> <% if (rowData.donationCount == 1) { %>donation<% } else { %>donations<% } %></span>
                         <span class="divider"> ♦ </span>
-                        <span class="place-clause">$<% print(numberWithCommas(rowData.donationTotal.toFixed(2))); %> as of <%= dataEndDate %></span>
+                        <span class="place-clause"><% print(formatCurrency(rowData.donationTotal, 2)); %> as of <%= dataEndDate %></span>
                     </span>
                 </h2>
+
+                <p class="obbes-upper-link"><a href="<%= rowData.tableLinkURL %>">Explore all donations from <%= rowData.stateNameFull %>&nbsp;&raquo;</a></p>
 
                 <div class="attribute-stat-line row">
                     <div class="attribute-stat-line-mid">
@@ -231,21 +233,36 @@
                             <tr>
                                 <th>Donor</th>
                                 <th>Amount</th>
+                                <th class="show-for-medium-up">Date</th>
+                                <th class="show-for-medium-up">Employer</th>
+                                <th>City</th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
-                    <p class="obbes-link"><a href="<%= rowData.tableLinkURL %>">Explore all donations from <%= rowData.stateNameFull %>&nbsp;&raquo;</a></p>
+                    <p class="obbes-lower-link"><a href="<%= rowData.tableLinkURL %>"></a></p>
                 </div>
+
+                <% print(_.template($("#finance-about-this-app").html(), {})); %>
             </div>
+        </script>
+
+        <script type="text/template" id="finance-donor-table-row">
+            <tr>
+                <td><%= webName %></td>
+                <td><% print(formatCurrency(ContributionAmount, 2)); %></td>
+                <td class="show-for-medium-up"><% print(timestampToAPStyleDate(unixTransactionDate * 1000)[1]); %></td>
+                <td class="show-for-medium-up"><%= EmployerName %></td>
+                <td><%= City %></td>
+            </tr>
         </script>
 
         <script type="text/template" id="finance-visualization">
             <div class="detail-card">
                 <div class="finance-map-holder map-holder">
                     <% if (viewMode == "US") { %>
-                    <h1 class="map-title"><span class="title-underline">Contributions to Scott Walker&rsquo;s statewide campaigns</span></h1>
+                    <h1 class="map-title"><span class="title-underline">Contributions to Scott Walker&rsquo;s statewide&nbsp;campaigns</span></h1>
                     <ul class="stately">
                         <li data-state="al" class="al">A</li>
                         <li data-state="ak" class="ak">B</li>
@@ -329,12 +346,39 @@
                             <tr>
                                 <td><% if (viewMode == "US") { %><%= r.stateNameFull %><% } else { %><%= r.city %><% } %></td>
                                 <td><% print(numberWithCommas(r.count)); %></td>
-                                <td>$<% print(numberWithCommas(r.total.toFixed(2))); %></td>
+                                <td><% print(formatCurrency(r.total, 2)); %></td>
                             </tr>
                             <% }); %>
                         </tbody>
                     </table>
+
+                    <% print(_.template($("#finance-about-this-app").html(), {})); %>
                 </div>
+            </div>
+        </script>
+
+        <script type="text/template" id="finance-about-this-app">
+                <div class="about-this-app">
+                    <div class="about-app-trigger">About this data<span class="trigger-up ss-icon ss-navigateup"></span><span class="trigger-down ss-icon ss-navigatedown"></span></div>
+                    <div class="about-app-flexible">
+                        <p>The campaign finance data come from reports Friends of Scott Walker filed with the Wisconsin Government Accountability Board from July 2003 through January 2015. During that period, Scott Walker held either county office or statewide office.</p>
+                        <p>He was county executive from 2002 through 2010, running one unsuccessful campaign for governor in 2006.</p>
+                        <p>From 2010 to 2014, Walker won three gubernatorial elections: the 2010 general, the 2012 recall and the 2014 general.</p>
+                        <p>This application was developed by <a href="mailto:ajvestal@journalsentinel.com">Allan James Vestal</a>, <a href="mailto:mandre@journalsentinel.com">Michael Andre</a> and <a href="mailto:kcrowe@journalsentinel.com">Kevin Crowe</a> of the Journal Sentinel&nbsp;staff.</p>
+                    </div>
+                </div>
+        </script>
+
+        <script type="text/template" id="event-pagination-template">
+            <div>
+                <% if (paginationData.prevPage != null) { %>
+                <a class="pagination-left pagination-link" href="#!/<%= facetSlug %>/refine/<%= pagelessQueryDict %>page=<%= paginationData.prevPage %>/">&lsaquo; Newer</a>
+                <% } %>
+                <% if (paginationData.nextPage != null) { %>
+                <a class="pagination-right pagination-link" href="#!/<%= facetSlug %>/refine/<%= pagelessQueryDict %>page=<%= paginationData.nextPage %>/">Older &rsaquo;</a>
+                <% } %>
+                <div class="pagination-center">Page <span class="current-page"><%= paginationData.currentPage %></span> of <span class="total-pages"><%= paginationData.totalPages %></span></div>
+                <div class="clearer"></div>
             </div>
         </script>
 
@@ -491,14 +535,7 @@
                 </div>
                 <% } %>
 
-                <div class="about-this-app">
-                    <div class="about-app-trigger">About this application<span class="trigger-up ss-icon ss-navigateup"></span><span class="trigger-down ss-icon ss-navigatedown"></span></div>
-                    <div class="about-app-flexible">
-                        <p>Information on Scott Walker&rsquo;s travel is compiled by Dave Umhoefer and others from the Milwaukee Journal Sentinel staff. Only out-of-state trips are&nbsp;listed.</p>
-                        <p>Information comes from publicly reported information. <a href="mailto:dumhoefer@journalsentinel.com">Contact the Journal Sentinel</a> if you know of a trip we have not&nbsp;listed.</p>
-                        <p>This application was developed by <a href="mailto:ajvestal@journalsentinel.com">Allan James Vestal</a>, <a href="mailto:mandre@journalsentinel.com">Michael Andre</a> and <a href="mailto:kcrowe@journalsentinel.com">Kevin Crowe</a> of the Journal Sentinel&nbsp;staff.</p>
-                    </div>
-                </div>
+                <% print(_.template($("#event-about-this-app").html(), {})); %>
             </div>
         </script>
 
@@ -506,7 +543,7 @@
             <div class="detail-card">
                 <div class="events-map-holder map-holder">
                     <% if (viewMode == "US") { %>
-                    <h1 class="map-title"><span class="title-underline">Scott Walker&rsquo;s out-of-state visits</span></h1>
+                    <h1 class="map-title"><span class="title-underline">Scott Walker&rsquo;s out-of-state&nbsp;visits</span></h1>
                     <ul class="stately">
                         <li data-state="al" class="al">A</li>
                         <li data-state="ak" class="ak">B</li>
@@ -596,22 +633,26 @@
                         </tbody>
                     </table>
 
-                    <div class="about-this-app">
-                        <div class="about-app-trigger">About this application<span class="trigger-up ss-icon ss-navigateup"></span><span class="trigger-down ss-icon ss-navigatedown"></span></div>
-                        <div class="about-app-flexible">
-                            <p>Information on Scott Walker&rsquo;s travel is compiled by Dave Umhoefer and others from the Milwaukee Journal Sentinel staff. Only out-of-state trips are&nbsp;listed.</p>
-                            <p>Information comes from publicly reported information. <a href="mailto:dumhoefer@journalsentinel.com">Contact the Journal Sentinel</a> if you know of a trip we have not&nbsp;listed.</p>
-                            <p>This application was developed by <a href="mailto:ajvestal@journalsentinel.com">Allan James Vestal</a>, <a href="mailto:mandre@journalsentinel.com">Michael Andre</a> and <a href="mailto:kcrowe@journalsentinel.com">Kevin Crowe</a> of the Journal Sentinel&nbsp;staff.</p>
-                        </div>
-                    </div>
+                    <% print(_.template($("#event-about-this-app").html(), {})); %>
                 </div>
             </div>
+        </script>
+
+        <script type="text/template" id="event-about-this-app">
+                <div class="about-this-app">
+                    <div class="about-app-trigger">About this data<span class="trigger-up ss-icon ss-navigateup"></span><span class="trigger-down ss-icon ss-navigatedown"></span></div>
+                    <div class="about-app-flexible">
+                        <p>Information on Scott Walker&rsquo;s travel is compiled by Dave Umhoefer and others from the Milwaukee Journal Sentinel staff. Only out-of-state trips are&nbsp;listed.</p>
+                        <p>Information comes from publicly reported information. <a href="mailto:dumhoefer@journalsentinel.com">Contact the Journal Sentinel</a> if you know of a trip we have not&nbsp;listed.</p>
+                        <p>This application was developed by <a href="mailto:ajvestal@journalsentinel.com">Allan James Vestal</a>, <a href="mailto:mandre@journalsentinel.com">Michael Andre</a> and <a href="mailto:kcrowe@journalsentinel.com">Kevin Crowe</a> of the Journal Sentinel&nbsp;staff.</p>
+                    </div>
+                </div>
         </script>
 
         <script src="http://m.jsonline.com/templates/jrn.tracking.js" type="text/javascript"></script>
 
         <script src="javascripts/v2/helpers.js" type="text/javascript"></script>
-        <script src="javascripts/v2/tracker.js?1232" type="text/javascript"></script>
+        <script src="javascripts/v2/tracker.js" type="text/javascript"></script>
 
         <script type="text/javascript">
             var debug = true;

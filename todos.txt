@@ -27,22 +27,23 @@
 √       - CampFin.ListView
 √       - CampFin.DetailView
 
-• "About this data"
-    - Re-style for Travel.DetailView
-    - Place for CampFin.DetailView
-    - Text for CampFin.DetailView
-    - Re-style for Travel.BonusItemView
-    - Place for CampFin.BonusItemView
-    - Text for CampFin.BonusItemView
+√   • "About this data"
+√       - Re-style for Travel.DetailView
+√       - Place for CampFin.DetailView
+√       - Text for CampFin.DetailView
+√       - Re-style for Travel.BonusItemView
+√       - Place for CampFin.BonusItemView
+√       - Text for CampFin.BonusItemView
 
 
 ========[ Pre-publication additions ]========
 
-• More fields from OBBES?
-• Convert all possible instances to use formatCurrency()
-• Remove all possible calls to facetConfig within facetConfig
+√   • More fields from OBBES?
+√   • Convert all possible instances to use formatCurrency()
+√   • Remove all possible calls to facetConfig within facetConfig
+√   • "About this data" views for CampFin and Travel (DRY)
+√   • Connect OBBES table to "Explore all donations from <state> >>" links
 • True IE-testing
 • Minified templates
 • Minified CSS, JS
 • Review all Travel options not set for CampFin
-√   • Connect OBBES table to "Explore all donations from <state> >>" links

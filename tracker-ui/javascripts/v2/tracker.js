@@ -169,7 +169,8 @@ facetConfigs = {
             "bonusLI": "finance-bonus-item",
             "detail": "finance-detail",
             "visualization": "finance-visualization",
-            "placeholderLI": "finance-placeholder-item"
+            "placeholderLI": "finance-placeholder-item",
+            "pagination": "finance-pagination-template"
             // "tagArchiveHeader": "event-tag-archive-header",
             // "tagArchiveItem": "event-tag-archive-item"
         },
@@ -366,17 +367,18 @@ facetConfigs = {
                         );
 
                         _.each(data.results.slice(0,10), function(row) {
-                            tableBody.append(
-                                '<tr>' +
-                                '    <td>' + row.webName + '</td>' +
-                                '    <td>$' +
-                                    numberWithCommas(
-                                        row.ContributionAmount.toFixed(2)
-                                    ) +
-                                '</td>' +
-                                '</tr>'
+                            var nextRowHTML = _.template(
+                                $("#finance-donor-table-row").html(),
+                                row
                             );
+                            tableBody.append(nextRowHTML);
                         });
+
+                        view.$el.find(".obbes-lower-link a").html(
+                            "Explore all donations from " +
+                            view.rowContext.rowData.stateNameFull +
+                            "&nbsp;&raquo;"
+                        );
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         // TODO: Capture error and send to Sentry.
@@ -397,7 +399,8 @@ facetConfigs = {
             "visualization": "event-visualization",
             "placeholderLI": "event-placeholder-item",
             "tagArchiveHeader": "event-tag-archive-header",
-            "tagArchiveItem": "event-tag-archive-item"
+            "tagArchiveItem": "event-tag-archive-item",
+            "pagination": "event-pagination-template"
         },
         parseListViewFacets: function(view, facetsCandidate) {
             var facetsFinalized = {};
@@ -482,12 +485,7 @@ facetConfigs = {
             return row;
         },
         listHasRightNav: true,
-        renderRightNav: function(listView) {
-            listView.chaperone.view.rightMenu.setListElements(
-                listView.facetConfig.generateListRightNav(listView)
-            );
-        },
-        generateListRightNav: function(view) {
+        renderRightNav: function(view) {
             var activeArea,
                 rightNavElements = [],
                 filterByArea = {
@@ -551,7 +549,9 @@ facetConfigs = {
 
             rightNavElements.push(filterByArea);
 
-            return rightNavElements;
+            view.chaperone.view.rightMenu.setListElements(
+                rightNavElements
+            );
         },
         enhanceHeader: function(view) {
             var headerText = "nationwide";
@@ -1726,7 +1726,7 @@ var PaginationView = Backbone.View.extend({
         }
 
         var htmlContents = _.template(
-            $("#pagination-template").html(),
+            $("#" + self.chaperone.facetConfig.templateIDs.pagination).html(),
             {
                 facetSlug: self.chaperone.facetSlug,
                 paginationData: self.chaperone.paginationData,

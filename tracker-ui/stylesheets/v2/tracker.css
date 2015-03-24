@@ -843,9 +843,8 @@ body {
     color: #FFFFFF;
 }
 #finances ul .donation h4 .ranking {
-    color: #888888;
     font-family: Verdana, Arial, sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 20px;
     padding-right: 2px;
 }
@@ -1079,9 +1078,12 @@ ul.off-canvas-list li a.active .stateface:before {
 }
 .detail-card .attribute-section {
     border-top: 1px solid #BBBBBB;
-    margin: 0;
+    margin: 0 auto;
+    max-width: 780px;
     padding: 8px 6px 6px;
+    width: 100%;
 }
+
 .detail-card .attribute-section.no-top-line {
     border-top: 0 none;
 }
@@ -1144,11 +1146,13 @@ ul.off-canvas-list li a.active .stateface:before {
 .detail-card .about-this-app {
     background: #CCCCCC;
     border: 1px solid #333333;
-    margin: 10px 0 12px;
+    margin: 42px auto 12px;
+    max-width: 540px;
+    width: 100%;
 }
 .detail-card .about-this-app .about-app-trigger {
-    background-color: #2171B5;
-    color: #FFFFFF;
+    background-color: #E5E5E5;
+    color: #222222;
     cursor: pointer;
     font-family: "Crete Round", Rockwell, 'Courier Bold',
                     Courier, Georgia, Times, 'Times New Roman', serif;
@@ -1184,10 +1188,10 @@ ul.off-canvas-list li a.active .stateface:before {
 .detail-card .about-this-app .about-app-trigger.chosen,
 .detail-card .about-this-app .about-app-trigger:hover,
 .detail-card .about-this-app .about-app-trigger.tapped {
-    background-color: #6BAED6;
+    background-color: #D7D7D7;
 }
 .detail-card .about-this-app .about-app-flexible {
-    background-color: #F7FBFF;
+    background-color: #F7F7F7;
     border-top: 1px solid #333333;
     display: none;
     padding: 10px 20px;
@@ -1203,11 +1207,35 @@ ul.off-canvas-list li a.active .stateface:before {
     text-align: left;
 }
 
-.detail-card .events-map-holder {
+.detail-card .map-holder {
     margin-top: 10px;
     text-align: center;
 }
-.detail-card .events-map-holder .stately {
+.detail-card .map-holder h1.map-title {
+    font-size: 21px;
+    line-height: 33px;
+    margin-bottom: 12px;
+    margin-top: 21px;
+}
+.detail-card .map-holder h1.table-header {
+    background: #494949;
+    border: 2px solid #333333;
+    border-bottom: 0 none;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+    line-height: 42px;
+    margin: 45px auto 0;
+    padding: 0 0 1px;
+    width: 93%;
+}
+.detail-card .map-holder h1.map-title .title-underline {
+    border-bottom: 1px solid #CCCCCC;
+    display: inline-block;
+    padding: 0 9px 3px;
+    width: 93%;
+}
+
+.detail-card .map-holder .stately {
     background: none;
     font: normal normal 0 "stately-webfont";
     position: relative;
@@ -1216,27 +1244,12 @@ ul.off-canvas-list li a.active .stateface:before {
        -moz-user-select: none;
         -ms-user-select: none;
 }
-.detail-card .events-map-holder .stately li {
+.detail-card .map-holder .stately li {
     font: normal normal 320px "stately-webfont";
     -webkit-text-stroke: 0.2px black;
     -webkit-transition: 0s none;
 }
-.detail-card .events-map-holder {
-    color: #F2F0F7;
-}
-.detail-card .events-map-holder .tier-zero {
-    color: #FFFFFF;
-}
-.detail-card .events-map-holder .tier-two {
-    color: #BCBDDC;
-}
-.detail-card .events-map-holder .tier-three {
-    color: #807DBA;
-}
-.detail-card .events-map-holder .tier-four {
-    color: #4A1486;
-}
-.detail-card .events-map-holder .stately #popouts-holder {
+.detail-card .map-holder .stately #popouts-holder {
     bottom: 4%;
     font-family: Georgia, "Times", serif;
     font-variant: small-caps;
@@ -1247,8 +1260,7 @@ ul.off-canvas-list li a.active .stateface:before {
     top: auto;
     width: 40px;
 }
-.detail-card .events-map-holder .stately #popouts-holder .popout-box {
-    background-color: #F2F0F7;
+.detail-card .map-holder .stately #popouts-holder .popout-box {
     border: 1px solid #666666;
     border-radius: 3px;
     color: #333333;
@@ -1261,71 +1273,6 @@ ul.off-canvas-list li a.active .stateface:before {
         -ms-text-rendering: auto;
          -o-text-rendering: auto;
             text-rendering: auto;
-}
-.detail-card .events-map-holder .stately #popouts-holder .popout-box.tier-two {
-    background-color: #BCBDDC;
-}
-.detail-card .events-map-holder .stately #popouts-holder .popout-box.tier-three {
-    background-color: #807DBA;
-    color: #FFFFFF;
-}
-.detail-card .events-map-holder .stately #popouts-holder .popout-box.tier-four {
-    background-color: #4A1486;
-    color: #FFFFFF;
-}
-.detail-card .events-map-holder h1.table-header {
-    background: #494949;
-    border: 2px solid #333333;
-    border-bottom: 0 none;
-    color: #FFFFFF;
-    letter-spacing: 1px;
-    line-height: 42px;
-    margin: 15px auto 0;
-    padding: 0 0 1px;
-    width: 100%;
-}
-.detail-card .events-map-holder .state-frequencies {
-    width: 100%;
-}
-.detail-card .events-map-holder .state-frequencies {
-    border: 2px solid #333333;
-    border-collapse: collapse;
-}
-.detail-card .events-map-holder .state-frequencies thead tr {
-    background: #6B6B6B;
-    height: 20px;
-    line-height: 20px;
-}
-.detail-card .events-map-holder .state-frequencies thead tr th {
-    border-bottom: 1px solid #333333;
-    border-right: 1px solid #333333;
-    color: #FFFFFF;
-    font-family: Verdana, Arial, sans-serif;
-    font-size: 9px;
-    font-weight: normal;
-    letter-spacing: 2px;
-    padding: 6px 0.625rem;
-    text-transform: uppercase;
-}
-.detail-card .events-map-holder .state-frequencies tr.even,
-.detail-card .events-map-holder .state-frequencies tr.alt,
-.detail-card .events-map-holder .state-frequencies tr:nth-of-type(even) {
-    background: #F7F7F7;
-}
-.detail-card .events-map-holder .state-frequencies td {
-    border-bottom: 1px solid #DDDDDD;
-    display: table-cell;
-    font-family: Georgia, "Times", serif;
-    font-size: 12px;
-    line-height: 16px;
-}
-.detail-card .events-map-holder .state-frequencies td + td {
-    border-left: 1px solid #DDDDDD;
-}
-
-.detail-card .finance-map-holder {
-    margin-top: 10px;
-    text-align: center;
 }
 .detail-card .map-holder .choropleth-legend {
     background: #D4D4D4;
@@ -1365,20 +1312,74 @@ ul.off-canvas-list li a.active .stateface:before {
     top: 0;
 }
 
-.detail-card .finance-map-holder .stately {
-    background: none;
-    font: normal normal 0 "stately-webfont";
-    position: relative;
+.detail-card .map-holder .state-frequencies {
+    border: 2px solid #333333;
+    border-collapse: collapse;
+    margin: 0 auto;
+    width: 93%;
+}
+.detail-card .map-holder .state-frequencies thead tr {
+    background: #6B6B6B;
+    height: 20px;
+    line-height: 20px;
+}
+.detail-card .map-holder .state-frequencies thead tr th {
+    border-bottom: 1px solid #333333;
+    border-right: 1px solid #333333;
+    color: #FFFFFF;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 9px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    padding: 6px 0.625rem;
+    text-transform: uppercase;
+}
+.detail-card .map-holder .state-frequencies tr.even,
+.detail-card .map-holder .state-frequencies tr.alt,
+.detail-card .map-holder .state-frequencies tr:nth-of-type(even) {
+    background: #F7F7F7;
+}
+.detail-card .map-holder .state-frequencies td {
+    border-bottom: 1px solid #DDDDDD;
+    display: table-cell;
+    font-family: Georgia, "Times", serif;
+    font-size: 12px;
+    line-height: 16px;
+}
+.detail-card .map-holder .state-frequencies td + td {
+    border-left: 1px solid #DDDDDD;
+}
 
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
+.detail-card .events-map-holder {
+    color: #F2F0F7;
 }
-.detail-card .finance-map-holder .stately li {
-    font: normal normal 320px "stately-webfont";
-    -webkit-text-stroke: 0.2px black;
-    -webkit-transition: 0s none;
+.detail-card .events-map-holder .tier-zero {
+    color: #FFFFFF;
 }
+.detail-card .events-map-holder .tier-two {
+    color: #BCBDDC;
+}
+.detail-card .events-map-holder .tier-three {
+    color: #807DBA;
+}
+.detail-card .events-map-holder .tier-four {
+    color: #4A1486;
+}
+.detail-card .events-map-holder .stately #popouts-holder .popout-box {
+    background-color: #F2F0F7;
+}
+.detail-card .events-map-holder .stately #popouts-holder .popout-box.tier-two {
+    background-color: #BCBDDC;
+}
+.detail-card .events-map-holder .stately #popouts-holder .popout-box.tier-three {
+    background-color: #807DBA;
+    color: #FFFFFF;
+}
+.detail-card .events-map-holder .stately #popouts-holder .popout-box.tier-four {
+    background-color: #4A1486;
+    color: #FFFFFF;
+}
+
 .detail-card .finance-map-holder .tier-one {
     color: #EDF8E9;
 }
@@ -1394,31 +1395,8 @@ ul.off-canvas-list li a.active .stateface:before {
 .detail-card .finance-map-holder .tier-five {
     color: #006D2C;
 }
-.detail-card .finance-map-holder .stately #popouts-holder {
-    bottom: 4%;
-    font-family: Georgia, "Times", serif;
-    font-variant: small-caps;
-    font-weight: bold;
-    position: absolute;
-    right: 6px;
-    text-align: center;
-    top: auto;
-    width: 40px;
-}
 .detail-card .finance-map-holder .stately #popouts-holder .popout-box {
     background-color: #EDF8E9;
-    border: 1px solid #666666;
-    border-radius: 3px;
-    color: #333333;
-    font-size: 12px;
-    line-height: 20px;
-    margin-bottom: 6px;
-
-    -webkit-text-rendering: auto;
-       -moz-text-rendering: auto;
-        -ms-text-rendering: auto;
-         -o-text-rendering: auto;
-            text-rendering: auto;
 }
 .detail-card .finance-map-holder .stately #popouts-holder .popout-box.tier-two {
     background-color: #BAE4B3;
@@ -1434,64 +1412,6 @@ ul.off-canvas-list li a.active .stateface:before {
 .detail-card .finance-map-holder .stately #popouts-holder .popout-box.tier-five {
     background-color: #006D2C;
     color: #FFFFFF;
-}
-.detail-card .finance-map-holder h1.map-title {
-    font-size: 21px;
-    margin-bottom: 12px;
-    margin-top: 24px;
-}
-.detail-card .finance-map-holder h1.map-title .title-underline {
-    border-bottom: 1px solid #CCCCCC;
-    padding: 0 9px 6px;
-}
-.detail-card .finance-map-holder h1.table-header {
-    background: #494949;
-    border: 2px solid #333333;
-    border-bottom: 0 none;
-    color: #FFFFFF;
-    letter-spacing: 1px;
-    line-height: 42px;
-    margin: 15px auto 0;
-    padding: 0 0 1px;
-    width: 100%;
-}
-.detail-card .finance-map-holder .state-frequencies {
-    width: 100%;
-}
-.detail-card .finance-map-holder .state-frequencies {
-    border: 2px solid #333333;
-    border-collapse: collapse;
-}
-.detail-card .finance-map-holder .state-frequencies thead tr {
-    background: #6B6B6B;
-    height: 20px;
-    line-height: 20px;
-}
-.detail-card .finance-map-holder .state-frequencies thead tr th {
-    border-bottom: 1px solid #333333;
-    border-right: 1px solid #333333;
-    color: #FFFFFF;
-    font-family: Verdana, Arial, sans-serif;
-    font-size: 9px;
-    font-weight: normal;
-    letter-spacing: 2px;
-    padding: 6px 0.625rem;
-    text-transform: uppercase;
-}
-.detail-card .finance-map-holder .state-frequencies tr.even,
-.detail-card .finance-map-holder .state-frequencies tr.alt,
-.detail-card .finance-map-holder .state-frequencies tr:nth-of-type(even) {
-    background: #F7F7F7;
-}
-.detail-card .finance-map-holder .state-frequencies td {
-    border-bottom: 1px solid #DDDDDD;
-    display: table-cell;
-    font-family: Georgia, "Times", serif;
-    font-size: 12px;
-    line-height: 16px;
-}
-.detail-card .finance-map-holder .state-frequencies td + td {
-    border-left: 1px solid #DDDDDD;
 }
 
 .detail-card.donation-detail {
@@ -1510,8 +1430,8 @@ ul.off-canvas-list li a.active .stateface:before {
     margin: 0 -6px 21px;
 }
 .detail-card.donation-detail h2 .date-info {
-    background: #E4E4E4;
-    border: 1px solid #C0C0C0;
+    background: #EFEFEF;
+    border: 4px double #CCCCCC;
     color: #333333;
     padding: 6px;
 }
@@ -1525,7 +1445,7 @@ ul.off-canvas-list li a.active .stateface:before {
     border-bottom: 1px solid #BBBBBB;
     border-top: 1px solid #BBBBBB;
     margin: 0 -12px 10px;
-    max-width: 1100px;
+    max-width: 750px;
     padding: 6px;
     width: auto;
 }
@@ -1581,6 +1501,8 @@ ul.off-canvas-list li a.active .stateface:before {
 
 .detail-card .donor-table {
     border-top: 0 none;
+    margin: 0 auto;
+    max-width: 730px;
     padding-top: 15px;
 }
 .detail-card .donor-table .donor-header {
@@ -1600,7 +1522,6 @@ ul.off-canvas-list li a.active .stateface:before {
     border: 1px solid #AAAAAA;
     border-collapse: collapse;
     margin-bottom: 14px;
-    max-width: 1100px;
     width: 100%;
 }
 .detail-card .donor-table table thead tr {
@@ -1634,7 +1555,14 @@ ul.off-canvas-list li a.active .stateface:before {
     border-left: 1px solid #DDDDDD;
 }
 
-.donation-detail .obbes-link {
+.donation-detail .obbes-upper-link {
+    font-family: "Crete Round", Rockwell, 'Courier Bold',
+                    Courier, Georgia, Times, 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+}
+.donation-detail .obbes-lower-link {
     font-family: "Crete Round", Rockwell, 'Courier Bold',
                     Courier, Georgia, Times, 'Times New Roman', serif;
     font-size: 14px;
@@ -1644,22 +1572,16 @@ ul.off-canvas-list li a.active .stateface:before {
 }
 
 @media(min-width: 450px) {
-    .detail-card .events-map-holder .stately #popouts-holder {
+    .detail-card .map-holder .stately #popouts-holder {
         bottom: 16%;
         top: auto;
     }
-    .detail-card .events-map-holder .stately #popouts-holder .popout-box {
+    .detail-card .map-holder .stately #popouts-holder .popout-box {
         font-size: 14px;
         margin-bottom: 9px;
     }
-
-    .detail-card .finance-map-holder .stately #popouts-holder {
-        bottom: 16%;
-        top: auto;
-    }
-    .detail-card .finance-map-holder .stately #popouts-holder .popout-box {
-        font-size: 14px;
-        margin-bottom: 9px;
+    .detail-card .map-holder h1.map-title .title-underline {
+        width: 85%;
     }
 
     .detail-card.donation-detail h2 {
@@ -1670,6 +1592,11 @@ ul.off-canvas-list li a.active .stateface:before {
 
     .detail-card .map-holder .choropleth-legend li {
         width: 50%;
+    }
+}
+@media(min-width: 525px) {
+    .detail-card .map-holder h1.map-title .title-underline {
+        width: auto;
     }
 }
 @media(min-width: 600px) {
@@ -1802,19 +1729,18 @@ ul.off-canvas-list li a.active .stateface:before {
         box-shadow: inset 1px 1px 200px rgba(0,0,0,1);
     }
 
-    .detail-card .events-map-holder .stately #popouts-holder {
+    .detail-card .about-this-app {
+        width: 93%;
+    }
+
+    .detail-card .map-holder .stately #popouts-holder {
         bottom: auto;
         top: 36%;
     }
-
-    .detail-card .finance-map-holder .stately #popouts-holder {
-        bottom: auto;
-        top: 36%;
-    }
-
     .detail-card .map-holder .choropleth-legend li {
         width: 33.3333%;
     }
+
     .detail-card .events-map-holder .choropleth-legend li {
         width: 25%;
     }
@@ -1835,18 +1761,10 @@ ul.off-canvas-list li a.active .stateface:before {
         width: 98%;
     }
 
-    .detail-card .events-map-holder .stately li {
+    .detail-card .map-holder .stately li {
         -webkit-text-stroke: 0.39px black;
     }
-    .detail-card .events-map-holder .state-frequencies td {
-        font-size: 13px;
-        line-height: 18px;
-    }
-
-    .detail-card .finance-map-holder .stately li {
-        -webkit-text-stroke: 0.39px black;
-    }
-    .detail-card .finance-map-holder .state-frequencies td {
+    .detail-card .map-holder .state-frequencies td {
         font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD',
                         'Book Antiqua', Georgia, serif;
         font-size: 13px;
@@ -1879,13 +1797,25 @@ ul.off-canvas-list li a.active .stateface:before {
         border: 0 none;
         width: 33.33333%;
     }
+
+    .detail-card .map-holder h1.table-header,
+    .detail-card .map-holder .state-frequencies {
+        max-width: 810px;
+    }
 }
 
 @media(min-width: 900px) {
+    .detail-card .attribute-stat-line {
+        max-width: 900px;
+    }
     .detail-card .attribute-stat-line .number-reference {
         font-size: 10px;
         letter-spacing: 2px;
         line-height: 16px;
+    }
+
+    .detail-card .donor-table {
+        max-width: 870px;
     }
 
     .detail-card .map-holder .choropleth-legend {
@@ -1896,6 +1826,11 @@ ul.off-canvas-list li a.active .stateface:before {
     }
     .detail-card .events-map-holder .choropleth-legend li {
         width: 25%;
+    }
+
+    .detail-card .map-holder h1.table-header,
+    .detail-card .map-holder .state-frequencies {
+        max-width: 900px;
     }
 }
 
