@@ -1076,6 +1076,17 @@ ul.off-canvas-list li a.active .stateface:before {
 }
 .detail-card h2 .date-info-outer .date-info-inner {
 }
+.detail-card.donation-detail h3 {
+    color: #777777;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    line-height: 21px;
+    margin-bottom: 15px;
+    margin-top: -5px;
+    text-align: center;
+    text-transform: uppercase;
+}
 .detail-card .attribute-section {
     border-top: 1px solid #BBBBBB;
     margin: 0 auto;

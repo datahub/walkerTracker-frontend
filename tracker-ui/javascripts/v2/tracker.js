@@ -210,6 +210,7 @@ facetConfigs = {
         storeListResponseData: function(view, dataObject) {
             view.collectionData = dataObject.aggregates;
 
+            view.dataStartDate = dataObject.startDate;
             view.dataEndDate = dataObject.endDate;
 
             view.verboseTagName = dataObject.tagName;
@@ -217,6 +218,7 @@ facetConfigs = {
             view.paginationData = dataObject.pagination;
         },
         generateListItemContext: function(view, row) {
+            row.dataStartDate = view.dataStartDate;
             row.dataEndDate = view.dataEndDate;
 
             return row;
@@ -230,7 +232,7 @@ facetConfigs = {
             detail: "loadStateSummary"
         },
         listHolderID: "finances",
-        listHeaderBase: "Donations",
+        listHeaderBase: "Donations to Walker&rsquo;s state committee",
         listClass: "donation-list",
         itemClasses: {
             detail: "donation",
@@ -243,6 +245,7 @@ facetConfigs = {
             var context = _.clone(initialContext);
 
             context.rowData = data.stateData;
+            context.dataStartDate = data.startDate;
             context.dataEndDate = data.endDate;
 
             return context;

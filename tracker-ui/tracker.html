@@ -166,8 +166,8 @@
                     <h5 class="location"><% print(numberWithCommas(rowData.donationCount)); %> <% if (rowData.donationCount == 1) { %>donation<% } else { %>donations<% } %></h5>
                 </div>
                 <h6 class="donation-totals">
-                    <span class="total"><% print(formatCurrency(rowData.donationTotal, 2)); %></span>
-                    <span class="to-date">As of <%= rowData.dataEndDate %></span>
+                    <span class="total"><% print(formatCurrency(rowData.donationTotal, 0)); %></span>
+                    <span class="to-date"><%= rowData.dataStartDate %>&thinsp;&ndash;&thinsp;<%= rowData.dataEndDate %></span>
                 </h6>
                 <div class="clearer"></div>
             </a>
@@ -196,15 +196,16 @@
         <script type="text/template" id="finance-detail">
             <div class="detail-card donation-detail">
                 <h1>Financial contributions from <%= rowData.stateNameFull %></h1>
+                <h3>Donations to Scott Walker&rsquo;s state committee, <%= dataStartDate %>&thinsp;&ndash;&thinsp;<%= dataEndDate %></h3>
                 <h2>
                     <span class="date-info">
                         <span class="date-clause"><% print(numberWithCommas(rowData.donationCount)); %> <% if (rowData.donationCount == 1) { %>donation<% } else { %>donations<% } %></span>
                         <span class="divider"> ♦ </span>
-                        <span class="place-clause"><% print(formatCurrency(rowData.donationTotal, 2)); %> as of <%= dataEndDate %></span>
+                        <span class="place-clause"><% print(formatCurrency(rowData.donationTotal, 0)); %> total</span>
                     </span>
                 </h2>
 
-                <p class="obbes-upper-link"><a href="<%= rowData.tableLinkURL %>">Explore all donations from <%= rowData.stateNameFull %>&nbsp;&raquo;</a></p>
+                <p class="obbes-upper-link"><a href="<%= rowData.tableLinkURL %>" target="_blank">Explore all donations from <%= rowData.stateNameFull %>&nbsp;&raquo;</a></p>
 
                 <div class="attribute-stat-line row">
                     <div class="attribute-stat-line-mid">
@@ -214,12 +215,12 @@
                                 <div class="number-reference">nationally in money raised</div>
                             </div>
                             <div class="attribute-stat small-4 columns">
-                                <div class="big-number"><span><% print(numberWithCommas(rowData.maxDonations)); %></span></div>
-                                <div class="number-reference">maximum-donation contributions</div>
-                            </div>
-                            <div class="attribute-stat small-4 columns">
                                 <div class="big-number"><span><% print(numberWithCommas(rowData.smallDonations)); %></span></div>
                                 <div class="number-reference">contributions of $50 or less</div>
+                            </div>
+                            <div class="attribute-stat small-4 columns">
+                                <div class="big-number"><span><% print(numberWithCommas(rowData.maxDonations)); %></span></div>
+                                <div class="number-reference">$10,000+ contributions</div>
                             </div>
                             <div class="clearer"></div>
                         </div>
@@ -234,14 +235,14 @@
                                 <th>Donor</th>
                                 <th>Amount</th>
                                 <th class="show-for-medium-up">Date</th>
-                                <th class="show-for-medium-up">Employer</th>
-                                <th>City</th>
+                                <th>Employer</th>
+                                <th class="show-for-medium-up">City</th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
-                    <p class="obbes-lower-link"><a href="<%= rowData.tableLinkURL %>"></a></p>
+                    <p class="obbes-lower-link"><a href="<%= rowData.tableLinkURL %>" target="_blank"></a></p>
                 </div>
 
                 <% print(_.template($("#finance-about-this-app").html(), {})); %>
@@ -252,9 +253,9 @@
             <tr>
                 <td><%= webName %></td>
                 <td><% print(formatCurrency(ContributionAmount, 2)); %></td>
-                <td class="show-for-medium-up"><% print(timestampToAPStyleDate(unixTransactionDate * 1000)[1]); %></td>
+                <td><% print(timestampToAPStyleDate(unixTransactionDate * 1000)[1]); %></td>
                 <td class="show-for-medium-up"><%= EmployerName %></td>
-                <td><%= City %></td>
+                <td class="show-for-medium-up"><%= City %></td>
             </tr>
         </script>
 
