@@ -19,7 +19,7 @@
 
         <link href="http://media.dhb.io/webfonts/stately/git-8f406598d5/stately/css/stately.css" rel="stylesheet" type="text/css" />
 
-        <link href="stylesheets/v2/tracker.css" rel="stylesheet" type="text/css" />
+        <link href="stylesheets/v3/tracker.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <div id="app"></div>
@@ -114,11 +114,11 @@
                             <div class="trigger-icon ss-icon ss-briefcase"></div>
                             <h5>Travel</h5>
                         </li>
-                        <li class="trigger trigger-three" facet-slug="campaign-finance">
+                        <li class="trigger trigger-two" facet-slug="campaign-finance">
                             <div class="trigger-icon ss-icon ss-moneybag"></div>
                             <h5>Contributions</h5>
                         </li>
-                        <li class="trigger trigger-two trigger-disabled" facet-slug="media-appearances" title="Coming soon">
+                        <li class="trigger trigger-three" facet-slug="media-appearances">
                             <div class="trigger-icon ss-icon ss-tv"></div>
                             <h5>Media appearances</h5>
                         </li>
@@ -365,6 +365,151 @@
                         <p>The campaign finance data come from reports Friends of Scott Walker filed with the Wisconsin Government Accountability Board from July 2003 through January 2015. During that period, Scott Walker held either county office or statewide office.</p>
                         <p>He was county executive from 2002 through 2010, running one unsuccessful campaign for governor in 2006.</p>
                         <p>From 2010 to 2014, Walker won three gubernatorial elections: the 2010 general, the 2012 recall and the 2014 general.</p>
+                        <p>This application was developed by <a href="mailto:ajvestal@journalsentinel.com">Allan James Vestal</a>, <a href="mailto:mandre@journalsentinel.com">Michael Andre</a> and <a href="mailto:kcrowe@journalsentinel.com">Kevin Crowe</a> of the Journal Sentinel&nbsp;staff.</p>
+                    </div>
+                </div>
+        </script>
+
+        <script type="text/template" id="appearance-pagination-template">
+            <div>
+                <% if (paginationData.prevPage != null) { %>
+                <a class="pagination-left pagination-link" href="#!/<%= facetSlug %>/refine/<%= pagelessQueryDict %>page=<%= paginationData.prevPage %>/">&lsaquo; Newer</a>
+                <% } %>
+                <% if (paginationData.nextPage != null) { %>
+                <a class="pagination-right pagination-link" href="#!/<%= facetSlug %>/refine/<%= pagelessQueryDict %>page=<%= paginationData.nextPage %>/">Older &rsaquo;</a>
+                <% } %>
+                <div class="pagination-center">Page <span class="current-page"><%= paginationData.currentPage %></span> of <span class="total-pages"><%= paginationData.totalPages %></span></div>
+                <div class="clearer"></div>
+            </div>
+        </script>
+
+        <script type="text/template" id="appearance-list-header">
+            <span><%= baseDisplay %> <span class="selected-area"><%= enhancedDisplay %></span></span>
+            <span class="top-pagination">Page <%= currentPage %>/<%= totalPages %></span>
+        </script>
+
+        <script type="text/template" id="appearance-list-item">
+            <a href="#!/<%= facetSlug %>/items/<%= rowData.id %>/">
+                <div class="appearance-details">
+                    <h4 class="description"><% if (rowData.show) { %><%= rowData.show %><% } else { %><%= rowData.organization.name %><% } %></h4>
+                    <h5 class="location"><span class="organization-name"><% if (rowData.show) { %><%= rowData.organization.name %><% } else { %>General coverage<% } %></span></h5>
+                </div>
+                <h6 class="date">
+                    <span class="month"><%= rowData.dateComponents.month %></span>
+                    <span class="hidden"> </span>
+                    <span class="day"><%= rowData.dateComponents.day%></span>
+                    <span class="hidden">, </span>
+                    <span class="year"><%= rowData.dateComponents.year %></span>
+                </h6>
+                <div class="clearer"></div>
+            </a>
+        </script>
+
+        <script type="text/template" id="appearance-ad-item">
+            <div class="ad-holder">
+                <div class="ad-warning">Advertisement</div>
+
+                <iframe id="51a4f9b058955" name="51a4f9b058955" src="http://ox-d.jrn.com/w/1.0/afr?auid=421130&cb=<%= cbValue %>" frameborder="0" scrolling="no"><a href="http://ox-d.jrn.com/w/1.0/rc?cs=51a4f9b058955&cb=<%= cbValue %>" ><img src="http://ox-d.jrn.com/w/1.0/ai?auid=421130&cs=51a4f9b058955&cb=<%= cbValue %>" border="0" alt=""></a></iframe>
+            </div>
+        </script>
+
+        <script type="text/template" id="appearance-bonus-item">
+            <a href="<%= itemURL %>">
+                <div class="bonus-link-text">Open <span class="bonus-type"><%= itemToOpen %></span> »</div>
+            </a>
+        </script>
+
+        <script type="text/template" id="appearance-placeholder-item">
+            <div class="placeholder-inner">
+                <div>No visits found.</div>
+            </div>
+        </script>
+
+        <script type="text/template" id="appearance-tag-pagination-template">
+        </script>
+
+        <script type="text/template" id="appearance-tag-archive-template">
+            <div id="<%= listHolderID %>">
+                <h3><%= tagArchiveHeaderPlaceholder %></h3>
+                <ul class="<%= tagArchiveClass %>">
+                </ul>
+                <div class="pagination"></div>
+            </div>
+            <a class="exit-off-canvas" style="height: 991px;"></a>
+        </script>
+
+        <script type="text/template" id="appearance-tag-archive-header">
+            <span><%= enhancedDisplay %> <span class="selected-area">in <%= baseDisplay %></span></span>
+        </script>
+
+        <script type="text/template" id="appearance-tag-archive-item">
+            <a href="#!/<%= facetSlug %>/refine/issue=<%= rowData.slug %>/">
+                <div class="visit-details">
+                    <h4 class="description"><%= rowData.name %></h4>
+                    <h5 class="location"><%= rowData.eventCount %></h5>
+                </div>
+            </a>
+        </script>
+
+        <script type="text/template" id="appearance-detail">
+            <div class="detail-card">
+                <h1><% if (rowData.show) { %><%= rowData.show %> (<% } %><%= rowData.organization.name %><% if (rowData.show) { %>)<% } %></h1>
+                <h2>
+                    <span class="date-info">
+                        <span class="date-clause"><%= rowData.interviewDate %></span>
+                    </span>
+                </h2>
+
+                <% if (typeof rowData.publicNotes != "undefined" && rowData.publicNotes != null) { %>
+                <div class="attribute-section">
+                    <div class="attribute-name">Notes</div>
+                    <div class="attribute-value"><%= rowData.publicNotes %></div>
+                </div>
+                <% } %>
+
+                <% if (typeof rowData.transcript != "undefined" && rowData.transcript != null) { %>
+                <div class="attribute-section no-header">
+                    <div class="attribute-value inline-value"><a href="<%= rowData.transcript %>">Transcript</a></div>
+                    <div class="clearer"></div>
+                </div>
+                <% } %>
+
+                <% if (typeof rowData.recordings != "undefined" && rowData.recordings.length > 0) { %>
+                <div class="attribute-section multi-attribute">
+                    <div class="attribute-name">Recordings</div>
+                        <% _.each(rowData.recordings, function(recording){ %>
+                        <div class="attribute-value inline-value">
+                            <a href="<%= recording.link %>"><%= recording.type %> recording</a>
+                        </div>
+                        <% }); %>
+                    <div class="clearer"></div>
+                </div>
+                <% } %>
+
+                <% if (typeof rowData.tags != "undefined" && rowData.tags.length > 0) { %>
+                <div class="attribute-section tag-display">
+                    <div class="attribute-name">Issues discussed</div>
+                    <ul class="tag-list">
+                        <% _.each(rowData.tags, function(tag) { %>
+                            <li class="tag"><a href="#!/<%= facetSlug %>/refine/issue=<%= tag.slug %>/"><%= tag.name %></a></li>
+                        <% }); %>
+                    </ul>
+                    <div class="clearer"></div>
+                </div>
+                <% } %>
+
+                <% print(_.template($("#appearance-about-this-app").html(), {})); %>
+            </div>
+        </script>
+
+        <script type="text/template" id="appearance-visualization">
+        </script>
+
+        <script type="text/template" id="appearance-about-this-app">
+                <div class="about-this-app">
+                    <div class="about-app-trigger">About this data<span class="trigger-up ss-icon ss-navigateup"></span><span class="trigger-down ss-icon ss-navigatedown"></span></div>
+                    <div class="about-app-flexible">
+                        <p>Media appearance-specific text TK.</p>
                         <p>This application was developed by <a href="mailto:ajvestal@journalsentinel.com">Allan James Vestal</a>, <a href="mailto:mandre@journalsentinel.com">Michael Andre</a> and <a href="mailto:kcrowe@journalsentinel.com">Kevin Crowe</a> of the Journal Sentinel&nbsp;staff.</p>
                     </div>
                 </div>
@@ -652,8 +797,8 @@
 
         <script src="http://m.jsonline.com/templates/jrn.tracking.js" type="text/javascript"></script>
 
-        <script src="javascripts/v2/helpers.js" type="text/javascript"></script>
-        <script src="javascripts/v2/tracker.js" type="text/javascript"></script>
+        <script src="javascripts/v3/helpers.js" type="text/javascript"></script>
+        <script src="javascripts/v3/tracker.js" type="text/javascript"></script>
 
         <script type="text/javascript">
             var debug = true;
