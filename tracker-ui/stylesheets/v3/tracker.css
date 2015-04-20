@@ -636,14 +636,14 @@ body {
          -o-transition: box-shadow .25s ease-in-out;
             transition: box-shadow .25s ease-in-out;
 }
-#appearances ul .map {
-    background: #FFFFFF url("../../img/") no-repeat scroll 50% 50%;
+#appearances ul .organization-list {
+    background: #FFFFFF url("../../img/appearance-organization-list-placeholder.png") no-repeat scroll 50% 50%;
 }
-#appearances ul .state-list {
-    background: #FFFFFF url("../../img/") no-repeat scroll 50% 50%;
+#appearances ul .show-list {
+    background: #FFFFFF url("../../img/appearance-show-list-placeholder.png") no-repeat scroll 50% 50%;
 }
 #appearances ul .tag-list {
-    background: #FFFFFF url("../../img/") no-repeat scroll 50% 50%;
+    background: #FFFFFF url("../../img/taglist-bar-placeholder.png") no-repeat scroll 50% 50%;
 }
 #appearances ul .bonus-item:active,
 #appearances ul .bonus-item.chosen,
