@@ -257,14 +257,14 @@ var generateURLs = {
 
 facetConfigs = {
     'media-appearances': {
-        baseURL: "http://127.0.0.1:8080/api/v3/",
+        baseURL: "http://aukofer.dhb.io/api/v3/",
         templateIDs: {
             "listHeader": "appearance-list-header",
             "listItem": "appearance-list-item",
             "adLI": "appearance-ad-item",
             "bonusLI": "appearance-bonus-item",
             "detail": "appearance-detail",
-            // "visualization": "appearance-visualization",
+            "visualization": "appearance-visualization",
             "placeholderLI": "appearance-placeholder-item",
             "tagArchiveHeader": "appearance-tag-archive-header",
             "tagArchiveItem": "appearance-tag-archive-item",
@@ -553,67 +553,66 @@ facetConfigs = {
             return contextObj;
         },
         renderVisualization: function(view, callbackFunction) {
-            // var statsURL, templateID,
-            //     viewType = "US",
-            //     query = view.chaperone.view.listQueryDict,
-            //     areaMatches;
+            var statsURL,
+                viewType = "all",
+                query = view.chaperone.view.listQueryDict,
+                organizationMatches;
 
-            // if (_.has(query, 'area')) {
-            //     var queryAreaCandidate = query.area.toUpperCase();
+            if (_.has(query, 'organization')) {
+                var organizationCandidate = query.organization.toLowerCase();
 
-            //     areaMatches = _.where(
-            //                 view.facetConfig.queryAreas,
-            //                 {a: queryAreaCandidate}
-            //             );
+                // Here's where we'd verify organization slugs if we
+                // chose to.
+                viewType = organizationCandidate;
+            }
 
-            //     if (areaMatches.length > 0) {
-            //         viewType = areaMatches[0].a;
-            //     }
-            // }
+            if (debug) {
+                statsURL = view.facetConfig.baseURL +
+                                "media-appearances/" +
+                                "visualizations/" +
+                                viewType.toLowerCase() + "/";
+            } else {
+                statsURL = view.facetConfig.baseURL +
+                                "media-appearances/" +
+                                "visualizations/" +
+                                viewType.toLowerCase() + "/" +
+                                "?spaceless=true";
+            }
 
-            // if (debug) {
-            //     statsURL = view.facetConfig.baseURL +
-            //                     "events/" +
-            //                     "visualizations/" +
-            //                     viewType.toLowerCase() + "/";
-            // } else {
-            //     statsURL = view.facetConfig.baseURL +
-            //                     "events/" +
-            //                     "visualizations/" +
-            //                     viewType.toLowerCase() + "/" +
-            //                     "?spaceless=true";
-            // }
-
-            // $.ajax({
-            //     url: statsURL,
-            //     dataType: "jsonp",
-            //     // jsonpCallback: "loadStats",
-            //     type: "GET",
-            //     jsonp: "callback",
-            //     contentType: "application/json",
-            //     success: function(data) {
-            //         if (typeof callbackFunction != "undefined") {
-            //             if (callbackFunction !== null) {
-            //                 callbackFunction(data);
-            //             }
-            //         }
-            //     },
-            //     error: function(jqXHR, textStatus, errorThrown) {
-            //         // TODO: Capture error and send to Sentry.
-            //     }
-            // });
+            $.ajax({
+                url: statsURL,
+                dataType: "jsonp",
+                // jsonpCallback: "loadStats",
+                type: "GET",
+                jsonp: "callback",
+                contentType: "application/json",
+                success: function(data) {
+                    if (typeof callbackFunction != "undefined") {
+                        if (callbackFunction !== null) {
+                            callbackFunction(data);
+                        }
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // TODO: Capture error and send to Sentry.
+                }
+            });
+        },
+        visualizationDataMap: {
+            "currentMode": "currentView",
+            "frequencyCounts": "appearanceCounts"
         },
         generateVisualizationContext: function(view) {
-            // return {
-            //     viewMode: view.currentArea,
-            //     frequencies: view.locationCounts
-            // };
+            return {
+                viewType: view.currentMode,
+                frequencies: view.frequencyCounts
+            };
         },
         visualizationPostRenderHooks: function(view) {
             // var tierMaxes = [0, 5, 10];
 
-            // if (view.currentArea == "US") {
-            //     _.each(view.locationCounts, function(location) {
+            // if (view.currentMode == "US") {
+            //     _.each(view.frequencyCounts, function(location) {
             //         view.facetConfig.classifyState(
             //             view.$el.find(".stately"),
             //             location.stateAbbrev,
@@ -634,7 +633,7 @@ facetConfigs = {
         // tagArchiveClass: "",
         // renderRightNav: function(listView) {},
         // generateListRightNav: function(view) {},
-        baseURL: "http://aukofer.dhb.io/api/v2/",
+        baseURL: "http://aukofer.dhb.io/api/v3/",
         templateIDs: {
             "listHeader": "finance-list-header",
             "listItem": "finance-list-item",
@@ -767,11 +766,15 @@ facetConfigs = {
                 }
             });
         },
+        visualizationDataMap: {
+            "currentMode": "currentArea",
+            "frequencyCounts": "locationCounts"
+        },
         generateVisualizationContext: function(view) {
             var jenksCount = 5,
                 legendFormatted,
                 maxes = jenks(
-                    _.pluck(view.locationCounts, 'total'),
+                    _.pluck(view.frequencyCounts, 'total'),
                     jenksCount
                 ).splice(1, (jenksCount - 1));
 
@@ -790,14 +793,14 @@ facetConfigs = {
             view.tierMaxes = maxes;
 
             return {
-                viewMode: view.currentArea,
+                viewMode: view.currentMode,
                 legend: legendFormatted,
-                frequencies: view.locationCounts
+                frequencies: view.frequencyCounts
             };
         },
         visualizationPostRenderHooks: function(view) {
-            if (view.currentArea == "US") {
-                _.each(view.locationCounts, function(location) {
+            if (view.currentMode == "US") {
+                _.each(view.frequencyCounts, function(location) {
                     view.facetConfig.classifyState(
                         view.$el.find(".stately"),
                         location.statePostal,
@@ -864,7 +867,7 @@ facetConfigs = {
         }
     },
     'travel': {
-        baseURL: "http://aukofer.dhb.io/api/v2/",
+        baseURL: "http://aukofer.dhb.io/api/v3/",
         queryAreas: [{a:"US",fn:"Entire U.S."},{a:"AL",fn:"Alabama"},{a:"AK",fn:"Alaska"},{a:"AZ",fn:"Arizona"},{a:"AR",fn:"Arkansas"},{a:"CA",fn:"California"},{a:"CO",fn:"Colorado"},{a:"CT",fn:"Connecticut"},{a:"DE",fn:"Delaware"},{a:"DC",fn:"D.C."},{a:"FL",fn:"Florida"},{a:"GA",fn:"Georgia"},{a:"HI",fn:"Hawaii"},{a:"ID",fn:"Idaho"},{a:"IL",fn:"Illinois"},{a:"IN",fn:"Indiana"},{a:"IA",fn:"Iowa"},{a:"KS",fn:"Kansas"},{a:"KY",fn:"Kentucky"},{a:"LA",fn:"Louisiana"},{a:"ME",fn:"Maine"},{a:"MD",fn:"Maryland"},{a:"MA",fn:"Massachusetts"},{a:"MI",fn:"Michigan"},{a:"MN",fn:"Minnesota"},{a:"MS",fn:"Mississippi"},{a:"MO",fn:"Missouri"},{a:"MT",fn:"Montana"},{a:"NE",fn:"Nebraska"},{a:"NV",fn:"Nevada"},{a:"NH",fn:"New Hampshire"},{a:"NJ",fn:"New Jersey"},{a:"NM",fn:"New Mexico"},{a:"NY",fn:"New York"},{a:"NC",fn:"North Carolina"},{a:"ND",fn:"North Dakota"},{a:"OH",fn:"Ohio"},{a:"OK",fn:"Oklahoma"},{a:"OR",fn:"Oregon"},{a:"PA",fn:"Pennsylvania"},{a:"RI",fn:"Rhode Island"},{a:"SC",fn:"South Carolina"},{a:"SD",fn:"South Dakota"},{a:"TN",fn:"Tennessee"},{a:"TX",fn:"Texas"},{a:"UT",fn:"Utah"},{a:"VT",fn:"Vermont"},{a:"VA",fn:"Virginia"},{a:"WA",fn:"Washington"},{a:"WV",fn:"West Virginia"},{a:"WY",fn:"Wyoming"}],
         templateIDs: {
             "listHeader": "event-list-header",
@@ -1209,17 +1212,21 @@ facetConfigs = {
                 }
             });
         },
+        visualizationDataMap: {
+            "currentMode": "currentArea",
+            "frequencyCounts": "locationCounts"
+        },
         generateVisualizationContext: function(view) {
             return {
-                viewMode: view.currentArea,
-                frequencies: view.locationCounts
+                viewMode: view.currentMode,
+                frequencies: view.frequencyCounts
             };
         },
         visualizationPostRenderHooks: function(view) {
             var tierMaxes = [0, 5, 10];
 
-            if (view.currentArea == "US") {
-                _.each(view.locationCounts, function(location) {
+            if (view.currentMode == "US") {
+                _.each(view.frequencyCounts, function(location) {
                     view.facetConfig.classifyState(
                         view.$el.find(".stately"),
                         location.stateAbbrev,
@@ -1601,7 +1608,7 @@ var HomepageView = Backbone.View.extend({
 
     render: function(previousView) {
         var self = this,
-            headlineListURL = "http://aukofer.dhb.io/api/v2/" +
+            headlineListURL = "http://aukofer.dhb.io/api/v3/" +
                                 "latest-articles-feed/";
 
         if (!debug) {
@@ -2307,9 +2314,9 @@ var VisualizationView = Backbone.View.extend({
         fc.renderVisualization(self, function(data) {
             if (data.status[0] == "2") {
 
-                self.currentArea = data.currentArea;
-
-                self.locationCounts = data.locationCounts;
+                _.each(fc.visualizationDataMap, function(value, key) {
+                    self[key] = data[value];
+                });
 
                 var values = fc.generateVisualizationContext(self);
 
