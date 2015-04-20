@@ -431,8 +431,9 @@ facetConfigs = {
             if (_.has(view.queryDict, 'organization')) {
                 var matchingState;
 
-                if (view.queryDict.organization != "all") {
-                    matchingOrganization = _.findWhere(
+                if ((view.queryDict.organization != "all") &&
+                        (typeof view.organizationList != "undefined")) {
+                    var matchingOrganization = _.findWhere(
                         view.organizationList,
                         {
                             a: view.queryDict.organization
@@ -543,9 +544,9 @@ facetConfigs = {
             }
 
             if (isAllOrganizationsView) {
-                contextObj.itemToOpen = "show-by-show list";
+                contextObj.itemToOpen = "list of organizations";
             } else if (isOrganizationView) {
-                contextObj.itemToOpen = "show-by-show list";
+                contextObj.itemToOpen = "list of shows";
             } else if (isTagView) {
                 contextObj.itemToOpen = "list of all issues";
             }
