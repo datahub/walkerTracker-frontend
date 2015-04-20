@@ -425,9 +425,6 @@
             </div>
         </script>
 
-        <script type="text/template" id="appearance-tag-pagination-template">
-        </script>
-
         <script type="text/template" id="appearance-tag-archive-template">
             <div id="<%= listHolderID %>">
                 <h3><%= tagArchiveHeaderPlaceholder %></h3>
@@ -503,6 +500,31 @@
         </script>
 
         <script type="text/template" id="appearance-visualization">
+            <div class="detail-card">
+                <div class="appearance-map-holder map-holder">
+                    <h1 class="table-header">Most-frequented <% if (viewType == "All organizations") { %>organizations<% } else { %>shows<% } %></h1>
+                    <table class="state-frequencies">
+                        <thead>
+                            <tr>
+                                <th><% if (viewType == "All organizations") { %>Organization<% } else { %>Show<% } %></th>
+                                <th>Appearances</th>
+                                <th>Latest appearance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% _.each(frequencies, function(r) { %>
+                            <tr>
+                                <td><% if (viewType == "All organizations") { %><%= r.organization %><% } else { %><%= r.show_name %><% } %></td>
+                                <td><%= r.frequency %></td>
+                                <td><%= r.latest %></td>
+                            </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+
+                    <% print(_.template($("#appearance-about-this-app").html(), {})); %>
+                </div>
+            </div>
         </script>
 
         <script type="text/template" id="appearance-about-this-app">
