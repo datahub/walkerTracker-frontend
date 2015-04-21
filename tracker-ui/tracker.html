@@ -200,7 +200,7 @@
                 <h2>
                     <span class="date-info">
                         <span class="date-clause"><% print(numberWithCommas(rowData.donationCount)); %> <% if (rowData.donationCount == 1) { %>donation<% } else { %>donations<% } %></span>
-                        <span class="divider"> ♦ </span>
+                        <span class="divider"> &diams; </span>
                         <span class="place-clause"><% print(formatCurrency(rowData.donationTotal, 0)); %> total</span>
                     </span>
                 </h2>
@@ -421,7 +421,7 @@
 
         <script type="text/template" id="appearance-placeholder-item">
             <div class="placeholder-inner">
-                <div>No appearances found.</div>
+                <div>No interviews found.</div>
             </div>
         </script>
 
@@ -450,10 +450,14 @@
 
         <script type="text/template" id="appearance-detail">
             <div class="detail-card">
-                <h1><% if (rowData.show) { %><%= rowData.show %> (<% } %><%= rowData.organization.name %><% if (rowData.show) { %>)<% } %></h1>
+                <h1><% if (rowData.show) { %><%= rowData.show %> <% } else { %><%= rowData.organization.name %><% } %></h1>
                 <h2>
                     <span class="date-info">
                         <span class="date-clause"><%= rowData.interviewDate %></span>
+                        <% if (rowData.show) { %>
+                        <span class="divider"> &diams; </span>
+                        <span class="organization"><%= rowData.organization.name %></span>
+                        <% } %>
                     </span>
                 </h2>
 
@@ -502,13 +506,13 @@
         <script type="text/template" id="appearance-visualization">
             <div class="detail-card">
                 <div class="appearance-map-holder map-holder">
-                    <h1 class="table-header">Most-frequented <% if (viewType == "All organizations") { %>organizations<% } else { %>shows<% } %></h1>
+                    <h1 class="table-header">Interviews by <% if (viewType == "All organizations") { %>organization<% } else { %>show<% } %></h1>
                     <table class="state-frequencies">
                         <thead>
                             <tr>
                                 <th><% if (viewType == "All organizations") { %>Organization<% } else { %>Show<% } %></th>
-                                <th>Appearances</th>
-                                <th>Latest appearance</th>
+                                <th>Interviews</th>
+                                <th>Latest</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -529,7 +533,7 @@
 
         <script type="text/template" id="appearance-about-this-app">
                 <div class="about-this-app">
-                    <div class="about-app-trigger">About this data<span class="trigger-up ss-icon ss-navigateup"></span><span class="trigger-down ss-icon ss-navigatedown"></span></div>
+                    <div class="about-app-trigger">About this information<span class="trigger-up ss-icon ss-navigateup"></span><span class="trigger-down ss-icon ss-navigatedown"></span></div>
                     <div class="about-app-flexible">
                         <p>Media appearance-specific text TK.</p>
                         <p>This application was developed by <a href="mailto:ajvestal@journalsentinel.com">Allan James Vestal</a>, <a href="mailto:mandre@journalsentinel.com">Michael Andre</a> and <a href="mailto:kcrowe@journalsentinel.com">Kevin Crowe</a> of the Journal Sentinel&nbsp;staff.</p>
@@ -635,7 +639,7 @@
                 <h2>
                     <span class="date-info">
                         <span class="date-clause"><%= rowData.startDate %></span>
-                        <span class="divider"> ♦ </span>
+                        <span class="divider"> &diams; </span>
                         <span class="place-clause"><%= rowData.city %>, <%= rowData.state %></span>
                     </span>
                 </h2>
