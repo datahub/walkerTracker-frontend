@@ -426,7 +426,7 @@ facetConfigs = {
             );
         },
         enhanceHeader: function(view) {
-            var headerText = "everywhere";
+            var headerText = "";
 
             if (_.has(view.queryDict, 'organization')) {
                 var matchingState;
@@ -440,7 +440,7 @@ facetConfigs = {
                         }
                     ).fn;
 
-                    headerText = "in " + matchingOrganization;
+                    headerText = "by " + matchingOrganization;
                 }
             } else if (_.has(view.queryDict, 'issue')) {
                 return 'mentioning "' + view.verboseTagName + '"';
@@ -455,7 +455,7 @@ facetConfigs = {
         },
         // callbacks: {},
         listHolderID: "appearances",
-        listHeaderBase: "Media appearances",
+        listHeaderBase: "Interviews",
         listClass: "appearance-list",
         tagArchiveHeaderPlaceholder: "Issues discussed",
         tagArchiveClass: "appearance-tags",
