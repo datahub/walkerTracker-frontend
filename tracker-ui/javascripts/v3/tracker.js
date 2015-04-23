@@ -258,18 +258,6 @@ var generateURLs = {
 facetConfigs = {
     'media-appearances': {
         baseURL: "http://aukofer.dhb.io/api/v3/",
-        templateIDs: {
-            "listHeader": "appearance-list-header",
-            "listItem": "appearance-list-item",
-            "adLI": "appearance-ad-item",
-            "bonusLI": "appearance-bonus-item",
-            "detail": "appearance-detail",
-            "visualization": "appearance-visualization",
-            "placeholderLI": "appearance-placeholder-item",
-            "tagArchiveHeader": "appearance-tag-archive-header",
-            "tagArchiveItem": "appearance-tag-archive-item",
-            "pagination": "appearance-pagination-template"
-        },
         parseListViewFacets: function(view, facetsCandidate) {
             var facetsFinalized = {};
 
@@ -635,18 +623,6 @@ facetConfigs = {
         // renderRightNav: function(listView) {},
         // generateListRightNav: function(view) {},
         baseURL: "http://aukofer.dhb.io/api/v3/",
-        templateIDs: {
-            "listHeader": "finance-list-header",
-            "listItem": "finance-list-item",
-            "adLI": "finance-ad-item",
-            "bonusLI": "finance-bonus-item",
-            "detail": "finance-detail",
-            "visualization": "finance-visualization",
-            "placeholderLI": "finance-placeholder-item",
-            "pagination": "finance-pagination-template"
-            // "tagArchiveHeader": "event-tag-archive-header",
-            // "tagArchiveItem": "event-tag-archive-item"
-        },
         parseListViewFacets: function(view, facetsCandidate) {
             var facetsFinalized = {};
 
@@ -847,8 +823,9 @@ facetConfigs = {
                         );
 
                         _.each(data.results.slice(0,10), function(row) {
-                            var nextRowHTML = _.template(
-                                $("#finance-donor-table-row").html(),
+                            var nextRowHTML = renderTemplate(
+                                view.facetSlug,
+                                "donorTableRow",
                                 row
                             );
                             tableBody.append(nextRowHTML);
@@ -870,18 +847,6 @@ facetConfigs = {
     'travel': {
         baseURL: "http://aukofer.dhb.io/api/v3/",
         queryAreas: [{a:"US",fn:"Entire U.S."},{a:"AL",fn:"Alabama"},{a:"AK",fn:"Alaska"},{a:"AZ",fn:"Arizona"},{a:"AR",fn:"Arkansas"},{a:"CA",fn:"California"},{a:"CO",fn:"Colorado"},{a:"CT",fn:"Connecticut"},{a:"DE",fn:"Delaware"},{a:"DC",fn:"D.C."},{a:"FL",fn:"Florida"},{a:"GA",fn:"Georgia"},{a:"HI",fn:"Hawaii"},{a:"ID",fn:"Idaho"},{a:"IL",fn:"Illinois"},{a:"IN",fn:"Indiana"},{a:"IA",fn:"Iowa"},{a:"KS",fn:"Kansas"},{a:"KY",fn:"Kentucky"},{a:"LA",fn:"Louisiana"},{a:"ME",fn:"Maine"},{a:"MD",fn:"Maryland"},{a:"MA",fn:"Massachusetts"},{a:"MI",fn:"Michigan"},{a:"MN",fn:"Minnesota"},{a:"MS",fn:"Mississippi"},{a:"MO",fn:"Missouri"},{a:"MT",fn:"Montana"},{a:"NE",fn:"Nebraska"},{a:"NV",fn:"Nevada"},{a:"NH",fn:"New Hampshire"},{a:"NJ",fn:"New Jersey"},{a:"NM",fn:"New Mexico"},{a:"NY",fn:"New York"},{a:"NC",fn:"North Carolina"},{a:"ND",fn:"North Dakota"},{a:"OH",fn:"Ohio"},{a:"OK",fn:"Oklahoma"},{a:"OR",fn:"Oregon"},{a:"PA",fn:"Pennsylvania"},{a:"RI",fn:"Rhode Island"},{a:"SC",fn:"South Carolina"},{a:"SD",fn:"South Dakota"},{a:"TN",fn:"Tennessee"},{a:"TX",fn:"Texas"},{a:"UT",fn:"Utah"},{a:"VT",fn:"Vermont"},{a:"VA",fn:"Virginia"},{a:"WA",fn:"Washington"},{a:"WV",fn:"West Virginia"},{a:"WY",fn:"Wyoming"}],
-        templateIDs: {
-            "listHeader": "event-list-header",
-            "listItem": "event-list-item",
-            "adLI": "event-ad-item",
-            "bonusLI": "event-bonus-item",
-            "detail": "event-detail",
-            "visualization": "event-visualization",
-            "placeholderLI": "event-placeholder-item",
-            "tagArchiveHeader": "event-tag-archive-header",
-            "tagArchiveItem": "event-tag-archive-item",
-            "pagination": "event-pagination-template"
-        },
         parseListViewFacets: function(view, facetsCandidate) {
             var facetsFinalized = {};
 
@@ -1163,7 +1128,7 @@ facetConfigs = {
             return contextObj;
         },
         renderVisualization: function(view, callbackFunction) {
-            var statsURL, templateID,
+            var statsURL,
                 viewType = "US",
                 query = view.chaperone.view.listQueryDict,
                 areaMatches;
@@ -1359,13 +1324,13 @@ var AppView = Backbone.View.extend({
             viewSections.push(v.topClass);
         });
 
-        var htmlContents = _.template(
-            $("#wrapper-template").html(),
+        var htmlContents = renderTemplate(
+            "general",
+            "wrapper",
             {
                 activeSection: self.contentViews[
                         self.currentViewLevel
                     ].topClass,
-                // navbarHTML:
                 sections: viewSections
             }
         );
@@ -1429,8 +1394,9 @@ var NavView = Backbone.View.extend({
     render: function() {
         var self = this;
 
-        var htmlContents =  _.template(
-            $("#nav-template").html(),
+        var htmlContents = renderTemplate(
+            "general",
+            "nav",
             {
                 appTitle: self.generateAppTitle()
             }
@@ -1487,8 +1453,9 @@ var OffCanvasMenuView = Backbone.View.extend({
     render: function() {
         var self = this;
 
-        var htmlContents = _.template(
-            $("#off-canvas-menu-base").html(),
+        var htmlContents = renderTemplate(
+            "general",
+            "offCanvasMenuBase",
             {}
         );
 
@@ -1532,8 +1499,9 @@ var OCLabelItemView = Backbone.View.extend({
     render: function() {
         var self = this;
 
-        var htmlContents =  _.template(
-            $("#off-canvas-label-item-template").html(),
+        var htmlContents = renderTemplate(
+            "general",
+            "offCanvasLabelItem",
             {
                 value: self.value
             }
@@ -1570,8 +1538,9 @@ var OCMenuItemView = Backbone.View.extend({
     render: function() {
         var self = this;
 
-        var htmlContents = _.template(
-            $("#off-canvas-menu-item-template").html(),
+        var htmlContents = renderTemplate(
+            "general",
+            "offCanvasMenuItem",
             {
                 anchorClass: self.valueDict.anchorClass,
                 anchorLink: self.valueDict.anchorLink,
@@ -1626,8 +1595,9 @@ var HomepageView = Backbone.View.extend({
                 if (data.status[0] == "2") {
                     dd = data.articles;
 
-                    var htmlContents =  _.template(
-                        $("#homepage-template").html(),
+                    var htmlContents = renderTemplate(
+                        "general",
+                        "homepage",
                         {
                             articles: data.articles
                         }
@@ -1971,19 +1941,13 @@ var ListView = Backbone.View.extend({
             // console.log("Placed back button.");
 
             navView.$el.find(".left-small").html(
-                _.template(
-                    $("#back-button-contents").html(),
-                    {}
-                )
+                renderTemplate("general", "backButtonContents", {})
             );
         }
 
         if (navView.$el.find(".right-small > *").length === 0) {
             navView.$el.find(".right-small").html(
-                _.template(
-                    $("#menu-button-contents").html(),
-                    {}
-                )
+                renderTemplate("general", "menuButtonContents", {})
             );
         }
 
@@ -1991,8 +1955,9 @@ var ListView = Backbone.View.extend({
 
         navView.$el.find(".right-small .menu-icon").unbind();
 
-        var htmlContents = _.template(
-            $("#list-template").html(),
+        var htmlContents = renderTemplate(
+            "general",
+            "list",
             {
                 listHolderID: fc.listHolderID,
                 listHeaderBase: fc.listHeaderBase,
@@ -2207,8 +2172,9 @@ var PaginationView = Backbone.View.extend({
                                                 ) + ",";
         }
 
-        var htmlContents = _.template(
-            $("#" + self.chaperone.facetConfig.templateIDs.pagination).html(),
+        var htmlContents = renderTemplate(
+            self.chaperone.facetSlug,
+            "pagination",
             {
                 facetSlug: self.chaperone.facetSlug,
                 paginationData: self.chaperone.paginationData,
@@ -2296,17 +2262,13 @@ var VisualizationView = Backbone.View.extend({
         var self = this,
             navView = self.chaperone.view.navView,
             fc = self.facetConfig,
-            templateID = fc.templateIDs.visualization,
             htmlContents;
 
         if (navView.$el.find(".left-small > *").length === 0) {
             // console.log("Placed back button.");
 
             navView.$el.find(".left-small").html(
-                _.template(
-                    $("#back-button-contents").html(),
-                    {}
-                )
+                renderTemplate("general", "backButtonContents", {})
             );
         }
 
@@ -2321,8 +2283,9 @@ var VisualizationView = Backbone.View.extend({
 
                 var values = fc.generateVisualizationContext(self);
 
-                htmlContents = _.template(
-                    $("#" + templateID).html(),
+                htmlContents = renderTemplate(
+                    self.facetSlug,
+                    "visualization",
                     values
                 );
             }
@@ -2523,10 +2486,7 @@ var DetailView = Backbone.View.extend({
             // console.log("Placed back button.");
 
             navView.$el.find(".left-small").html(
-                _.template(
-                    $("#back-button-contents").html(),
-                    {}
-                )
+                renderTemplate("general", "backButtonContents", {})
             );
         }
 
@@ -2543,8 +2503,9 @@ var DetailView = Backbone.View.extend({
                     }
                 );
 
-                htmlContents = _.template(
-                    $("#" + fc.templateIDs.detail).html(),
+                htmlContents = renderTemplate(
+                    self.facetSlug,
+                    "detail",
                     self.rowContext
                 );
             } else {
@@ -2702,11 +2663,11 @@ var ListHeaderView = Backbone.View.extend({
 
     render: function() {
         var self = this,
-            fc = self.chaperone.facetConfig,
-            templateID = fc.templateIDs.listHeader;
+            fc = self.chaperone.facetConfig;
 
-        var htmlContents = _.template(
-            $("#" + templateID).html(),
+        var htmlContents = renderTemplate(
+            self.chaperone.facetSlug,
+            "listHeader",
             {
                 baseDisplay: fc.listHeaderBase,
                 enhancedDisplay: fc.enhanceHeader(self.chaperone),
@@ -2746,13 +2707,11 @@ var ListItemView = Backbone.View.extend({
     },
 
     render: function() {
-        var self = this,
-            templateID = self.chaperone.facetConfig
-                                        .templateIDs
-                                        .listItem;
+        var self = this;
 
-        var htmlContents = _.template(
-            $("#" + templateID).html(),
+        var htmlContents = renderTemplate(
+            self.chaperone.facetSlug,
+            "listItem",
             {
                 rowData: self.data,
                 facetSlug: self.chaperone.facetSlug
@@ -2804,11 +2763,11 @@ var NoItemsView = Backbone.View.extend({
 
     render: function() {
         var self = this,
-            facetConfig = self.chaperone.facetConfig,
-            templateID = facetConfig.templateIDs.placeholderLI;
+            facetConfig = self.chaperone.facetConfig;
 
-        var htmlContents = _.template(
-            $("#" + templateID).html(),
+        var htmlContents = renderTemplate(
+            self.chaperone.facetSlug,
+            "placeholderItem",
             {}
         );
 
@@ -2846,11 +2805,11 @@ var AdView = Backbone.View.extend({
 
     render: function() {
         var self = this,
-            facetConfig = self.chaperone.facetConfig,
-            templateID = facetConfig.templateIDs.adLI;
+            facetConfig = self.chaperone.facetConfig;
 
-        var htmlContents = _.template(
-            $("#" + templateID).html(),
+        var htmlContents = renderTemplate(
+            self.chaperone.facetSlug,
+            "adItem",
             {
                 cbValue: Date.now()
             }
@@ -2895,14 +2854,14 @@ var ListBonusView = Backbone.View.extend({
         var self = this,
             fc = self.chaperone.facetConfig,
             facetSlug = self.chaperone.facetSlug,
-            templateID = fc.templateIDs.bonusLI,
             listURL,
             context = fc.generateBonusItemContext(self);
 
         context.itemURL = fc.generateBonusItemURL(self);
 
-        var htmlContents = _.template(
-            $("#" + templateID).html(),
+        var htmlContents = renderTemplate(
+            self.chaperone.facetSlug,
+            "bonusItem",
             context
         );
 
@@ -3143,19 +3102,13 @@ var TagArchiveView = Backbone.View.extend({
             // console.log("Placed back button.");
 
             navView.$el.find(".left-small").html(
-                _.template(
-                    $("#back-button-contents").html(),
-                    {}
-                )
+                renderTemplate("general", "backButtonContents", {})
             );
         }
 
         if (navView.$el.find(".right-small > *").length === 0) {
             navView.$el.find(".right-small").html(
-                _.template(
-                    $("#menu-button-contents").html(),
-                    {}
-                )
+                renderTemplate("general", "menuButtonContents", {})
             );
         }
 
@@ -3163,12 +3116,12 @@ var TagArchiveView = Backbone.View.extend({
 
         navView.$el.find(".right-small .menu-icon").unbind();
 
-        var htmlContents = _.template(
-            $("#tag-archive-template").html(),
+        var htmlContents = renderTemplate(
+            "general",
+            "tagArchive",
             {
                 listHolderID: fc.listHolderID,
-                tagArchiveHeaderPlaceholder: fc
-                                .tagArchiveHeaderPlaceholder,
+                tagArchiveHeaderPlaceholder: fc.tagArchiveHeaderPlaceholder,
                 tagArchiveClass: fc.tagArchiveClass
             }
         );
@@ -3311,11 +3264,11 @@ var TagArchiveHeaderView = Backbone.View.extend({
 
     render: function() {
         var self = this,
-            fc = self.chaperone.facetConfig,
-            templateID = fc.templateIDs.tagArchiveHeader;
+            fc = self.chaperone.facetConfig;
 
-        var htmlContents = _.template(
-            $("#" + templateID).html(),
+        var htmlContents = renderTemplate(
+            self.chaperone.facetSlug,
+            "tagArchiveHeader",
             {
                 baseDisplay: fc.listHeaderBase,
                 enhancedDisplay: fc.enhanceTagArchiveHeader(
@@ -3364,8 +3317,9 @@ var TagPaginationView = Backbone.View.extend({
                                                 ) + ",";
         }
 
-        var htmlContents = _.template(
-            $("#tag-pagination-template").html(),
+        var htmlContents = renderTemplate(
+            "general",
+            "tagPagination",
             {
                 facetSlug: self.chaperone.facetSlug,
                 paginationData: self.chaperone.paginationData,
@@ -3405,12 +3359,11 @@ var TagArchiveItemView = Backbone.View.extend({
     },
 
     render: function() {
-        var self = this,
-            templateID = self.chaperone.facetConfig
-                                    .templateIDs.tagArchiveItem;
+        var self = this;
 
-        var htmlContents = _.template(
-            $("#" + templateID).html(),
+        var htmlContents = renderTemplate(
+            self.chaperone.facetSlug,
+            "tagArchiveItem",
             {
                 facetSlug: self.chaperone.facetSlug,
                 rowData: self.data
@@ -3446,11 +3399,11 @@ var NoTagItemsView = Backbone.View.extend({
 
     render: function() {
         var self = this,
-            facetConfig = self.chaperone.facetConfig,
-            templateID = facetConfig.templateIDs.placeholderLI;
+            facetConfig = self.chaperone.facetConfig;
 
-        var htmlContents = _.template(
-            $("#" + templateID).html(),
+        var htmlContents = renderTemplate(
+            self.chaperone.facetSlug,
+            "placeholderItem",
             {}
         );
 
@@ -3710,6 +3663,11 @@ var AppRouter = Backbone.Router.extend({
         }
     }
 });
+
+
+function renderTemplate(nameSpace, templateName, context) {
+    return templates[nameSpace][templateName](context);
+}
 
 
 function deleteView(backboneView) {
