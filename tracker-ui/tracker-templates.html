@@ -434,7 +434,7 @@
             <a href="#!/<%= facetSlug %>/refine/issue=<%= rowData.slug %>/">
                 <div class="visit-details">
                     <h4 class="description"><%= rowData.name %></h4>
-                    <h5 class="location"><%= rowData.count %> interview<% if (rowData.count) > 1 { %>s<% } %></h5>
+                    <h5 class="location"><%= rowData.count %> interview<% if (rowData.count > 1) { %>s<% } %></h5>
                 </div>
             </a>
         </script>

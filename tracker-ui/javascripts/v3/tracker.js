@@ -1,3 +1,5 @@
+var debug = false;
+
 var generateURLs = {
     'campaign-finance': {
         list: function(listView) {
@@ -3740,3 +3742,15 @@ function reframeWindow() {
 
     resizeChoropleth();
 }
+
+// jQuery bound functions.
+$(document).ready(function() {
+    SwiftClick.attach(document.body);
+
+    app = new AppRouter();
+});
+
+
+$(window).resize(function() {
+    reframeWindow();
+});

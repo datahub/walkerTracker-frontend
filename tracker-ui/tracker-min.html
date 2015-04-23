@@ -9,17 +9,9 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-        <link rel="stylesheet" href="http://media.dhb.io/javascripts/foundation/v5.5.1/css/normalize.css" />
-        <link rel="stylesheet" href="http://media.dhb.io/javascripts/foundation/v5.5.1/css/foundation.css" />
-
-        <!-- KEEP OUT <link href='http://fonts.googleapis.com/css?family=Arbutus+Slab' rel='stylesheet' type='text/css'> -->
         <link href='http://fonts.googleapis.com/css?family=Crete+Round:400,400italic' rel='stylesheet' type='text/css'>
-        <link href="http://media.dhb.io/webfonts/stateface/stateface.css" rel="stylesheet" type="text/css" />
-        <link href="http://graphics.jsonline.com/jsi_news/webfonts/symbolset-symbolicons-block/ss-symbolicons-block.css" rel="stylesheet" type="text/css" />
 
-        <link href="http://media.dhb.io/webfonts/stately/git-8f406598d5/stately/css/stately.css" rel="stylesheet" type="text/css" />
-
-        <link href="stylesheets/v3/tracker.css" rel="stylesheet" type="text/css" />
+        <link href="stylesheets/v3/tracker.min.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <div id="app"></div>
@@ -45,17 +37,6 @@
 
         <script type="text/javascript">
             var debug = true;
-
-            $(document).ready(function() {
-                SwiftClick.attach(document.body);
-
-                app = new AppRouter();
-            });
-
-
-            $(window).resize(function() {
-                rW();
-            });
         </script>
     </body>
 </html>
