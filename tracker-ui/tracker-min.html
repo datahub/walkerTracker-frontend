@@ -1,0 +1,61 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <title>WalkerTracker</title>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <link rel="stylesheet" href="http://media.dhb.io/javascripts/foundation/v5.5.1/css/normalize.css" />
+        <link rel="stylesheet" href="http://media.dhb.io/javascripts/foundation/v5.5.1/css/foundation.css" />
+
+        <!-- KEEP OUT <link href='http://fonts.googleapis.com/css?family=Arbutus+Slab' rel='stylesheet' type='text/css'> -->
+        <link href='http://fonts.googleapis.com/css?family=Crete+Round:400,400italic' rel='stylesheet' type='text/css'>
+        <link href="http://media.dhb.io/webfonts/stateface/stateface.css" rel="stylesheet" type="text/css" />
+        <link href="http://graphics.jsonline.com/jsi_news/webfonts/symbolset-symbolicons-block/ss-symbolicons-block.css" rel="stylesheet" type="text/css" />
+
+        <link href="http://media.dhb.io/webfonts/stately/git-8f406598d5/stately/css/stately.css" rel="stylesheet" type="text/css" />
+
+        <link href="stylesheets/v3/tracker.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="app"></div>
+
+        <script src="http://media.dhb.io/javascripts/foundation/v5.5.1/js/vendor/jquery.js" type="text/javascript"></script>
+
+        <script src="http://media.dhb.io/javascripts/foundation/v5.5.1/js/vendor/modernizr.js" type="text/javascript"></script>
+        <script src="http://media.dhb.io/javascripts/foundation/v5.5.1/js/foundation.min.js" type="text/javascript"></script>
+        <script src="http://media.dhb.io/javascripts/swiftclick/v1.1.5/swiftclick.min.js" type="text/javascript"></script>
+
+        <script src="http://media1.dhb.io/projects/2013/newborns/underscore-min.1.5.1.js" type="text/javascript"> </script>
+        <script src="http://media1.dhb.io/projects/2013/newborns/backbone-min.1.0.js" type="text/javascript"> </script>
+
+        <script src="http://media1.dhb.io/webfonts/symbolset/ss-standard.js" type="text/javascript"> </script>
+
+        <script src="http://media.dhb.io/javascripts/jenks-breaks/gist20130218/jenks.js" type="text/javascript"> </script>
+
+        <script src="http://m.jsonline.com/templates/jrn.tracking.js" type="text/javascript"></script>
+
+        <script src="javascripts/v3/helpers.js" type="text/javascript"></script>
+        <script src="javascripts/v3/tracker.min.js" type="text/javascript"></script>
+        <script src="javascripts/v3/templates.min.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+            var debug = true;
+
+            $(document).ready(function() {
+                SwiftClick.attach(document.body);
+
+                app = new AppRouter();
+            });
+
+
+            $(window).resize(function() {
+                rW();
+            });
+        </script>
+    </body>
+</html>
